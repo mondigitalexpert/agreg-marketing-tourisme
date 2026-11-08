@@ -8,11 +8,11 @@ const sections = [
   { id:'veille', group:'dashboard', title:'Actualité & Veille', icon:'📰', color:'#4C7EA8', desc:'Actualités marketing, tourisme, digital, IA et réglementation.', size:'small' },
   { id:'bibliotheque', group:'dashboard', title:'Bibliothèque', icon:'📖', color:'#59636E', desc:'Ressources, sujets, rapports, articles et favoris.', size:'small' },
 
-  { id:'cours', group:'learn', title:'Cours Marketing', icon:'📚', color:'#2F6B6D', desc:'Les notions du programme, structurées pour réviser efficacement.', size:'hero' },
+  { id:'cours', group:'learn', title:'Cours Marketing', icon:'📚', color:'#2F6B6D', desc:'Les notions du programme, structurées pour réviser efficacement.', size:'feature' },
   { id:'tourisme', group:'learn', title:'Marketing & Tourisme', icon:'🏨', color:'#C96F4A', desc:'Applications au tourisme, à l’hôtellerie et aux services.', size:'tall' },
   { id:'auteurs', group:'learn', title:'Auteurs & Modèles', icon:'🧠', color:'#6F5B8C', desc:'Concepts, modèles, références et flashcards.', size:'wide' },
 
-  { id:'entrainement', group:'practice', title:'S’entraîner', icon:'✍️', color:'#3F7D5A', desc:'QCM, mini-cas, exercices, entraînements chronométrés et concours blancs.', size:'hero' },
+  { id:'entrainement', group:'practice', title:'S’entraîner', icon:'✍️', color:'#3F7D5A', desc:'QCM, mini-cas, exercices, entraînements chronométrés et concours blancs.', size:'feature' },
   { id:'cas', group:'practice', title:'Cas réels', icon:'🧳', color:'#B67A32', desc:'Situations réelles, sourcées, datées et corrigées.', size:'wide' },
 ]
 
