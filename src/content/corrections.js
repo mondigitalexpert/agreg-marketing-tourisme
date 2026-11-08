@@ -286,3 +286,249 @@ export const trainingCorrections = {
     {title:'Correction différée',text:'Ne pas corriger immédiatement. Après une pause, utiliser une grille sur 20 : compréhension de la commande (3), concepts/auteurs (4), exploitation des annexes (4), calculs et interprétation (3), recommandations contextualisées (4), clarté/forme (2). Cette grille est un outil de travail interne et ne prétend pas reproduire une notation officielle.'}
   ]
 }
+
+
+export const tourismCorrections = {
+  'tourisme|Fondamentaux': [
+    {
+      title:'Correction — comparer trois niveaux de données',
+      text:'Une donnée nationale, régionale et d’entreprise peuvent toutes être exactes sans être directement comparables, car elles n’ont pas le même périmètre, la même population ni la même finalité.',
+      bullets:[
+        'Nationale : utile pour situer une tendance générale du marché, mais elle masque les écarts territoriaux.',
+        'Régionale : plus proche du contexte local, mais elle agrège encore des territoires et catégories d’acteurs différents.',
+        'Entreprise : très précise pour l’organisation étudiée, mais elle ne permet pas à elle seule de généraliser au marché.',
+        'À vérifier avant comparaison : période, territoire, type d’hébergement, population observée, unité, source et caractère provisoire ou définitif.',
+        'Conclusion attendue : on peut mettre ces données en perspective, mais pas les substituer les unes aux autres.'
+      ]
+    }
+  ],
+
+  'tourisme|Hôtellerie': [
+    {
+      title:'Correction — augmenter le direct sans supprimer les OTA',
+      text:'L’objectif n’est pas de sortir des OTA mais de rééquilibrer le mix de distribution en renforçant la valeur et la conversion du canal direct.',
+      bullets:[
+        'Objectif : augmenter la part de réservations directes rentables tout en conservant l’apport d’audience des OTA.',
+        'Levier 1 : améliorer le parcours de réservation direct — vitesse, simplicité, transparence des conditions, preuve sociale.',
+        'Levier 2 : proposer des avantages réservés au direct sans casser le prix — flexibilité, surclassement selon disponibilité, service additionnel, reconnaissance membre.',
+        'Levier 3 : utiliser CRM et fidélité après un premier séjour OTA pour favoriser le prochain achat direct.',
+        'Levier 4 : travailler SEO, marque et retargeting dans le respect des règles applicables.',
+        'KPI : part direct/OTA, coût net par réservation, taux de conversion direct, taux de réachat, marge par canal, CAC.'
+      ]
+    }
+  ],
+
+  'tourisme|Restauration': [
+    {
+      title:'Correction — trois leviers sans dépendre d’une hausse de prix',
+      text:'La marge peut être améliorée en travaillant le mix vendu, la productivité de la capacité et les coûts, sans reposer principalement sur une hausse tarifaire.',
+      bullets:[
+        'Levier 1 — Menu engineering : pousser les plats à forte marge et bonne popularité, réduire les références peu rentables, travailler accompagnements et desserts à contribution élevée.',
+        'Levier 2 — Rotation et capacité : mieux gérer réservations, horaires, durée d’occupation et préparation pour servir davantage de couverts sur les créneaux très demandés sans dégrader l’expérience.',
+        'Levier 3 — Réduction des coûts et du gaspillage : ajuster achats, portions, prévisions, stocks et carte aux volumes réellement vendus.',
+        'Levier complémentaire — Upselling non agressif : boissons, desserts, menus ou options à forte marge, en améliorant la valeur perçue plutôt qu’en augmentant simplement tous les prix.',
+        'KPI : marge brute par plat, food cost, nombre de couverts/service, panier moyen, durée moyenne de table, gaspillage, marge par créneau.'
+      ]
+    }
+  ],
+
+  'tourisme|Destinations & territoires': [
+    {
+      title:'Correction — réduire la concentration en août',
+      text:'Pour une destination littorale, l’enjeu est de créer des motifs de visite spécifiques hors août plutôt que de simplement déplacer la même campagne dans le calendrier.',
+      bullets:[
+        'Cible 1 : couples sans enfants / seniors actifs au printemps et en septembre.',
+        'Cible 2 : sportifs, randonneurs, cyclistes ou amateurs de nature hors forte chaleur.',
+        'Cible 3 : courts séjours culture, gastronomie ou événementiel.',
+        'Offre : événements, activités guidées, gastronomie, patrimoine, bien-être, packages hébergement + activité.',
+        'Distribution : CRM partenaires, campagnes géolocalisées, transporteurs, hébergeurs, contenus inspirationnels hors saison.',
+        'Préserver le positionnement : ne pas devenir une destination “discount hors août” ; vendre une expérience différente, pas seulement moins chère.',
+        'KPI : nuitées avril-juin/septembre-octobre, taux d’occupation, dépense/jour, durée de séjour, part de primo-visiteurs hors saison, satisfaction.'
+      ]
+    }
+  ],
+
+  'tourisme|Agences / TO / plateformes': [
+    {
+      title:'Correction — comparer trois canaux',
+      text:'Aucun canal n’est supérieur dans l’absolu : il faut comparer leur contribution selon la clientèle visée et la valeur qu’ils apportent.',
+      bullets:[
+        'OTA : audience très large, forte capacité de conversion et visibilité internationale ; coût de commission, accès limité à certaines données et risque de dépendance.',
+        'Agence traditionnelle : conseil, confiance et accès à certains segments ; coût d’intermédiation et couverture souvent plus limitée que les grandes plateformes.',
+        'Vente directe : contrôle de l’expérience, de la donnée et de la relation ; nécessite acquisition, technologie, notoriété et capacité de conversion.',
+        'Risque OTA : dépendance et pouvoir de négociation. Risque direct : coût d’acquisition élevé ou faible conversion.',
+        'Fidélisation : le direct est souvent plus favorable à la relation, mais une OTA peut rester un bon canal d’acquisition initiale.',
+        'Décision attendue : construire un mix de canaux par segment plutôt qu’un choix exclusif.'
+      ]
+    }
+  ],
+
+  'tourisme|Expérience touristique': [
+    {
+      title:'Correction — city-break de 48 heures',
+      text:'Une cartographie possible consiste à identifier les moments où l’incertitude, l’effort ou l’émotion sont les plus forts, puis à associer un indicateur à chacun.',
+      bullets:[
+        '1. Recherche / inspiration → KPI : taux de clic qualifié ou taux de sauvegarde de contenu.',
+        '2. Réservation transport + hébergement → KPI : taux de conversion / abandon du tunnel.',
+        '3. Arrivée et orientation → KPI : temps moyen d’accès ou taux de demandes d’assistance.',
+        '4. Check-in / première interaction hébergement → KPI : temps d’attente + satisfaction arrivée.',
+        '5. Activité principale / visite → KPI : satisfaction spécifique ou NPS de l’activité.',
+        '6. Départ / post-séjour → KPI : avis publié, intention de recommandation ou taux de réachat.',
+        'Bonne réponse : montrer que les “moments de vérité” ne sont pas seulement commerciaux mais aussi opérationnels et émotionnels.'
+      ]
+    }
+  ],
+
+  'tourisme|Distribution & OTA': [
+    {
+      title:'Correction — tableau de bord de distribution',
+      text:'Le nombre de réservations ne suffit pas. Il faut mesurer la contribution économique et relationnelle de chaque canal.',
+      bullets:[
+        '1. Coût net d’acquisition / réservation par canal.',
+        '2. Marge ou contribution nette par réservation.',
+        '3. Taux de conversion par canal.',
+        '4. Part de clients récurrents ou taux de réachat après une première réservation.',
+        '5. Part de réservations directes dans le mix.',
+        'Compléments utiles : annulation, no-show, panier, durée de séjour, CLV, part des clients dont les données sont exploitables légalement.',
+        'Interprétation attendue : un canal qui génère beaucoup de volume peut être moins intéressant s’il coûte cher ou produit peu de fidélisation.'
+      ]
+    }
+  ],
+
+  'tourisme|E-réputation': [
+    {
+      title:'Correction — identifier le point de rupture',
+      text:'La baisse de note alors que la satisfaction chambre reste stable suggère que le problème se situe ailleurs dans le parcours.',
+      bullets:[
+        'Étape 1 : coder les 50 avis par thèmes — réservation, accueil, attente, petit-déjeuner, propreté, bruit, facturation, départ, etc.',
+        'Étape 2 : comparer la fréquence et la gravité des thèmes négatifs à la période précédente.',
+        'Étape 3 : repérer le moment du parcours où la dégradation apparaît.',
+        'Étape 4 : croiser les avis avec les données opérationnelles — temps d’attente, incidents, sous-effectif, délais de réponse.',
+        'Étape 5 : vérifier si un changement récent de processus, équipe, prestataire ou technologie correspond au début de la baisse.',
+        'KPI : fréquence des mentions négatives par thème, note par étape, temps d’attente, taux de réclamation, taux de résolution.'
+      ]
+    }
+  ],
+
+  'tourisme|Revenue management': [
+    {
+      title:'Correction — même RevPAR, modèles différents',
+      text:'Deux hôtels peuvent avoir le même RevPAR avec des arbitrages prix/occupation très différents. Il faut donc analyser risque, coûts et positionnement.',
+      bullets:[
+        'Hôtel A : ADR élevé / occupation plus faible → potentiel de marge unitaire plus forte, positionnement premium et capacité disponible ; risque de sous-utilisation et de volatilité de la demande.',
+        'Hôtel B : ADR plus faible / occupation élevée → meilleur remplissage et potentiel de revenus annexes ; risque de pression sur les coûts, saturation opérationnelle et difficulté à remonter les prix.',
+        'À comparer : coût variable par chambre occupée, clientèle, saisonnalité, commissions, revenus annexes, satisfaction et capacité de montée en gamme.',
+        'Conclusion attendue : le RevPAR est utile mais ne suffit pas pour choisir le meilleur modèle économique.'
+      ]
+    }
+  ],
+
+  'tourisme|Fidélisation & CRM': [
+    {
+      title:'Correction — trois avantages sans remise',
+      text:'La fidélité peut être renforcée par reconnaissance, simplicité et bénéfices de service plutôt que par réduction systématique du prix.',
+      bullets:[
+        'Avantage 1 : check-in prioritaire ou simplifié → comportement recherché : réserver à nouveau pour gagner du temps.',
+        'Avantage 2 : préférence de chambre mémorisée / personnalisation → comportement recherché : renforcer la valeur relationnelle et le réachat.',
+        'Avantage 3 : late check-out ou surclassement selon disponibilité → comportement recherché : adhésion active au programme et préférence de marque.',
+        'Autres options : accès privilégié à certains services, événements, partenariats locaux, bagagerie étendue.',
+        'KPI : taux de réachat, fréquence, part de réservations directes membres, utilisation des avantages, CLV.'
+      ]
+    }
+  ],
+
+  'tourisme|Tourisme durable': [
+    {
+      title:'Correction — évaluer une promesse “séjour durable”',
+      text:'Une promesse environnementale crédible doit reposer sur des preuves mesurables, un périmètre clair et des résultats suivis dans le temps.',
+      bullets:[
+        'Critère 1 : consommation d’énergie par nuitée et évolution.',
+        'Critère 2 : consommation d’eau par nuitée.',
+        'Critère 3 : mobilité d’accès et solutions bas-carbone réellement proposées.',
+        'Critère 4 : politique d’achats, alimentation, déchets et gaspillage.',
+        'Critère 5 : certification ou audit avec référentiel identifiable, si pertinent.',
+        'Risque de greenwashing 1 : allégation générale “écoresponsable” sans données, périmètre ni preuve.',
+        'Risque de greenwashing 2 : mettre en avant une action marginale tout en masquant l’impact principal du séjour.',
+        'Bonne réponse : distinguer réduction réelle, compensation, certification et communication.'
+      ]
+    }
+  ],
+
+  'tourisme|IA & nouvelles technologies': [
+    {
+      title:'Correction — cas d’usage IA en office de tourisme',
+      text:'Exemple : assistant conversationnel de préparation de séjour personnalisé.',
+      bullets:[
+        'Utilisateur : visiteur qui prépare un séjour avant son arrivée.',
+        'Problème : trop d’informations dispersées et difficulté à construire un programme adapté au temps disponible.',
+        'Données : horaires, lieux, accessibilité, événements, météo si autorisée/accessible, préférences déclarées et données publiques fiables.',
+        'Valeur attendue : réduire le temps de recherche et augmenter l’usage des offres locales pertinentes.',
+        'Risques : hallucinations, données périmées, biais de recommandation, confidentialité, dépendance au fournisseur.',
+        'KPI : taux d’utilisation, taux de réponses utiles, clics vers partenaires, satisfaction, temps gagné, taux d’erreur signalée.',
+        'Condition de réussite : sources à jour, contrôle humain, transparence et possibilité de vérifier les recommandations.'
+      ]
+    }
+  ],
+
+  'tourisme|Influence & réseaux sociaux': [
+    {
+      title:'Correction — macro-influenceur ou micro-créateurs ?',
+      text:'Pour une destination hors saison, trois micro-créateurs spécialisés peuvent être préférables si l’objectif est de toucher des communautés plus qualifiées et de produire plusieurs angles de contenu.',
+      bullets:[
+        'Macro-influenceur : forte portée et notoriété rapide ; coût élevé, audience plus large et parfois moins affinitaire.',
+        'Micro-créateurs : audience plus faible mais souvent plus spécialisée, contenus diversifiés et coût mieux réparti.',
+        'Choix possible : trois micro-créateurs si la destination cherche des segments précis — gastronomie, randonnée, patrimoine — hors saison.',
+        'KPI : portée qualifiée, taux d’engagement, clics, codes/UTM, réservations attribuées, coût par visite ou réservation, contenu réutilisable.',
+        'Vigilance : transparence commerciale, droits d’usage des contenus et cohérence avec le positionnement.'
+      ]
+    }
+  ],
+
+  'tourisme|Luxe & tourisme': [
+    {
+      title:'Correction — trois preuves d’une montée en gamme',
+      text:'Une montée en gamme crédible doit transformer l’expérience et la qualité de service, pas uniquement le décor ou le prix.',
+      bullets:[
+        'Preuve 1 : service plus personnalisé — conciergerie, anticipation des préférences, personnel formé et disponible.',
+        'Preuve 2 : amélioration des processus — fluidité de réservation, accueil, traitement des demandes et récupération de service.',
+        'Preuve 3 : accès à des expériences distinctives — gastronomie, bien-être, événements, partenariats exclusifs.',
+        'Autres preuves : qualité mesurée, ratio personnel/client, certifications pertinentes, réputation, continuité de service.',
+        'KPI : satisfaction segment premium, NPS, repeat rate, part de services additionnels, ADR/RevPAR, réclamations.'
+      ]
+    }
+  ],
+
+  'tourisme|Événementiel': [
+    {
+      title:'Correction — tableau d’évaluation d’un événement',
+      text:'Le succès doit combiner performance commerciale et qualité de l’expérience.',
+      bullets:[
+        'KPI commerciaux 1 : nombre de visiteurs incrémentaux.',
+        'KPI commerciaux 2 : chiffre d’affaires ou panier moyen.',
+        'KPI commerciaux 3 : taux d’occupation des hébergements partenaires.',
+        'KPI commerciaux 4 : coût d’acquisition / visiteur.',
+        'KPI commerciaux 5 : taux de revisite ou intention de retour.',
+        'KPI expérience 1 : satisfaction globale / NPS.',
+        'KPI expérience 2 : temps d’attente et fluidité des flux.',
+        'KPI expérience 3 : taux et motifs de réclamation.',
+        'Complément pertinent : retombées territoriales et externalités négatives si l’événement est important.'
+      ]
+    }
+  ],
+
+  'tourisme|Crises & tourisme': [
+    {
+      title:'Correction — cinq premières décisions marketing',
+      text:'Le marketing intervient après sécurisation opérationnelle et en coordination avec la gestion de crise. Il doit protéger les clients, réduire l’incertitude et préserver la confiance sans spéculer.',
+      bullets:[
+        '1. Vérifier les faits avec les équipes sécurité/juridique avant toute communication.',
+        '2. Alerter rapidement les clients potentiellement concernés avec des consignes claires et actionnables.',
+        '3. Mettre en place un canal d’assistance dédié et prioriser les personnes touchées.',
+        '4. Suspendre temporairement les campagnes ou messages susceptibles d’être incohérents avec la crise.',
+        '5. Publier des mises à jour datées distinguant faits confirmés, investigation en cours et mesures prises.',
+        'Ensuite : mesurer confiance, volume de contacts, temps de résolution, taux de réclamation et comportement de retour.',
+        'À éviter : nier trop tôt, minimiser, spéculer sur les auteurs ou annoncer une résolution avant vérification.'
+      ]
+    }
+  ]
+}
