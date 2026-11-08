@@ -199,8 +199,8 @@ export const marketingPages = {
     ],
     [
       {type:'Académique',name:'BNF — Eiglier & Langeard, Servuction (1987)',url:'https://catalogue.bnf.fr/ark:/12148/cb34968117n'},
-      {type:'Académique',name:'Vargo & Lusch — Evolving to a New Dominant Logic for Marketing',url:'https://journals.sagepub.com/doi/10.1509/jmkg.68.1.1.24036'},
-      {type:'Académique',name:'Parasuraman, Zeithaml & Berry — SERVQUAL',url:'https://zenodo.org/records/14579730'},
+      {type:'Académique',name:'Booms & Bitner — Marketing Services by Managing the Environment (1982), avec référence au cadre 7P de 1981',url:'https://journals.sagepub.com/doi/10.1177/001088048202300107'},\n      {type:'Académique',name:'Vargo & Lusch — Evolving to a New Dominant Logic for Marketing',url:'https://journals.sagepub.com/doi/10.1509/jmkg.68.1.1.24036'},
+      {type:'Académique',name:'Parasuraman, Zeithaml & Berry — SERVQUAL',url:'https://journals.sagepub.com/doi/10.1177/076737019000500102'},
       {type:'Ressource fournie',name:'Copies Option C — Innovation et marketing des services.pdf',note:'Support de préparation interne ; utilisé comme point de départ puis recoupé.'}
     ]
   ),
