@@ -1,3 +1,4 @@
+import { caseCorrections } from './corrections'
 const p=(title,intro,facts,questions,sources)=>({
   label:'Cas réel sourcé',title,intro,keyPoints:facts,
   sections:questions.map((text,i)=>({heading:i===questions.length-1?'Piste de travail':`Question ${i+1}`,text})),
@@ -269,3 +270,8 @@ export const casePages = {
     ]
   )
 }
+
+
+Object.entries(caseCorrections).forEach(([key,corrections])=>{
+  if(casePages[key]) casePages[key].corrections=corrections
+})
