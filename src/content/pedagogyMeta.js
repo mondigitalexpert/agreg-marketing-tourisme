@@ -184,3 +184,87 @@ export const watchPedagogy={
   'veille|Chiffres clés':{recap:['Un chiffre n’est utile qu’avec unité, période, périmètre et source.','Les chiffres d’entreprise ne sont pas des statistiques sectorielles.'],examTips:['Écrire la date dans la fiche.','Interpréter le chiffre avant de le mémoriser.']},
   'veille|Relier une actualité à une notion':{recap:['Fait → source → notion → mécanisme → limite.','L’exemple doit éclairer un raisonnement, pas remplacer la théorie.'],examTips:['Préparer une phrase de mobilisation en copie.','Conserver au moins une limite ou donnée manquante.']}
 }
+
+
+export const tourismDeepSections={
+  'tourisme|Fondamentaux':[
+    {heading:'Comprendre le système touristique',text:'Une consommation touristique est rarement produite par une seule organisation. Transport, hébergement, restauration, activités, espace public, information, habitants et intermédiaires contribuent à une expérience composite. Cette interdépendance implique qu’une défaillance extérieure à l’entreprise peut affecter sa satisfaction, tandis qu’une amélioration collective peut accroître la valeur de tous les acteurs.'},
+    {heading:'Passer des volumes à la valeur',text:'Le nombre de nuitées ou d’arrivées mesure une partie de l’activité, mais ne renseigne pas directement sur la dépense, la marge, la durée, la pression territoriale ou la satisfaction. Une analyse marketing doit compléter les volumes par le mix de clientèles, la saisonnalité, la dépense, le canal de réservation et les comportements.'},
+    {heading:'Limites et usage concours',text:'Éviter d’additionner des indicateurs dont les champs diffèrent. Dans une copie, préciser la source et le périmètre puis utiliser le chiffre pour soutenir un mécanisme : saisonnalité, segmentation, capacité ou arbitrage budgétaire. Le chiffre n’est jamais la conclusion.'}
+  ],
+  'tourisme|Hôtellerie':[
+    {heading:'Le modèle économique derrière la chambre',text:'L’hôtellerie combine capacité fixe à court terme, coûts fixes élevés, service humain et inventaire périssable. La performance dépend donc simultanément du prix, du taux d’occupation, du coût de distribution, du mix de clientèle et des revenus annexes. Deux hôtels ayant le même RevPAR peuvent avoir des structures de marge et de risque très différentes.'},
+    {heading:'Marque, distribution et relation',text:'Une chaîne ou un groupe multimarque crée de la valeur par notoriété, standard de service, fidélité, négociation et couverture de segments. Les OTA apportent audience et conversion mais captent commission et une partie de la relation. Le direct n’est supérieur que si son coût d’acquisition et de conversion reste maîtrisé.'},
+    {heading:'Limites et usage concours',text:'Ne pas attribuer la performance d’un groupe à son programme de fidélité ou à sa stratégie de marque sans données causales. Dans un cas, distinguer indicateurs publiés, hypothèses explicatives et informations manquantes : part directe, coût par canal, taux de membres actifs, marge et réachat.'}
+  ],
+  'tourisme|Restauration':[
+    {heading:'Une capacité qui se mesure en tables et en temps',text:'La capacité d’un restaurant dépend du nombre de places mais aussi de la durée d’occupation, du rythme de production, de la disponibilité du personnel et de la répartition des réservations. Le revenue management peut donc agir sur créneaux, durée, réservation, menus et conditions, pas uniquement sur le prix.'},
+    {heading:'Menu engineering et contribution',text:'La carte est un portefeuille d’offres. Il faut comparer popularité et marge contributive des plats, tenir compte du food cost, du temps de préparation et du gaspillage. Une hausse du panier moyen n’est intéressante que si elle améliore la contribution et reste cohérente avec le positionnement.'},
+    {heading:'Limites et usage concours',text:'Une hausse de chiffre d’affaires ne permet pas de conclure à une meilleure rentabilité. Dans une copie, demander ou estimer avec prudence volume de couverts, panier, marge, coûts variables et capacité ; proposer ensuite des leviers de mix, productivité, réservation et expérience.'}
+  ],
+  'tourisme|Destinations & territoires':[
+    {heading:'Une offre collective difficile à contrôler',text:'La destination résulte d’un ensemble d’acteurs autonomes. L’organisme de destination peut coordonner, informer, promouvoir et parfois aménager, mais il ne contrôle pas directement la qualité de chaque hôtel, restaurant, transport ou interaction avec les habitants. La gouvernance est donc une variable marketing centrale.'},
+    {heading:'Gérer les flux et pas seulement attirer',text:'Une stratégie d’attractivité doit tenir compte de la saison, des lieux saturés, de la capacité, des habitants et des retombées. Désaisonnaliser ne consiste pas à faire une promotion moins chère : il faut créer des motifs de visite crédibles pour d’autres segments et périodes.'},
+    {heading:'Limites et usage concours',text:'Éviter de traiter le territoire comme une marque-produit contrôlée de bout en bout. Dans une copie, identifier les parties prenantes, leurs intérêts, la capacité d’accueil et les indicateurs de valeur : dépenses, durée, satisfaction, répartition des flux et acceptabilité.'}
+  ],
+  'tourisme|Agences / TO / plateformes':[
+    {heading:'Des intermédiaires qui n’exercent pas la même fonction',text:'L’agence conseille et sécurise une décision ; le tour-opérateur assemble et prend une partie du risque de production ; l’OTA agrège l’offre et facilite comparaison et transaction ; une marketplace organise une rencontre entre plusieurs côtés du marché. Les confondre empêche d’analyser correctement la valeur créée.'},
+    {heading:'Effets de réseau et dépendance',text:'Une plateforme gagne en attractivité lorsque davantage d’offre attire davantage de demande et inversement. Cette dynamique peut réduire les coûts de recherche pour le client mais renforcer le pouvoir de l’intermédiaire sur les fournisseurs, notamment quand l’accès à la demande et aux données devient difficile à reproduire.'},
+    {heading:'Limites et usage concours',text:'La commission ne suffit pas à juger un canal. Comparer coût net, conversion, audience incrémentale, accès aux données, risque de dépendance et fidélisation. Une recommandation solide peut conclure à un mix plutôt qu’à la suppression de l’intermédiaire.'}
+  ],
+  'tourisme|Expérience touristique':[
+    {heading:'L’expérience dépasse la prestation centrale',text:'Le souvenir d’un séjour se construit avant le départ, pendant les déplacements, au contact des prestataires puis après le retour. Les points de contact peuvent appartenir à la marque, à des partenaires, à d’autres clients ou à l’environnement. L’expérience doit donc être analysée dans le temps et comme un système.'},
+    {heading:'Moments de vérité et récupération',text:'Tous les moments n’ont pas le même poids. Une arrivée difficile, une attente, un incident ou une interaction humaine peuvent structurer le souvenir. En cas de défaillance, rapidité, équité, information et marge de contrôle donnée au client influencent la récupération de confiance.'},
+    {heading:'Limites et usage concours',text:'Une carte de parcours ne doit pas être une suite décorative de canaux. Pour chaque étape, préciser besoin, friction, émotion, acteur responsable, donnée et KPI. Dans une copie, prioriser les moments qui modifient réellement satisfaction ou conversion.'}
+  ],
+  'tourisme|Distribution & OTA':[
+    {heading:'Piloter la contribution, pas le volume',text:'Un canal de distribution doit être évalué après commission, coût média, coût technologique, annulations, service, conversion et potentiel de réachat. Le direct peut produire davantage de données et de relation, mais il supporte ses propres coûts d’acquisition.'},
+    {heading:'Régulation et évolution du rapport de force',text:'Le DMA encadre certaines pratiques des gatekeepers, notamment les clauses de parité de Booking.com dans l’Union européenne. Ces règles peuvent modifier les marges de manœuvre des hébergeurs sans supprimer pour autant le pouvoir de marché, les effets de réseau ou l’utilité commerciale de la plateforme.'},
+    {heading:'Limites et usage concours',text:'Ne pas présenter une enquête DSA comme une condamnation ni une réforme comme disparition du pouvoir d’une plateforme. Dans une copie, distinguer règle établie, procédure en cours, comportement observé et conséquence marketing.'}
+  ],
+  'tourisme|E-réputation':[
+    {heading:'De la note au diagnostic',text:'Une note agrégée mélange plusieurs dimensions et plusieurs périodes. L’analyse doit examiner récence, volume, dispersion, thèmes, type de clientèle et étape du parcours. Le texte des avis peut signaler une cause que la moyenne masque.'},
+    {heading:'Répondre pour trois publics',text:'Une réponse à un avis s’adresse au client concerné, aux futurs lecteurs et aux équipes internes. Elle peut reconnaître un problème, expliquer une action et montrer la capacité de récupération. Elle devient inefficace si elle est standardisée, défensive ou déconnectée des opérations.'},
+    {heading:'Limites et usage concours',text:'Les avis ne constituent pas un échantillon représentatif automatique : les personnes qui publient peuvent différer des autres clients. Dans une copie, croiser avis, réclamations et données opérationnelles avant de conclure.'}
+  ],
+  'tourisme|Revenue management':[
+    {heading:'Pourquoi le temps change la valeur de l’inventaire',text:'Une chambre, un siège ou une table non vendus à la date de service perdent leur valeur commerciale. Le revenue management cherche donc à prévoir la demande et à réserver la capacité aux segments dont la contribution attendue est la plus pertinente, en jouant sur prix, conditions et disponibilité.'},
+    {heading:'Prix, inventaire et perception d’équité',text:'La tarification différenciée peut être acceptée lorsqu’elle repose sur des règles compréhensibles — flexibilité, anticipation, service, période — mais être perçue comme injuste si les écarts semblent arbitraires. La perception de justice doit donc compléter l’optimisation de revenu.'},
+    {heading:'Limites et usage concours',text:'Le RevPAR ne mesure ni coûts, ni restauration, ni autres revenus. Dans une copie, l’interpréter avec ADR, occupation, segment, canal, marge variable et expérience. Le meilleur taux d’occupation n’est pas nécessairement la meilleure performance.'}
+  ],
+  'tourisme|Fidélisation & CRM':[
+    {heading:'Fidéliser n’est pas seulement récompenser',text:'La fidélité peut venir de satisfaction, confiance, habitude, coûts de changement ou attachement. Un programme relationnel cherche à augmenter la valeur perçue et la reconnaissance, mais des points non utilisés ou des avantages peu différenciants créent peu de valeur.'},
+    {heading:'CRM comme processus stratégique',text:'Le CRM organise connaissance client, proposition de valeur, interactions multicanales et mesure. La donnée doit être exacte, utile et gouvernée ; la personnalisation doit produire un bénéfice identifiable plutôt qu’une impression de surveillance.'},
+    {heading:'Limites et usage concours',text:'Nombre de membres, ouverture d’e-mails ou téléchargements d’application ne suffisent pas à prouver la fidélité. Regarder activité, fréquence, rétention, part de portefeuille, valeur client et coût du programme.'}
+  ],
+  'tourisme|Tourisme durable':[
+    {heading:'Du discours au système d’impact',text:'L’impact touristique provient de la mobilité, du bâtiment, des achats, de l’eau, des déchets, des activités et des flux territoriaux. Une politique crédible hiérarchise les impacts matériels plutôt que de multiplier des gestes facilement communicables mais secondaires.'},
+    {heading:'Mesurer une trajectoire',text:'Une intensité par nuitée ou passager peut baisser alors que l’impact absolu augmente avec la croissance du volume. Les deux lectures peuvent donc être nécessaires. Un label ou une certification apporte un cadre de preuve mais ne remplace pas l’analyse des résultats.'},
+    {heading:'Limites et usage concours',text:'Éviter les notions vagues comme “écologique” ou “responsable” sans indicateur. Dans une copie, préciser périmètre, année de référence, mesure, action et risque de déplacement d’impact ou de greenwashing.'}
+  ],
+  'tourisme|IA & nouvelles technologies':[
+    {heading:'Commencer par le problème utilisateur',text:'Un cas d’usage doit identifier utilisateur, tâche, friction, données disponibles, qualité attendue et indicateur de valeur. Une IA générative qui produit rapidement une réponse fausse peut dégrader davantage l’expérience qu’un processus humain plus lent.'},
+    {heading:'Du pilote à l’industrialisation',text:'Un pilote démontre une possibilité dans un contexte limité. Le passage à l’échelle exige intégration SI, qualité des données, sécurité, coût, conduite du changement, supervision et responsabilité. Le taux d’usage réel est souvent plus instructif que le nombre de démonstrations.'},
+    {heading:'Limites et usage concours',text:'Ne pas écrire “mettre de l’IA” comme recommandation. Décrire la tâche, la valeur, le contrôle humain, les erreurs possibles, les données et le KPI. Distinguer capacité technique et intérêt économique.'}
+  ],
+  'tourisme|Influence & réseaux sociaux':[
+    {heading:'Choisir un créateur par fonction, pas par taille',text:'Une campagne peut chercher inspiration, crédibilité, contenu, trafic ou conversion. Le bon profil dépend de la cible et du rôle attendu. Une petite communauté très affinitaire peut produire plus de valeur qu’une audience massive peu pertinente.'},
+    {heading:'Mesure et attribution',text:'Portée et engagement mesurent l’exposition et la réaction, pas nécessairement la réservation. Les liens UTM, codes, recherches de marque, enquêtes post-achat ou tests géographiques peuvent aider à approcher l’effet, sans prétendre à une attribution parfaite.'},
+    {heading:'Limites et usage concours',text:'Intégrer transparence commerciale, droits d’usage des contenus et risque réputationnel. Une recommandation doit préciser créateur, cible, message, format, rôle dans le parcours et KPI.'}
+  ],
+  'tourisme|Luxe & tourisme':[
+    {heading:'Une valeur multidimensionnelle',text:'Dans le luxe, la valeur vient de la qualité fonctionnelle mais aussi de la rareté, du statut, de la personnalisation, du temps gagné, de l’accès et de la cohérence symbolique. Le prix élevé peut renforcer certaines perceptions mais ne remplace pas la preuve de service.'},
+    {heading:'La cohérence opérationnelle comme barrière',text:'Une promesse premium exige recrutement, formation, autonomie, processus, données et partenaires adaptés. Une expérience spectaculaire compensant mal des défaillances basiques produit une dissonance particulièrement forte lorsque les attentes sont élevées.'},
+    {heading:'Limites et usage concours',text:'Éviter de définir le luxe par décoration et prix. Dans une copie, montrer comment chaque élément du mix et de la servuction soutient la promesse et comment l’établissement mesure satisfaction, réachat et contribution.'}
+  ],
+  'tourisme|Événementiel':[
+    {heading:'Créer une raison de déplacement datée',text:'L’événement concentre une proposition de valeur dans le temps et peut déclencher un déplacement qui n’aurait pas eu lieu autrement. Il peut aussi renforcer l’image, générer du contenu, stimuler hébergement/restauration et créer une habitude de revisite.'},
+    {heading:'Capacité, flux et externalités',text:'La réussite commerciale peut dégrader l’expérience si files, transport, sécurité ou nuisances ne sont pas maîtrisés. Le dispositif doit donc articuler marketing, opérations et territoire. Les retombées doivent être comparées aux coûts directs et aux externalités.'},
+    {heading:'Limites et usage concours',text:'Ne pas évaluer un événement uniquement au nombre d’entrées. Mesurer visiteurs incrémentaux, dépense, occupation, satisfaction, attente, réclamation, intention de retour et retombées pour les partenaires.'}
+  ],
+  'tourisme|Crises & tourisme':[
+    {heading:'La confiance comme actif vulnérable',text:'Une crise augmente l’incertitude et peut modifier rapidement le comportement. Les clients cherchent des informations, des garanties et des solutions. Une réponse marketing crédible dépend d’abord de faits opérationnels vérifiés et d’une coordination avec sécurité, juridique et direction.'},
+    {heading:'Séquence de réponse',text:'Sécuriser et vérifier, informer les personnes exposées, fournir une assistance, adapter les campagnes incompatibles avec la situation, puis publier des mises à jour datées. Après stabilisation, suivre la confiance, les réclamations, les abandons et la reprise.'},
+    {heading:'Limites et usage concours',text:'Éviter de spéculer, nier trop tôt ou confondre enquête et culpabilité. Dans une copie, distinguer faits établis, incertitudes, décisions immédiates et actions de restauration de la relation.'}
+  ]
+}
