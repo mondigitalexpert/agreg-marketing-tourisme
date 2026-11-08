@@ -184,7 +184,7 @@ export const watchPages = {
     ],
     [
       {type:'Officiel UE',name:'Commission européenne — Booking.com et DMA',url:'https://digital-strategy.ec.europa.eu/en/news/booking-must-now-comply-digital-markets-act',checked},
-      {type:'Entreprise',name:'Accor at a glance — juillet 2026',url:'https://assets.group.accor.com/yrj0orc8tx24/5fb92nCdGwFBM4lYRHTevc/940cd987ec64f05a7d81a6f310a7b489/ACCOR_AT_A_GLANCE_JULY_2026.pdf',checked}
+      {type:'Entreprise',name:'Accor at a glance — juillet 2026',url:'https://assets.group.accor.com/yrj0orc8tx24/1gfnIc7BnVhT7xnnVrKMYj/cde89098605135e4610f1e2b48c855b2/Accor_Overview_JULY_2026.pdf',checked}
     ]
   )
 }
