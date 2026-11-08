@@ -258,6 +258,27 @@ function ProgressDashboard({section,entries,progress,syncState,profileLabel,onBa
   </div>
 }
 
+function GlobalNavigation({section,activeSub,onHome,onBack,onTop}){
+  if(!section) return null
+  return <nav className="global-nav" aria-label="Navigation rapide">
+    <div className="global-nav-context">
+      <span className="global-nav-section">{section.icon} {section.title}</span>
+      {activeSub&&<><span className="global-nav-separator">›</span><strong>{activeSub}</strong></>}
+    </div>
+    <div className="global-nav-actions">
+      <button className="global-nav-button back-fast" onClick={onBack} title="Revenir au niveau précédent">
+        <span aria-hidden>←</span><span>Retour</span>
+      </button>
+      <button className="global-nav-button home-fast" onClick={onHome} title="Revenir à l’accueil">
+        <span aria-hidden>⌂</span><span>Accueil</span>
+      </button>
+      <button className="global-nav-button top-fast" onClick={onTop} title="Revenir en haut de la page">
+        <span aria-hidden>↑</span><span>Haut</span>
+      </button>
+    </div>
+  </nav>
+}
+
 function App(){
   const [active, setActive] = useState(null)
   const [activeSub, setActiveSub] = useState(null)
@@ -405,6 +426,24 @@ function App(){
   const score=totalAnswered?Math.round(totalCorrect/totalAnswered*100):0
   const progressMeta=totalAnswered?score+'% QCM':'Profil : '+activeProfileLabel
 
+  const goHome=()=>{
+    setActive(null)
+    setActiveSub(null)
+    window.scrollTo({top:0,behavior:'smooth'})
+  }
+
+  const goBack=()=>{
+    if(activeSub) setActiveSub(null)
+    else setActive(null)
+    window.scrollTo({top:0,behavior:'smooth'})
+  }
+
+  const goTop=()=>window.scrollTo({top:0,behavior:'smooth'})
+
+  useEffect(()=>{
+    window.scrollTo({top:0,behavior:'auto'})
+  },[active,activeSub])
+
   return <div className="app-shell">
     <header className="hero">
       <div>
@@ -432,6 +471,14 @@ function App(){
         </div>
       </div>
     </header>
+
+    <GlobalNavigation
+      section={section}
+      activeSub={activeSub}
+      onHome={goHome}
+      onBack={goBack}
+      onTop={goTop}
+    />
 
     {!active ? <>
       <section className="dashboard-zone">
