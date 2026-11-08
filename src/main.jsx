@@ -16,16 +16,54 @@ const sections = [
   { id:'cas', group:'practice', title:'Cas réels', icon:'🧳', color:'#B67A32', desc:'Des situations d’entreprises et d’acteurs du tourisme, datées, sourcées et reliées aux notions du programme.', size:'wide', badge:'Sourcés', tags:['Hôtellerie','Plateformes','Transport','Crises','Transformation digitale'] },
 ]
 
+const item = (icon, title) => ({ icon, title })
+
 const subpages = {
-  concours:['Épreuves 2027','Programme officiel','Option C Marketing','Attentes du jury','Méthodologie','Sujets officiels','Rapports de jury','Pièges à éviter'],
-  cours:['Marché & environnement','Comportement du consommateur','Segmentation • Ciblage • Positionnement','Produit / Service / Marque','Prix','Communication','Distribution & omnicanal','Marketing digital','Marketing des services','Marketing BtoB','Marketing territorial','Marketing entrepreneurial','Marketing international','Études marketing','Statistiques & décision','Droit appliqué au marketing'],
-  tourisme:['Fondamentaux','Hôtellerie','Restauration','Destinations & territoires','Agences / TO / plateformes','Expérience touristique','Distribution & OTA','E-réputation','Revenue management','Fidélisation & CRM','Tourisme durable','IA & nouvelles technologies','Influence & réseaux sociaux','Luxe & tourisme','Événementiel','Crises & tourisme'],
-  auteurs:['Auteurs incontournables','Modèles marketing','Définitions','Théories contemporaines','Quel auteur pour quoi ?','Flashcards','Auteur ↔ Concept','Choisir le bon modèle'],
-  entrainement:['QCM rapides','Vrai / Faux argumenté','Flashcards','Questions ouvertes','Définitions','Retrouver l’auteur','Retrouver le modèle','Mini-cas 10 min','Cas 30–45 min','Études de cas longues','Calculs marketing','Analyse de documents','Diagnostic','Problématique','Plan','Préconisations','Chronométré','Concours blanc'],
-  cas:['Hôtellerie','Plateformes','Transport','Destinations touristiques','Parcs & loisirs','Restauration','Croisières','Acteurs publics','Start-up tourisme','Crises & controverses','Transformation digitale','Développement durable'],
-  veille:['Marketing','Tourisme','Consommation','Digital & IA','Environnement','Réglementation','Entreprises à suivre','Chiffres clés','Relier une actualité à une notion'],
-  bibliotheque:['Ressources fournies','Programme officiel','Sujets officiels','Rapports de jury','Articles académiques','Articles professionnels','Statistiques officielles','Ressources tourisme','Ressources marketing','Mes fiches','Mes favoris'],
-  progression:['Vue d’ensemble','Mes résultats','Points faibles','Notions maîtrisées','À revoir','Historique QCM','Erreurs fréquentes','Cas réalisés','Flashcards difficiles','Favoris']
+  concours:[
+    item('🗓️','Épreuves 2027'), item('📘','Programme officiel'), item('📣','Option C Marketing'), item('👩‍⚖️','Attentes du jury'),
+    item('🧭','Méthodologie'), item('📝','Sujets officiels'), item('📊','Rapports de jury'), item('⚠️','Pièges à éviter')
+  ],
+  cours:[
+    item('🌍','Marché & environnement'), item('👥','Comportement du consommateur'), item('🎯','Segmentation • Ciblage • Positionnement'),
+    item('📦','Produit / Service / Marque'), item('💶','Prix'), item('📣','Communication'), item('🛍️','Distribution & omnicanal'),
+    item('📱','Marketing digital'), item('🤝','Marketing des services'), item('🏢','Marketing BtoB'), item('📍','Marketing territorial'),
+    item('🚀','Marketing entrepreneurial'), item('🌐','Marketing international'), item('🔎','Études marketing'),
+    item('📈','Statistiques & décision'), item('⚖️','Droit appliqué au marketing')
+  ],
+  tourisme:[
+    item('🧭','Fondamentaux'), item('🏨','Hôtellerie'), item('🍽️','Restauration'), item('🗺️','Destinations & territoires'),
+    item('🧳','Agences / TO / plateformes'), item('✨','Expérience touristique'), item('🛒','Distribution & OTA'), item('⭐','E-réputation'),
+    item('💹','Revenue management'), item('❤️','Fidélisation & CRM'), item('🌱','Tourisme durable'), item('🤖','IA & nouvelles technologies'),
+    item('📲','Influence & réseaux sociaux'), item('💎','Luxe & tourisme'), item('🎪','Événementiel'), item('🚨','Crises & tourisme')
+  ],
+  auteurs:[
+    item('👤','Auteurs incontournables'), item('🧩','Modèles marketing'), item('📖','Définitions'), item('🔭','Théories contemporaines'),
+    item('🧠','Quel auteur pour quoi ?'), item('🃏','Flashcards'), item('🔗','Auteur ↔ Concept'), item('🛠️','Choisir le bon modèle')
+  ],
+  entrainement:[
+    item('✅','QCM rapides'), item('⚖️','Vrai / Faux argumenté'), item('🃏','Flashcards'), item('💬','Questions ouvertes'),
+    item('📖','Définitions'), item('👤','Retrouver l’auteur'), item('🧩','Retrouver le modèle'), item('⏱️','Mini-cas 10 min'),
+    item('🕒','Cas 30–45 min'), item('📚','Études de cas longues'), item('🧮','Calculs marketing'), item('🔎','Analyse de documents'),
+    item('🩺','Diagnostic'), item('❓','Problématique'), item('🗂️','Plan'), item('💡','Préconisations'), item('⏳','Chronométré'), item('🏁','Concours blanc')
+  ],
+  cas:[
+    item('🏨','Hôtellerie'), item('📱','Plateformes'), item('🚆','Transport'), item('🗺️','Destinations touristiques'),
+    item('🎢','Parcs & loisirs'), item('🍽️','Restauration'), item('🚢','Croisières'), item('🏛️','Acteurs publics'),
+    item('🚀','Start-up tourisme'), item('🚨','Crises & controverses'), item('💻','Transformation digitale'), item('🌱','Développement durable')
+  ],
+  veille:[
+    item('📣','Marketing'), item('🧳','Tourisme'), item('🛒','Consommation'), item('🤖','Digital & IA'), item('🌱','Environnement'),
+    item('⚖️','Réglementation'), item('🏢','Entreprises à suivre'), item('📊','Chiffres clés'), item('🔗','Relier une actualité à une notion')
+  ],
+  bibliotheque:[
+    item('📂','Ressources fournies'), item('📘','Programme officiel'), item('📝','Sujets officiels'), item('📊','Rapports de jury'),
+    item('🎓','Articles académiques'), item('📰','Articles professionnels'), item('📈','Statistiques officielles'), item('🧳','Ressources tourisme'),
+    item('📣','Ressources marketing'), item('🗒️','Mes fiches'), item('⭐','Mes favoris')
+  ],
+  progression:[
+    item('🧭','Vue d’ensemble'), item('📈','Mes résultats'), item('⚠️','Points faibles'), item('✅','Notions maîtrisées'), item('🔁','À revoir'),
+    item('🕘','Historique QCM'), item('🧩','Erreurs fréquentes'), item('🧳','Cas réalisés'), item('🃏','Flashcards difficiles'), item('⭐','Favoris')
+  ]
 }
 
 function Tile({section, variant='action', onOpen}) {
@@ -125,10 +163,13 @@ function App(){
         <div><h2>{section.title}</h2><p>{section.desc}</p></div>
       </section>
       <main className="subgrid">
-        {subpages[active].map((item,i)=><button className="subtile" key={item} style={{'--tile':section.color}}>
-          <span className="sub-number">{String(i+1).padStart(2,'0')}</span>
-          <span>{item}</span>
-          <span aria-hidden>→</span>
+        {subpages[active].map((entry,i)=><button className="subtile" key={entry.title} style={{'--tile':section.color}}>
+          <span className="sub-icon" aria-hidden>{entry.icon}</span>
+          <span className="subtile-copy">
+            <span className="sub-number">{String(i+1).padStart(2,'0')}</span>
+            <span className="sub-title">{entry.title}</span>
+          </span>
+          <span className="sub-arrow" aria-hidden>→</span>
         </button>)}
       </main>
       <div className="placeholder-note">Les sous-pages seront alimentées progressivement avec les ressources fournies, des contenus complémentaires et des sources vérifiables.</div>
