@@ -114,7 +114,7 @@ function AuthPanel({activeProfile,activeProfileLabel,onProfileChange,session,clo
     const ok=await onRequestOtp(email)
     if(ok){
       setOtpSent(true)
-      setLocalMessage('Un code de connexion a été envoyé par e-mail.')
+      setLocalMessage('Un e-mail de connexion a été envoyé. S’il contient un code, saisis-le ci-dessous ; s’il contient un lien, tu peux aussi cliquer dessus.')
     }
   }
 
@@ -187,13 +187,13 @@ function AuthPanel({activeProfile,activeProfileLabel,onProfileChange,session,clo
       <button className="login-button" disabled={busy||!email} onClick={requestCode}>{busy?'Envoi…':'Recevoir un code par e-mail'}</button>
     </> : <>
       <div className="otp-email">{email}</div>
-      <input className="auth-input otp-input" inputMode="numeric" value={otp} onChange={e=>setOtp(e.target.value.replace(/\D/g,'').slice(0,8))} placeholder="Code reçu par e-mail" autoComplete="one-time-code" />
+      <input className="auth-input otp-input" inputMode="numeric" value={otp} onChange={e=>setOtp(e.target.value.replace(/\D/g,'').slice(0,8))} placeholder="Code reçu par e-mail (si présent)" autoComplete="one-time-code" />
       <button className="login-button" disabled={busy||otp.length<6} onClick={verifyCode}>{busy?'Vérification…':'Valider le code'}</button>
       <button className="text-button" onClick={()=>{setOtpSent(false);setOtp('');setLocalMessage('')}} disabled={busy}>Changer d’adresse e-mail</button>
     </>}
 
     {(error||localMessage)&&<small className={error?'auth-error':'auth-message'}>{error||localMessage}</small>}
-    <small>À la première connexion seulement, un code d’invitation sera demandé après validation de l’e-mail.</small>
+    <small>À la première connexion seulement, un code d’invitation sera demandé après authentification de l’e-mail.</small>
   </div>
 }
 
