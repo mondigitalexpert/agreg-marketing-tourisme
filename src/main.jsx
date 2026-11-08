@@ -428,7 +428,7 @@ function App(){
         />
         <div className="status-card">
           <span className="status-dot"></span>
-          <div><strong>Base de préparation complète</strong><small>108 fiches • {session?'synchronisé : ':'profil actif : '}{activeProfileLabel}</small></div>
+          <div><strong>Base de préparation complète</strong><small>107 fiches + tableau de bord • {session?'synchronisé : ':'profil actif : '}{activeProfileLabel}</small></div>
         </div>
       </div>
     </header>
