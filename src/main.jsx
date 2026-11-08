@@ -61,7 +61,7 @@ const subpages = {
     item('⚖️','Réglementation'), item('🏢','Entreprises à suivre'), item('📊','Chiffres clés'), item('🔗','Relier une actualité à une notion')
   ],
   bibliotheque:[
-    item('📂','Ressources fournies'), item('📘','Programme officiel'), item('📝','Sujets officiels'), item('📊','Rapports de jury'),
+    item('📂','Ressources fournies'), item('🎬','Médias & ressources fournies'), item('📘','Programme officiel'), item('📝','Sujets officiels'), item('📊','Rapports de jury'),
     item('🎓','Articles académiques'), item('📰','Articles professionnels'), item('📈','Statistiques officielles'), item('🧳','Ressources tourisme'),
     item('📣','Ressources marketing'), item('🗒️','Mes fiches'), item('⭐','Mes favoris')
   ],
@@ -428,7 +428,7 @@ function App(){
         />
         <div className="status-card">
           <span className="status-dot"></span>
-          <div><strong>Base de préparation complète</strong><small>107 fiches + tableau de bord • {session?'synchronisé : ':'profil actif : '}{activeProfileLabel}</small></div>
+          <div><strong>Base de préparation complète</strong><small>108 fiches + tableau de bord • {session?'synchronisé : ':'profil actif : '}{activeProfileLabel}</small></div>
         </div>
       </div>
     </header>
