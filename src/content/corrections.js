@@ -532,3 +532,38 @@ export const tourismCorrections = {
     }
   ]
 }
+
+
+export const authorsCorrections = {
+  'auteurs|Modèles marketing': [
+    {
+      title:'Correction — choisir le bon modèle',
+      text:'Le bon modèle dépend du problème à expliquer. L’objectif n’est pas de “placer un auteur”, mais de sélectionner l’outil qui éclaire le mécanisme central.',
+      bullets:[
+        'Baisse de conversion → parcours client (Lemon & Verhoef) ou comportement planifié (Ajzen) si le problème porte sur intention/freins ; compléter par données de tunnel.',
+        'Nouvelle destination → marketing territorial / place branding et segmentation-ciblage-positionnement ; Porter si l’enjeu principal est concurrentiel.',
+        'Dépendance OTA → cinq forces de Porter + analyse omnicanale ; éventuellement CRM pour la reconquête de la relation directe.',
+        'Lancement de start-up → effectuation de Sarasvathy + modèle d’affaires et expérimentation.',
+        'Image de marque → Keller ou Aaker pour analyser notoriété, associations et capital de marque.',
+        'Une bonne réponse justifie le choix en une phrase : “ce modèle est pertinent ici parce qu’il permet d’expliquer…”'
+      ]
+    }
+  ]
+}
+
+export const watchCorrections = {
+  'veille|Consommation': [
+    {
+      title:'Correction — transformer une tendance médiatique en constat exploitable',
+      text:'Exemple de méthode : partir d’un titre médiatique comme “les Français voyagent moins à cause du pouvoir d’achat”, puis chercher une donnée officielle ou sectorielle récente qui mesure réellement départs, nuitées, dépenses ou arbitrages.',
+      bullets:[
+        '1. Reformuler la tendance sous forme de proposition vérifiable.',
+        '2. Chercher une source officielle ou méthodologiquement explicite : Insee, Atout France, Eurostat, Banque de France, etc.',
+        '3. Vérifier période, population, champ et méthode.',
+        '4. Conclure uniquement ce que la donnée permet : par exemple “les dépenses progressent moins vite” ne signifie pas automatiquement “les Français voyagent moins”.',
+        '5. Relier ensuite la tendance à une notion marketing : sensibilité au prix, arbitrage, segmentation, valeur perçue ou modification du mix.',
+        '6. Signaler les limites : données provisoires, moyenne nationale, absence de causalité démontrée.'
+      ]
+    }
+  ]
+}
