@@ -90,3 +90,53 @@ footer{display:flex;justify-content:space-between;gap:20px;margin-top:38px;paddi
 .subtile-copy{display:flex;flex-direction:column;gap:3px;min-width:0}
 .sub-title{font-weight:760;line-height:1.25}
 .sub-arrow{font-size:1.05rem;color:var(--tile);font-weight:850}
+
+.detail-page{animation:fadeIn .18s ease}
+.detail-hero{--tile:#2F6B6D;display:grid;grid-template-columns:72px 1fr;gap:20px;align-items:start;background:#fff;border:1px solid #dfe5e9;border-top:6px solid var(--tile);border-radius:22px;padding:24px;box-shadow:0 10px 28px rgba(26,40,55,.06)}
+.detail-icon{width:64px;height:64px;border-radius:18px;display:grid;place-items:center;background:#f2f5f7;border:1px solid #e2e8ec;font-size:2rem}
+.detail-label{display:inline-block;font-size:.72rem;font-weight:850;letter-spacing:.11em;color:var(--tile);text-transform:uppercase;margin-bottom:5px}
+.detail-hero h2{font-size:clamp(1.8rem,4vw,2.7rem);letter-spacing:-.035em;margin:0 0 10px;color:#1b2b39}
+.detail-hero p{margin:0;max-width:840px;line-height:1.6;color:#5d6a75}
+.content-block{margin-top:26px}
+.content-block>h3,.sources-heading h3{font-size:1.3rem;margin:0 0 13px;letter-spacing:-.02em}
+.key-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
+.key-card{display:grid;grid-template-columns:38px 1fr;gap:10px;background:#fff;border:1px solid #dfe5e9;border-radius:15px;padding:15px}
+.key-card>span{font-size:.72rem;font-weight:850;color:var(--tile,#59636E);padding-top:2px}
+.key-card p{margin:0;line-height:1.45;color:#384957;font-size:.91rem}
+.reading-stack{display:grid;gap:11px}
+.reading-card{background:#fff;border:1px solid #dfe5e9;border-radius:16px;padding:18px 19px}
+.reading-card h4{margin:0 0 7px;font-size:1rem;color:#263746}
+.reading-card p{margin:0;line-height:1.6;color:#596874;font-size:.93rem}
+.sources-block{background:#fff;border:1px solid #dfe5e9;border-radius:20px;padding:20px}
+.sources-heading{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:12px}
+.sources-heading h3{margin-top:3px;margin-bottom:0}
+.verified-chip{font-size:.72rem;font-weight:820;color:#2f6b50;background:#edf7f1;border:1px solid #d6eadf;padding:6px 9px;border-radius:999px}
+.source-list{display:grid;gap:9px}
+.source-card{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:12px 0;border-top:1px solid #edf0f2}
+.source-card:first-child{border-top:0}
+.source-type{font-size:.7rem;font-weight:820;color:#66737e;text-transform:uppercase;letter-spacing:.05em}
+.source-card a,.source-card strong{color:#21394d;font-size:.9rem;text-decoration:none}
+.source-card a:hover{text-decoration:underline}
+.source-card small{display:block;color:#78848e;margin-top:4px;font-size:.75rem;line-height:1.35}
+.quiz-list{display:grid;gap:14px}
+.quiz-card{background:#fff;border:1px solid #dfe5e9;border-radius:18px;padding:18px}
+.quiz-question{display:grid;grid-template-columns:34px 1fr;gap:9px;font-weight:790;line-height:1.4;color:#253746}
+.quiz-question>span{font-size:.72rem;color:#687783;padding-top:3px}
+.quiz-choices{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:14px}
+.quiz-choice{border:1px solid #d9e0e4;background:#f8fafb;border-radius:12px;padding:11px 12px;text-align:left;cursor:pointer;display:flex;align-items:center;gap:9px;color:#394a57}
+.quiz-choice:hover:not(:disabled){border-color:#9eabb5;background:#fff}
+.quiz-choice:disabled{cursor:default}
+.quiz-choice.correct{border-color:#82b395;background:#eef8f1}
+.quiz-choice.wrong{border-color:#cc8d8d;background:#fbefef}
+.choice-letter{width:25px;height:25px;border-radius:8px;background:#fff;border:1px solid #e1e6e9;display:grid;place-items:center;font-size:.72rem;font-weight:850;flex:none}
+.quiz-feedback{margin-top:11px;border-radius:11px;padding:10px 12px;font-size:.84rem;line-height:1.45}
+.quiz-feedback.ok{background:#eef8f1;color:#315f43}
+.quiz-feedback.ko{background:#fbefef;color:#7b4444}
+@keyframes fadeIn{from{opacity:.35;transform:translateY(3px)}to{opacity:1;transform:none}}
+@media(max-width:680px){
+  .detail-hero{grid-template-columns:1fr;padding:19px}
+  .detail-icon{width:52px;height:52px;border-radius:15px;font-size:1.6rem}
+  .key-grid,.quiz-choices{grid-template-columns:1fr}
+  .source-card{grid-template-columns:1fr;gap:4px}
+  .sources-heading{flex-direction:column}
+}
