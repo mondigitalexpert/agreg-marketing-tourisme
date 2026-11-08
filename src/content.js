@@ -1,4 +1,13 @@
-export const contentPages = {
+import { marketingPages } from './content/marketing'
+import { tourismPages } from './content/tourism'
+import { authorsPages } from './content/authors'
+import { trainingPages } from './content/training'
+import { casePages } from './content/cases'
+import { watchPages } from './content/watch'
+import { libraryPages } from './content/library'
+import { progressPages } from './content/progress'
+
+const basePages = {
   'concours|Épreuves 2027': {
     label:'Repère officiel',
     title:'Épreuves de l’agrégation externe Économie-Gestion 2027',
@@ -300,4 +309,17 @@ export const contentPages = {
       {type:'Officiel',name:'Rapport du jury externe économie-gestion 2025',url:'https://www.devenirenseignant.gouv.fr/media/18028/download',checked:'08/11/2026'}
     ]
   }
+}
+
+
+export const contentPages = {
+  ...basePages,
+  ...marketingPages,
+  ...tourismPages,
+  ...authorsPages,
+  ...trainingPages,
+  ...casePages,
+  ...watchPages,
+  ...libraryPages,
+  ...progressPages
 }
