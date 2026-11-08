@@ -72,7 +72,7 @@ export const contentPages = {
       'Éviter la récitation : les concepts et modèles doivent servir l’analyse du cas.',
       'Définir les notions importantes et répondre précisément à toutes les sous-questions.',
       'Justifier les recommandations à partir du contexte, des données et de cadres théoriques adaptés.',
-      'Citer ses sources : le rapport rappelle explicitement l’exigence d’honnêteté intellectuelle.'
+      'Le rapport 2025 rappelle aussi, de manière transversale dans ses observations sur d’autres options, l’exigence de citer ses sources comme élément d’honnêteté intellectuelle.'
     ],
     sections:[
       {heading:'Un indicateur utile',text:'En 2025, pour l’étude de cas écrite Option C, la moyenne était de 5,87/20 pour 292 candidats présents. Cela montre le niveau de sélectivité de cette épreuve, sans préjuger des résultats 2026.'},
@@ -87,7 +87,7 @@ export const contentPages = {
   'concours|Méthodologie': {
     label:'Synthèse de travail',
     title:'Construire une préparation efficace',
-    intro:'Cette page synthétise les principes méthodologiques présents dans les ressources fournies, sans reproduire le support INSPE, dont la diffusion est expressément restreinte par son auteure.',
+    intro:'Cette page reprend uniquement des principes généraux de préparation présents dans le support INSPE fourni. Ce document porte sur une épreuve de l’agrégation interne : ses conseils de planification, veille, mémorisation et entraînement sont transposables, mais sa méthodologie d’épreuve ne doit pas être confondue avec celle de l’agrégation externe.',
     keyPoints:[
       'Structurer la préparation par matière et par thème, avec un calendrier de travail.',
       'Construire progressivement des fiches ou cartes mentales à partir d’ouvrages et de sources de référence.',
@@ -98,7 +98,7 @@ export const contentPages = {
     ],
     sections:[
       {heading:'La logique de l’application',text:'L’application reprend cette démarche sous une forme opérationnelle : un cours court, une fiche de mémorisation, un exemple sourcé, puis un exercice ou un cas.'},
-      {heading:'Protection de la ressource',text:'Le support méthodologique INSPE fourni sert uniquement de référence de travail. Son contenu original n’est ni intégré ni proposé au téléchargement dans l’application.'}
+      {heading:'Protection et périmètre de la ressource',text:'Le support méthodologique INSPE fourni sert uniquement de référence de travail. Son contenu original n’est ni intégré ni proposé au téléchargement. Comme il concerne l’agrégation interne, seules les recommandations générales de préparation sont reprises ici.'}
     ],
     sources:[
       {type:'Ressource fournie',name:'Cours INSPE Agreg Methodo Partie 2.pdf — Florence Clargé',note:'Synthèse d’idées méthodologiques uniquement ; le document indique qu’il ne peut être diffusé ou reproduit sans autorisation.'},
@@ -194,7 +194,7 @@ export const contentPages = {
     intro:'Le marketing des services est particulièrement important pour travailler le tourisme. Les ressources fournies mobilisent notamment la servuction, les spécificités du service et l’extension du mix marketing.',
     keyPoints:[
       'La servuction décrit le système de production du service et l’interaction entre client, personnel en contact et support physique.',
-      'Les services sont classiquement étudiés à travers leur intangibilité, leur hétérogénéité, l’indissociabilité production/consommation et leur périssabilité.',
+      'Les services ont classiquement été étudiés à travers quatre caractéristiques dites IHIP : intangibilité, hétérogénéité, indissociabilité et périssabilité. Ce cadre reste utile pédagogiquement mais son caractère universel est discuté dans la littérature académique.',
       'Le mix des services élargit les 4P par des dimensions liées aux personnes, aux processus et aux preuves physiques.',
       'L’expérience perçue dépend autant du résultat que des conditions de délivrance du service.',
       'Dans le tourisme, le client participe souvent directement à la production de son expérience.'
@@ -206,27 +206,31 @@ export const contentPages = {
     ],
     sources:[
       {type:'Académique',name:'BNF — Eiglier & Langeard, Servuction : le marketing des services (1987)',url:'https://catalogue.bnf.fr/ark:/12148/cb34968117n',checked:'08/11/2026'},
-      {type:'Ressource fournie',name:'Copies Option C — Innovation et marketing des services.pdf',note:'Utilisée comme ressource de préparation ; le contenu proposé ici est une synthèse et non une reproduction.'}
+      {type:'Académique',name:'Booms & Bitner — Marketing Strategies and Organization Structures for Service Firms (1981)',url:'https://www.scienceopen.com/book?vid=6af78f40-d8ac-4627-82cb-e5c651a134f1',checked:'08/11/2026'},
+      {type:'Académique',name:'Lovelock & Gummesson — Whither Services Marketing? (2004), discussion critique du cadre IHIP',url:'https://journals.sagepub.com/doi/10.1177/1094670504266131',checked:'08/11/2026'},
+      {type:'Ressource fournie',name:'Copies Option C — Innovation et marketing des services.pdf',note:'Ressource de préparation, utilisée comme point de départ ; les notions théoriques sont recoupées avec des références académiques externes.'}
     ]
   },
 
   'tourisme|Fondamentaux': {
     label:'Application tourisme',
-    title:'Lire le marché touristique avec des données fiables',
-    intro:'Le tourisme fournit un terrain riche pour l’option C, mais les données doivent être datées et interprétées avec prudence. Pour l’hôtellerie, l’Insee constitue une source de référence.',
+    title:'Premiers repères chiffrés sur le tourisme en France',
+    intro:'Cette fiche donne d’abord des repères sur les hébergements collectifs, qui ne couvrent pas à eux seuls toute l’économie touristique. Les données sont datées, leur champ est précisé et les résultats 2025 définitifs sont distingués des publications provisoires 2026.',
     keyPoints:[
-      'En 2025, les hôtels en France totalisent 220,2 millions de nuitées.',
-      'Le taux d’occupation moyen est de 62,3 %.',
-      'Les hôtels classés totalisent 203,1 millions de nuitées ; les 3 étoiles représentent 87,8 millions de nuitées.',
-      'Les chaînes totalisent 109,2 millions de nuitées et les indépendants 111,0 millions.',
-      'Ces chiffres décrivent l’année 2025 : ils doivent être distingués des données mensuelles provisoires 2026.'
+      'En 2025, les hébergements collectifs de tourisme totalisent 465,4 millions de nuitées.',
+      'Les hôtels représentent 220,2 millions de nuitées, les campings 147,6 millions et les autres hébergements collectifs touristiques 97,6 millions.',
+      'Pour les hôtels, le taux d’occupation moyen est de 62,3 % ; les établissements classés totalisent 203,1 millions de nuitées.',
+      'Dans l’hôtellerie, les chaînes totalisent 109,2 millions de nuitées et les indépendants 111,0 millions.',
+      'Les données annuelles 2025 sont définitives ; certaines publications mensuelles ou saisonnières 2026 sont encore provisoires.'
     ],
     sections:[
       {heading:'Comment les utiliser au concours',text:'Ces chiffres peuvent servir à contextualiser un cas, mais ils ne suffisent pas à expliquer une stratégie. Il faut ensuite segmenter le marché, identifier les acteurs, analyser les comportements et relier les tendances aux décisions marketing.'},
       {heading:'Réflexe anti-hallucination',text:'Toujours conserver l’année, le périmètre géographique et la définition de l’indicateur. “Le tourisme augmente” n’est pas une information exploitable sans ces précisions.'}
     ],
     sources:[
-      {type:'Officiel',name:'Insee — Parc et fréquentation des hôtels, données annuelles 2025',url:'https://www.insee.fr/fr/statistiques/2015412',checked:'08/11/2026'}
+      {type:'Officiel',name:'Insee — Parc et fréquentation des hébergements collectifs, données annuelles 2025',url:'https://www.insee.fr/fr/statistiques/2015395',checked:'08/11/2026'},
+      {type:'Officiel',name:'Insee — Parc et fréquentation des hôtels, données annuelles 2025',url:'https://www.insee.fr/fr/statistiques/2015412',checked:'08/11/2026'},
+      {type:'Officiel',name:'Insee — Saison touristique d’été 2026, données 2026 signalées provisoires',url:'https://www.insee.fr/fr/statistiques/9056644',checked:'08/11/2026'}
     ]
   },
 
@@ -235,20 +239,20 @@ export const contentPages = {
     title:'Hôtellerie : segmentation, expérience et distribution',
     intro:'L’hôtellerie permet de mobiliser presque tout le programme de marketing : segmentation, positionnement, politique de service, prix, distribution, expérience client, digital, CRM et marque.',
     keyPoints:[
-      'Le marché français comptait en moyenne 14 886 hôtels en 2025 pour 618 200 chambres ou appartements.',
+      'Le parc hôtelier recensé par l’Insee comptait en moyenne mensuelle 14 886 établissements en 2025, pour 618 200 chambres ou appartements.',
       'Les établissements classés 4 étoiles affichaient un taux d’occupation de 68,1 % en 2025, supérieur à la moyenne de l’ensemble des hôtels.',
       'L’analyse doit distinguer chaînes et indépendants, classement, clientèle résidente/non résidente, tourisme d’affaires/loisirs et saisonnalité.',
       'Les ressources fournies sur Accor et OKKO sont utiles pour travailler personnalisation, digitalisation, processus de service et plateformes — mais ce sont des cas historiques à ne pas présenter comme des faits 2026.'
     ],
     sections:[
-      {heading:'Cas historique — Accor',text:'La ressource fournie décrit la transformation des marques d’Accor autour de la personnalisation, de la déstandardisation et du digital. Elle est intéressante pour travailler la différenciation dans les services, mais doit être actualisée avant toute utilisation factuelle.'},
-      {heading:'Cas historique — OKKO Hotels',text:'La ressource fournie présente un concept hôtelier reposant sur la simplification de certains services, l’usage du numérique et un espace commun central. Elle permet de travailler le modèle d’affaires, la servuction et la valeur perçue.'},
+      {heading:'Cas historique — Accor (2015)',text:'La ressource fournie reprend un article de 2015 décrivant la transformation des marques d’Accor autour de la personnalisation, de la déstandardisation et du digital. Elle est intéressante pour travailler la différenciation dans les services, mais ne décrit pas la situation actuelle du groupe.'},
+      {heading:'Cas historique — OKKO Hotels (2015)',text:'La ressource fournie reprend un article de 2015 présentant un concept hôtelier reposant sur la simplification de certains services, l’usage du numérique et un espace commun central. Elle permet de travailler le modèle d’affaires, la servuction et la valeur perçue, mais ses données opérationnelles doivent être actualisées avant réemploi.'},
       {heading:'Mini-cas',text:'Un hôtel 4 étoiles veut réduire sa dépendance aux plateformes tout en conservant leur capacité d’acquisition. Propose un diagnostic en distinguant acquisition, conversion, fidélisation, coût de distribution et expérience client.'}
     ],
     sources:[
       {type:'Officiel',name:'Insee — Parc et fréquentation des hôtels 2025',url:'https://www.insee.fr/fr/statistiques/2015412',checked:'08/11/2026'},
-      {type:'Ressource fournie',name:'Accor et digital.docx',note:'Cas historique ; ne pas utiliser comme photographie actuelle du groupe.'},
-      {type:'Ressource fournie',name:'Pour lancer ses 4 étoiles version allégée OKKO Hôtel.docx',note:'Cas historique ; données et pratiques à actualiser avant réemploi.'}
+      {type:'Ressource fournie',name:'Accor et digital.docx',note:'Article Les Échos daté de 2015 dans le document fourni ; cas historique, à ne pas utiliser comme photographie actuelle du groupe.'},
+      {type:'Ressource fournie',name:'Pour lancer ses 4 étoiles version allégée OKKO Hôtel.docx',note:'Article Les Échos daté de 2015 dans le document fourni ; données et pratiques à actualiser avant réemploi.'}
     ]
   },
 
@@ -291,7 +295,9 @@ export const contentPages = {
       {type:'Officiel',name:'Épreuves de l’agrégation externe économie-gestion',url:'https://www.devenirenseignant.gouv.fr/les-epreuves-de-l-agregation-externe-section-economie-et-gestion-868',checked:'08/11/2026'},
       {type:'Officiel',name:'Programme 2027',url:'https://www.devenirenseignant.gouv.fr/media/20325/download',checked:'08/11/2026'},
       {type:'Ressource fournie',name:'Sujet option C externe 2026.pdf'},
-      {type:'Ressource fournie',name:'Copies Option C — Innovation et marketing des services.pdf'}
+      {type:'Ressource fournie',name:'Copies Option C — Innovation et marketing des services.pdf',note:'Ressource de préparation non officielle ; les références théoriques sont à recouper avant publication.'},
+      {type:'Académique',name:'BNF — Eiglier & Langeard, Servuction : le marketing des services (1987)',url:'https://catalogue.bnf.fr/ark:/12148/cb34968117n',checked:'08/11/2026'},
+      {type:'Officiel',name:'Rapport du jury externe économie-gestion 2025',url:'https://www.devenirenseignant.gouv.fr/media/18028/download',checked:'08/11/2026'}
     ]
   }
 }
