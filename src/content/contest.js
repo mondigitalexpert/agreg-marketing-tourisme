@@ -1,3 +1,4 @@
+import { contestPedagogy } from './pedagogyMeta'
 export const contestPages = {
   'concours|Épreuves 2027': {
     label:'Repère officiel',
@@ -167,3 +168,5 @@ export const contestPages = {
     ]
   }
 }
+
+Object.entries(contestPedagogy).forEach(([key,meta])=>{ if(contestPages[key]) Object.assign(contestPages[key],meta) })
