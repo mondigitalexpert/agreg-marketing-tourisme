@@ -232,7 +232,7 @@ export const casePages = {
     'Ce cas utilise les expérimentations documentées par la DGE pour éviter de présenter la transformation numérique comme une simple adoption d’outils.',
     [
       'La DGE indique plus de 80 mises en relation entre start-up lauréates et acteurs du tourisme sur les deux premières années du programme.',
-      'Une cinquantaine auraient abouti à des expérimentations selon le bilan publié en novembre 2025.',
+      'Plus de 55 expérimentations ont abouti ou sont documentées dans les bilans officiels France Tourisme Tech ; la DGE indique en 2026 que 10 ont été industrialisées.',
       'Les exemples cités incluent la revente de billets chez Transavia, la modélisation environnementale d’infrastructures de Vinci Concessions et une expérience immersive au château de Versailles avec Ask Mona.',
       'Les solutions de la promotion 2025-2026 mobilisent notamment IA, IoT, 3D, SaaS et réalité augmentée.',
       'Une expérimentation n’est pas encore une preuve de déploiement à grande échelle ni de rentabilité.'
