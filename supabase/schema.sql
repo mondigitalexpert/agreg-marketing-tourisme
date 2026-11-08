@@ -127,12 +127,6 @@ begin
   insert into public.profiles (id, display_name)
   values (v_uid, p_display_name);
 
-  insert into public.progress (user_id, data)
-  values (
-    v_uid,
-    '{"viewed":{},"favorites":[],"quiz":{},"difficultCards":[],"completedCases":[]}'::jsonb
-  )
-  on conflict (user_id) do nothing;
 
   update public.profile_invites
   set claimed_by = v_uid,
