@@ -17,6 +17,212 @@ const sources = {
   digital:{type:'Académique',name:'Kannan & Li — Digital marketing framework (2017)',url:'https://doi.org/10.1016/j.ijresmar.2016.11.006'}
 }
 
+
+export const authorProfiles = {
+  porter:{
+    name:'Michael E. Porter',
+    years:'Stratégie et concurrence',
+    icon:'🏭',
+    oneLine:'Analyser la structure concurrentielle d’un secteur et comprendre où se situe le pouvoir économique.',
+    concepts:['Cinq forces concurrentielles','Chaîne de valeur','Avantage concurrentiel','Stratégies génériques'],
+    useCases:['Diagnostic sectoriel','Pouvoir des OTA ou distributeurs','Menace des substituts','Barrières à l’entrée'],
+    limits:'Porter éclaire surtout la structure concurrentielle. Le modèle ne suffit pas pour expliquer à lui seul les comportements clients, la culture de consommation ou les dynamiques internes d’une organisation.',
+    exam:'Dans une copie : nommer la force pertinente, montrer le mécanisme et relier l’analyse à une conséquence stratégique. Éviter de réciter les cinq forces sans hiérarchisation.',
+    links:[
+      {label:'Biographie — Harvard Business School',url:'https://www.isc.hbs.edu/about-michael-porter/biography/Pages/default.aspx',type:'Institutionnel'},
+      {label:'Michael Porter — Wikipédia FR',url:'https://fr.wikipedia.org/wiki/Michael_Porter',type:'Wikipédia'},
+      {label:'The Five Competitive Forces That Shape Strategy — HBR',url:'https://hbr.org/2008/01/the-five-competitive-forces-that-shape-strategy',type:'Article'}
+    ]
+  },
+  ajzen:{
+    name:'Icek Ajzen',
+    years:'Comportement et intention',
+    icon:'🧭',
+    oneLine:'Expliquer comment attitudes, normes subjectives et contrôle perçu contribuent à former une intention comportementale.',
+    concepts:['Theory of Planned Behavior','Attitude','Norme subjective','Contrôle comportemental perçu','Intention'],
+    useCases:['Adoption d’un service','Intention de réservation','Comportement durable','Changement de comportement'],
+    limits:'Le modèle explique surtout l’intention et certains déterminants du comportement. Il ne remplace pas l’analyse des émotions, habitudes, contraintes matérielles ou dimensions culturelles.',
+    exam:'Très utile quand le sujet demande pourquoi une attitude favorable ne se transforme pas en comportement. Toujours distinguer intention et action effective.',
+    links:[
+      {label:'Profil — UMass Amherst',url:'https://www.umass.edu/natural-sciences/about/directory/icek-aizen',type:'Institutionnel'},
+      {label:'The Theory of Planned Behavior (1991)',url:'https://www.sciencedirect.com/science/article/pii/074959789190020T',type:'Article fondateur'}
+    ]
+  },
+  aaker:{
+    name:'David A. Aaker',
+    years:'Capital et architecture de marque',
+    icon:'🏷️',
+    oneLine:'Penser la marque comme un actif créateur de valeur, à travers notoriété, qualité perçue, associations et fidélité.',
+    concepts:['Brand equity','Notoriété','Qualité perçue','Associations de marque','Fidélité','Portefeuille de marques'],
+    useCases:['Diagnostic de marque','Architecture multimarque','Extension de marque','Différenciation'],
+    limits:'Les dimensions d’Aaker constituent une grille de gestion. Elles ne mesurent pas automatiquement la valeur financière d’une marque et doivent être opérationnalisées selon le cas.',
+    exam:'À mobiliser pour structurer un diagnostic de capital de marque, notamment quand plusieurs dimensions de la marque doivent être distinguées.',
+    links:[
+      {label:'Profil — Berkeley Haas',url:'https://haas.berkeley.edu/faculty/david-a-aaker/',type:'Institutionnel'},
+      {label:'David Aaker — Wikipédia',url:'https://en.wikipedia.org/wiki/David_Aaker',type:'Wikipédia'},
+      {label:'Managing Brand Equity — éditeur',url:'https://www.simonandschuster.com/books/Managing-Brand-Equity/David-A-Aaker/9780029001011',type:'Ouvrage'}
+    ]
+  },
+  keller:{
+    name:'Kevin Lane Keller',
+    years:'Customer-Based Brand Equity',
+    icon:'🧠',
+    oneLine:'Comprendre comment la connaissance de la marque modifie la réponse du consommateur aux actions marketing.',
+    concepts:['CBBE','Brand awareness','Brand image','Associations fortes, favorables et uniques','Résonance de marque'],
+    useCases:['Image de marque','Positionnement','Extension de marque','Construction d’une marque forte'],
+    limits:'Le cadre est centré sur la réponse du consommateur. Il doit être complété lorsqu’on analyse finance, organisation, distribution ou pouvoir concurrentiel.',
+    exam:'Utile pour distinguer notoriété et image et montrer que le capital de marque provient de la structure des connaissances en mémoire.',
+    links:[
+      {label:'Biographie — Tuck School of Business',url:'https://faculty.tuck.dartmouth.edu/images/uploads/faculty/kevin-lane-keller/Keller-bio-short.pdf',type:'Institutionnel'},
+      {label:'Kevin Lane Keller — Wikipédia',url:'https://en.wikipedia.org/wiki/Kevin_Lane_Keller',type:'Wikipédia'},
+      {label:'Customer-Based Brand Equity (1993)',url:'https://doi.org/10.1177/002224299305700101',type:'Article fondateur'}
+    ]
+  },
+  'eiglier-langeard':{
+    name:'Pierre Eiglier & Éric Langeard',
+    years:'Servuction',
+    icon:'🤝',
+    oneLine:'Analyser le service comme un système de production où client, personnel, support physique et organisation interagissent.',
+    concepts:['Servuction','Personnel en contact','Support physique','Client participant','Back-office'],
+    useCases:['Hôtellerie','Restauration','Accueil','Parcours de service','Défaillance de service'],
+    limits:'La servuction décrit très bien le système de production du service mais doit être complétée par des cadres sur expérience, relation, valeur ou comportement.',
+    exam:'Très pertinente pour localiser précisément où se crée ou se détruit la valeur dans un service.',
+    links:[
+      {label:'Servuction — notice BnF',url:'https://catalogue.bnf.fr/ark:/12148/cb34968117n',type:'Référence bibliographique'}
+    ]
+  },
+  'vargo-lusch':{
+    name:'Stephen L. Vargo & Robert F. Lusch',
+    years:'Service-Dominant Logic',
+    icon:'🔄',
+    oneLine:'Déplacer l’analyse de la vente d’un produit vers l’intégration de ressources et la création de valeur dans l’usage.',
+    concepts:['Service-Dominant Logic','Value-in-use','Co-création','Intégration de ressources','Écosystèmes de service'],
+    useCases:['Services','Plateformes','Expérience','Co-création','Écosystèmes'],
+    limits:'Le cadre est très général et conceptuel. Pour une recommandation opérationnelle, il faut souvent le compléter par des outils plus concrets.',
+    exam:'À utiliser pour montrer que la valeur n’est pas simplement “livrée” par l’entreprise mais se réalise dans l’usage et les interactions.',
+    links:[
+      {label:'Stephen Vargo — Wikipédia',url:'https://en.wikipedia.org/wiki/Stephen_Vargo',type:'Wikipédia'},
+      {label:'Evolving to a New Dominant Logic for Marketing (2004)',url:'https://journals.sagepub.com/doi/10.1509/jmkg.68.1.1.24036',type:'Article fondateur'}
+    ]
+  },
+  'lemon-verhoef':{
+    name:'Katherine N. Lemon & Peter C. Verhoef',
+    years:'Customer journey et expérience',
+    icon:'🛤️',
+    oneLine:'Analyser l’expérience client dans le temps, à travers de multiples touchpoints contrôlés ou non par la marque.',
+    concepts:['Customer journey','Touchpoints','Expérience client','Phases pré-achat / achat / post-achat'],
+    useCases:['Omnicanal','Parcours digital','Hôtellerie','Réservation','Fidélisation'],
+    limits:'Cartographier un parcours ne suffit pas : il faut ensuite mesurer les frictions, prioriser les moments critiques et relier l’expérience à la performance.',
+    exam:'Très utile pour ordonner une analyse de parcours et distinguer les points de contact propres à la marque, aux partenaires et aux clients.',
+    links:[
+      {label:'Katherine Lemon — profil auteur',url:'https://www.sciencedirect.com/author/6603914972/katherine-n-lemon',type:'Académique'},
+      {label:'Peter Verhoef — Université de Groningen',url:'https://www.rug.nl/staff/p.c.verhoef/',type:'Institutionnel'},
+      {label:'Understanding Customer Experience Throughout the Customer Journey',url:'https://doi.org/10.1509/jm.15.0420',type:'Article'}
+    ]
+  },
+  sarasvathy:{
+    name:'Saras D. Sarasvathy',
+    years:'Effectuation',
+    icon:'🚀',
+    oneLine:'Comprendre l’action entrepreneuriale en forte incertitude à partir des moyens disponibles et du contrôle plutôt que de la prédiction.',
+    concepts:['Effectuation','Affordable loss','Bird in hand','Crazy quilt','Lemonade','Pilot in the plane'],
+    useCases:['Start-up','Innovation','Nouveau marché','Travel tech','Projet entrepreneurial incertain'],
+    limits:'L’effectuation n’est ni l’improvisation ni le refus de toute planification. Elle est surtout pertinente lorsque l’incertitude est forte.',
+    exam:'À mobiliser pour analyser une démarche entrepreneuriale quand le marché et les objectifs ne sont pas encore stabilisés.',
+    links:[
+      {label:'Profil — UVA Darden',url:'https://www.darden.virginia.edu/faculty-research/directory/saras-d-sarasvathy',type:'Institutionnel'},
+      {label:'Saras Sarasvathy — Wikipédia',url:'https://en.wikipedia.org/wiki/Saras_Sarasvathy',type:'Wikipédia'},
+      {label:'Causation and Effectuation (2001)',url:'https://journals.aom.org/doi/10.5465/AMR.2001.4378020',type:'Article fondateur'}
+    ]
+  },
+  kimes:{
+    name:'Sheryl E. Kimes',
+    years:'Revenue management et capacité',
+    icon:'📈',
+    oneLine:'Piloter prix et disponibilité dans des services à capacité contrainte et inventaire périssable.',
+    concepts:['Revenue management','Yield management','Capacité périssable','Pricing','Perception d’équité'],
+    useCases:['Hôtellerie','Restauration','Transport','Loisirs','Billetterie'],
+    limits:'Le revenue management doit être articulé à la perception de justice, au positionnement et à la relation client ; maximiser le revenu à court terme peut avoir des effets relationnels négatifs.',
+    exam:'Référence prioritaire pour un cas qui combine demande variable, capacité fixe, réservation et tarification dynamique.',
+    links:[
+      {label:'Profil — Cornell',url:'https://business.cornell.edu/profiles/sek6/',type:'Institutionnel'},
+      {label:'Yield Management: A Tool for Capacity-Constrained Service Firms',url:'https://ecommons.cornell.edu/entities/publication/08225911-1a4a-46d7-9c9d-849458fab0a9',type:'Article'}
+    ]
+  },
+  'webster-wind':{
+    name:'Frederick E. Webster Jr. & Yoram Wind',
+    years:'Achat organisationnel BtoB',
+    icon:'🏢',
+    oneLine:'Analyser l’achat BtoB comme une décision organisationnelle influencée par l’environnement, l’organisation, le groupe et les individus.',
+    concepts:['Organizational buying behavior','Centre d’achat','Influences environnementales','Influences organisationnelles','Influences interpersonnelles et individuelles'],
+    useCases:['BtoB','Achats complexes','Comptes clés','Séminaires entreprise','Solutions professionnelles'],
+    limits:'Le modèle structure les influences mais ne remplace pas l’analyse concrète des rôles, pouvoirs et critères dans l’organisation étudiée.',
+    exam:'À mobiliser quand plusieurs acteurs participent à la décision d’achat et que le comportement du consommateur individuel ne suffit plus.',
+    links:[
+      {label:'Article original — Journal of Marketing',url:'https://journals.sagepub.com/doi/10.1177/002224297203600204',type:'Article fondateur'},
+      {label:'Version PDF — Wharton',url:'https://faculty.wharton.upenn.edu/wp-content/uploads/2012/04/7215_A_General_Model_for_Understanding.pdf',type:'Académique'}
+    ]
+  },
+  'pine-gilmore':{
+    name:'B. Joseph Pine II & James H. Gilmore',
+    years:'Experience Economy',
+    icon:'✨',
+    oneLine:'Penser l’expérience comme une forme de valeur distincte lorsque biens et services ne suffisent plus à différencier l’offre.',
+    concepts:['Experience Economy','Mise en scène','Expérience mémorable','Temps et attention du client'],
+    useCases:['Tourisme','Loisirs','Luxe','Événementiel','Retail expérientiel'],
+    limits:'Toutes les prestations n’ont pas besoin d’être théâtralisées. Une expérience mémorable n’exonère ni de la qualité fonctionnelle ni de la valeur économique.',
+    exam:'Utile pour analyser la différenciation par l’expérience, notamment dans le tourisme et les loisirs.',
+    links:[
+      {label:'Welcome to the Experience Economy — HBR',url:'https://hbr.org/1998/07/welcome-to-the-experience-economy',type:'Article fondateur'},
+      {label:'B. Joseph Pine II — biographie',url:'https://www.conference-board.org/bio/joseph-pine',type:'Biographie'}
+    ]
+  },
+  'payne-frow':{
+    name:'Adrian Payne & Pennie Frow',
+    years:'CRM stratégique',
+    icon:'❤️',
+    oneLine:'Concevoir le CRM comme un processus stratégique de création de valeur et d’intégration multicanale, pas comme un simple logiciel.',
+    concepts:['CRM stratégique','Création de valeur','Intégration multicanale','Gestion de l’information','Évaluation de la performance'],
+    useCases:['Fidélisation','CRM hôtelier','Programme relationnel','Omnicanal','Valeur client'],
+    limits:'Le cadre organise les processus CRM mais doit être complété par des indicateurs adaptés, une gouvernance de la donnée et le respect du cadre juridique.',
+    exam:'Pertinent lorsque le cas porte sur la connaissance client, la relation multicanale ou l’organisation d’un programme CRM.',
+    links:[
+      {label:'A Strategic Framework for Customer Relationship Management',url:'https://doi.org/10.1509/jmkg.2005.69.4.167',type:'Article fondateur'}
+    ]
+  },
+  'arnould-thompson':{
+    name:'Eric J. Arnould & Craig J. Thompson',
+    years:'Consumer Culture Theory',
+    icon:'🌍',
+    oneLine:'Analyser la consommation comme pratique culturelle, identitaire, sociale et symbolique, au-delà du calcul individuel.',
+    concepts:['Consumer Culture Theory','Identité','Cultures de marché','Communautés de consommation','Idéologies de marché'],
+    useCases:['Luxe','Tourisme identitaire','Communautés','Consommation symbolique','Expérience'],
+    limits:'La CCT regroupe plusieurs traditions de recherche ; ce n’est pas un modèle unique à appliquer mécaniquement.',
+    exam:'À utiliser lorsque le cas implique identité, appartenance, symboles, communautés ou significations culturelles.',
+    links:[
+      {label:'Consumer Culture Theory (2005)',url:'https://doi.org/10.1086/426626',type:'Article fondateur'}
+    ]
+  },
+  'kannan-li':{
+    name:'P. K. Kannan & Hongshuang “Alice” Li',
+    years:'Marketing digital',
+    icon:'📱',
+    oneLine:'Structurer l’impact des technologies numériques sur les processus marketing, les interactions et la création de valeur.',
+    concepts:['Digital marketing framework','Touchpoints numériques','Données','Plateformes','Parcours'],
+    useCases:['Marketing digital','Acquisition','Plateformes','Données','Transformation du parcours'],
+    limits:'Le cadre est transversal et doit être décliné en leviers, données et KPI spécifiques au cas étudié.',
+    exam:'Référence utile pour montrer que le digital reconfigure plusieurs étapes du marketing et ne constitue pas seulement un canal de communication.',
+    links:[
+      {label:'Digital marketing: A framework, review and research agenda',url:'https://doi.org/10.1016/j.ijresmar.2016.11.006',type:'Article'}
+    ]
+  }
+}
+
+export const essentialAuthorKeys = [
+  'porter','ajzen','aaker','keller','eiglier-langeard','vargo-lusch','lemon-verhoef',
+  'sarasvathy','kimes','webster-wind','pine-gilmore','payne-frow','arnould-thompson','kannan-li'
+]
+
 export const authorsPages = {
   'auteurs|Auteurs incontournables': p(
     'Références utiles',
@@ -36,7 +242,8 @@ export const authorsPages = {
       {heading:'Règle d’usage',text:'Dans une copie : nom de l’auteur + concept + mécanisme + application au cas. Si l’auteur n’apporte rien à l’analyse, ne pas le citer.'},
       {heading:'Exemple',text:'“Le problème ne relève pas seulement du prix. En mobilisant Ajzen, on peut interroger l’intention d’achat au regard des attitudes, des normes subjectives et du contrôle perçu.” La théorie sert alors à ouvrir l’analyse.'}
     ],
-    [sources.porter,sources.ajzen,sources.aaker,sources.keller,sources.servuction,sources.sd,sources.lemon,sources.effectuation,sources.kimes]
+    [sources.porter,sources.ajzen,sources.aaker,sources.keller,sources.servuction,sources.sd,sources.lemon,sources.effectuation,sources.kimes],
+    {authorKeys:essentialAuthorKeys}
   ),
 
   'auteurs|Modèles marketing': p(
@@ -122,7 +329,8 @@ export const authorsPages = {
     [
       {heading:'Test rapide',text:'Si tu ne peux pas expliquer en une phrase ce que l’auteur permet de comprendre dans le cas, ne l’utilise pas.'}
     ],
-    [sources.porter,sources.ajzen,sources.keller,sources.servuction,sources.lemon,sources.sd,sources.crm,sources.effectuation,sources.kimes,sources.webster,sources.experience]
+    [sources.porter,sources.ajzen,sources.keller,sources.servuction,sources.lemon,sources.sd,sources.crm,sources.effectuation,sources.kimes,sources.webster,sources.experience],
+    {authorKeys:essentialAuthorKeys}
   ),
 
   'auteurs|Flashcards': p(
