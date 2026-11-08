@@ -147,7 +147,7 @@ export const caseVisuals = {
   },
   'cas|Transformation digitale': {
     kind:'case', title:'France Tourisme Tech — du pilote au déploiement',
-    metrics:[['80+','mises en relation'],['≈50','expérimentations'],['IA / IoT / 3D','technologies']],
+    metrics:[['80+','mises en relation'],['55+','expérimentations / partenariats'],['IA / IoT / 3D','technologies']],
     tension:'Expérimenter vite ↔ prouver la valeur à l’échelle',
     levers:['Adoption','ROI','Intégration','Conduite du changement']
   },
