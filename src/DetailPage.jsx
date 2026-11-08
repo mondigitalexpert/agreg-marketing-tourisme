@@ -4,7 +4,7 @@ import { ProgressView } from './progressStore'
 import LearningVisual, { DeepLearningVisual } from './LearningVisual'
 import { getDeepVisualsForPage } from './visuals'
 import { authorProfiles } from './content/authors'
-import { CorrectionsBlock, MediaResourcesBlock } from './StudySupport'
+import { CorrectionsBlock, MediaResourcesBlock, ExerciseMetaBlock, CaseEvidenceBlock } from './StudySupport'
 
 function QuizBlock({items,pageKey,progress,onProgress,activity}){
   const stored=progress.quiz?.[pageKey]?.answers||{}
@@ -74,6 +74,20 @@ function FlashcardBlock({items,pageKey,progress,onProgress,activity}){
       <button className={'hard-button '+(hard?'active':'')} onClick={()=>toggleHard(index)}>{hard?'✓ À revoir':'Marquer à revoir'}</button>
     </article>
   })}</div>
+}
+
+function PageToc({page}){
+  const chapters=(page.sections||[]).map((item,index)=>({label:String(item.heading).replace(/^\d+\.\s*/,''),id:'chapter-'+(index+1)}))
+  if(chapters.length<4) return null
+  const go=(id)=>document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'})
+  return <nav className="page-toc" aria-label="Sommaire de la fiche">
+    <div className="page-toc-head"><span className="section-kicker">SOMMAIRE</span><strong>Accès rapide</strong></div>
+    <div className="page-toc-links">
+      {chapters.map((item,index)=><button key={item.id} type="button" onClick={()=>go(item.id)}><span>{String(index+1).padStart(2,'0')}</span>{item.label}</button>)}
+      {page.corrections?.length>0&&<button type="button" onClick={()=>go('page-corrections')}><span>✓</span>Correction</button>}
+      {page.sources?.length>0&&<button type="button" onClick={()=>go('page-sources')}><span>↗</span>Sources</button>}
+    </div>
+  </nav>
 }
 
 function AuthorDirectory({keys}){
@@ -201,6 +215,7 @@ export default function DetailPage({
   const pageKey=section.id+'|'+entry.title
   const page=contentPages[pageKey]
   const deepVisuals=getDeepVisualsForPage(pageKey)
+  const hasExerciseSection=Boolean(page?.sections?.some(item=>/^Exercice/i.test(String(item.heading))))
   const activity={
     pageKey,
     sectionId:section.id,
@@ -254,8 +269,11 @@ export default function DetailPage({
       </div>
     </header>
 
+    <PageToc page={page}/>
     <LearningVisual pageKey={pageKey} sectionId={section.id} page={page}/>
 
+    {page.caseMeta&&<CaseEvidenceBlock meta={page.caseMeta}/>} 
+    {page.trainingMeta&&!hasExerciseSection&&<ExerciseMetaBlock meta={page.trainingMeta}/>} 
     {page.authorKeys?.length>0&&<AuthorDirectory keys={page.authorKeys}/>} 
 
     {page.objectives?.length>0&&<section className="content-block course-objectives"><h3>Objectifs du cours</h3><div className="objective-grid">{page.objectives.map((objective,i)=><div className="objective-card" key={objective}><span>{String(i+1).padStart(2,'0')}</span><p>{objective}</p></div>)}</div></section>}
@@ -263,7 +281,8 @@ export default function DetailPage({
     {page.keyPoints?.length>0&&<section className="content-block"><h3>Repères essentiels</h3><div className="key-grid">{page.keyPoints.map((point,i)=><div className="key-card" key={point}><span>{String(i+1).padStart(2,'0')}</span><p>{point}</p></div>)}</div></section>}
 
     {page.sections?.length>0&&<section className="content-block"><h3>{section.id==='cours'?'Le cours':'Approfondir'}</h3><div className="reading-stack">{page.sections.map((item,index)=><React.Fragment key={item.heading}>
-      <article className="reading-card course-chapter">
+      {/^(Exercice)/i.test(String(item.heading))&&page.trainingMeta&&<ExerciseMetaBlock meta={page.trainingMeta}/>}
+      <article className="reading-card course-chapter" id={'chapter-'+(index+1)}>
         <h4>{item.heading}</h4>
         {item.text&&<p>{item.text}</p>}
         {item.bullets?.length>0&&<ul className="course-bullets">{item.bullets.map(bullet=><li key={bullet}>{bullet}</li>)}</ul>}
@@ -277,14 +296,14 @@ export default function DetailPage({
 
     {page.examTips?.length>0&&<section className="content-block exam-block"><h3>À savoir faire au concours</h3><div className="exam-list">{page.examTips.map((tip,i)=><div className="exam-item" key={tip}><span>{String(i+1).padStart(2,'0')}</span><p>{tip}</p></div>)}</div></section>}
 
-    <CorrectionsBlock items={page.corrections||[]}/>
+    <div id="page-corrections"><CorrectionsBlock items={page.corrections||[]}/></div>
     <MediaResourcesBlock pageKey={pageKey} page={page}/>
 
     {page.quiz?.length>0&&<section className="content-block"><h3>S’entraîner</h3><QuizBlock items={page.quiz} pageKey={pageKey} progress={progress} onProgress={updateProgress} activity={activity}/></section>}
     {page.flashcards?.length>0&&<section className="content-block"><h3>Flashcards</h3><FlashcardBlock items={page.flashcards} pageKey={pageKey} progress={progress} onProgress={updateProgress} activity={activity}/></section>}
     {page.progressType&&<section className="content-block"><h3>Données enregistrées</h3><ProgressView type={page.progressType} progress={progress} profileLabel={profileLabel} syncState={syncState}/></section>}
 
-    {page.sources?.length>0&&<section className="content-block sources-block">
+    {page.sources?.length>0&&<section className="content-block sources-block" id="page-sources">
       <div className="sources-heading"><div><span className="detail-label">TRAÇABILITÉ</span><h3>Sources</h3></div><span className="verified-chip">Sources identifiées</span></div>
       <div className="source-list">{page.sources.map((source,i)=><div className="source-card" key={source.name+i}><span className="source-type">{source.type}</span><div>
         {source.url?<a href={source.url} target="_blank" rel="noreferrer">{source.name} ↗</a>:<strong>{source.name}</strong>}
