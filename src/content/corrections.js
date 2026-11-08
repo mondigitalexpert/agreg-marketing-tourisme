@@ -535,6 +535,21 @@ export const tourismCorrections = {
 
 
 export const authorsCorrections = {
+  'auteurs|Quel auteur pour quoi ?': [
+    {
+      title:'Correction — justifier le choix d’un auteur',
+      text:'Une référence est pertinente seulement si elle éclaire le mécanisme central du cas. La bonne réponse ne se limite donc pas au nom de l’auteur : elle doit expliciter ce que son cadre permet de comprendre.',
+      bullets:[
+        'Dépendance à une plateforme → Porter, car il permet d’analyser le pouvoir de négociation et les rapports de force sectoriels.',
+        'Intention d’adopter un comportement → Ajzen, car attitude, norme subjective et contrôle perçu permettent d’expliquer l’intention.',
+        'Image ou capital de marque → Keller ou Aaker, selon que l’on insiste sur la connaissance de marque ou les dimensions du brand equity.',
+        'Défaillance dans un service → Eiglier & Langeard pour localiser les éléments de la servuction concernés.',
+        'Parcours fragmenté entre canaux → Lemon & Verhoef pour analyser les touchpoints dans le temps.',
+        'Start-up en forte incertitude → Sarasvathy pour raisonner en effectuation.',
+        'Réponse satisfaisante : auteur + concept + mécanisme + application précise au fait observé.'
+      ]
+    }
+  ],
   'auteurs|Modèles marketing': [
     {
       title:'Correction — choisir le bon modèle',
