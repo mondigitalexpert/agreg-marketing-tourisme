@@ -186,6 +186,10 @@ function AuthorDirectory({keys}){
             <p>{selectedProfile.limits}</p>
           </div>
         </div>
+        {selectedProfile.example&&<div className="author-copy-example">
+          <span>EXEMPLE DE MOBILISATION DANS UNE COPIE</span>
+          <p>{selectedProfile.example}</p>
+        </div>}
 
         <div className="author-links">
           <h4>Pour aller plus loin</h4>
