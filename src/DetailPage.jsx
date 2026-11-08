@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { contentPages } from './content'
 import { ProgressView } from './progressStore'
+import LearningVisual from './LearningVisual'
 
 function QuizBlock({items,pageKey,progress,onProgress,activity}){
   const stored=progress.quiz?.[pageKey]?.answers||{}
@@ -136,6 +137,8 @@ export default function DetailPage({
         {section.id==='cas'&&<button className={'case-done '+(isCaseDone?'active':'')} onClick={toggleCase}>{isCaseDone?'✓ Cas réalisé':'Marquer le cas comme réalisé'}</button>}
       </div>
     </header>
+
+    <LearningVisual pageKey={pageKey} sectionId={section.id} page={page}/>
 
     {page.objectives?.length>0&&<section className="content-block course-objectives"><h3>Objectifs du cours</h3><div className="objective-grid">{page.objectives.map((objective,i)=><div className="objective-card" key={objective}><span>{String(i+1).padStart(2,'0')}</span><p>{objective}</p></div>)}</div></section>}
 
