@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { contentPages } from './content'
-import { ProgressView, useProgress } from './progressStore'
+import { ProgressView } from './progressStore'
 
-function QuizBlock({items,pageKey,progress,onProgress}){
+function QuizBlock({items,pageKey,progress,onProgress,activity}){
   const stored=progress.quiz?.[pageKey]?.answers||{}
   const [answers,setAnswers]=useState(stored)
 
@@ -12,7 +12,11 @@ function QuizBlock({items,pageKey,progress,onProgress}){
     setAnswers(next)
     const answered=Object.keys(next).length
     const correct=Object.entries(next).filter(([i,value])=>items[Number(i)]?.answer===value).length
-    onProgress(prev=>({...prev,quiz:{...prev.quiz,[pageKey]:{answers:next,answered,correct,total:items.length,lastAt:new Date().toISOString()}}}))
+    onProgress(prev=>({
+      ...prev,
+      quiz:{...prev.quiz,[pageKey]:{answers:next,answered,correct,total:items.length,lastAt:new Date().toISOString()}},
+      lastActivity:{...activity,action:'QCM',updatedAt:new Date().toISOString()}
+    }))
   }
 
   return <div className="quiz-list">{items.map((q,index)=>{
@@ -32,15 +36,25 @@ function QuizBlock({items,pageKey,progress,onProgress}){
   })}</div>
 }
 
-function FlashcardBlock({items,pageKey,progress,onProgress}){
+function FlashcardBlock({items,pageKey,progress,onProgress,activity}){
   const [revealed,setRevealed]=useState({})
   const hardKeys=new Set(progress.difficultCards||[])
+
+  const reveal=(index)=>{
+    setRevealed(prev=>({...prev,[index]:!prev[index]}))
+    onProgress(prev=>({...prev,lastActivity:{...activity,action:'Flashcards',updatedAt:new Date().toISOString()}}))
+  }
+
   const toggleHard=(index)=>{
     const key=pageKey+'::'+index
     onProgress(prev=>{
       const set=new Set(prev.difficultCards||[])
       set.has(key)?set.delete(key):set.add(key)
-      return {...prev,difficultCards:[...set]}
+      return {
+        ...prev,
+        difficultCards:[...set],
+        lastActivity:{...activity,action:'Flashcards',updatedAt:new Date().toISOString()}
+      }
     })
   }
 
@@ -48,7 +62,7 @@ function FlashcardBlock({items,pageKey,progress,onProgress}){
     const key=pageKey+'::'+index
     const hard=hardKeys.has(key)
     return <article className="flash-card" key={card.front}>
-      <button className="flash-main" onClick={()=>setRevealed(prev=>({...prev,[index]:!prev[index]}))}>
+      <button className="flash-main" onClick={()=>reveal(index)}>
         <span className="flash-label">{revealed[index]?'RÉPONSE':'QUESTION'}</span>
         <strong>{revealed[index]?card.back:card.front}</strong>
         <small>{revealed[index]?'Cliquer pour masquer':'Cliquer pour révéler'}</small>
@@ -58,16 +72,40 @@ function FlashcardBlock({items,pageKey,progress,onProgress}){
   })}</div>
 }
 
-export default function DetailPage({section,entry,onBack,profile,profileLabel,userId=null}){
+export default function DetailPage({
+  section,
+  entry,
+  onBack,
+  profileLabel,
+  progress,
+  updateProgress,
+  syncState='local',
+  backLabel
+}){
   const pageKey=section.id+'|'+entry.title
   const page=contentPages[pageKey]
-  const [progress,updateProgress,syncState]=useProgress(profile,userId)
+  const activity={
+    pageKey,
+    sectionId:section.id,
+    sectionTitle:section.title,
+    entryTitle:entry.title,
+    entryIcon:entry.icon
+  }
 
   useEffect(()=>{
-    updateProgress(prev=>({...prev,viewed:{...prev.viewed,[pageKey]:new Date().toISOString()}}))
+    updateProgress(prev=>{
+      const next={
+        ...prev,
+        viewed:{...prev.viewed,[pageKey]:new Date().toISOString()}
+      }
+      if(section.id!=='progression'){
+        next.lastActivity={...activity,action:'Consultation',updatedAt:new Date().toISOString()}
+      }
+      return next
+    })
   },[pageKey])
 
-  if(!page) return <div className="detail-page"><button className="back" onClick={onBack}>← Retour à {section.title}</button><div className="placeholder-note">Cette fiche n’est pas disponible. Aucun contenu non vérifié n’est substitué.</div></div>
+  if(!page) return <div className="detail-page"><button className="back" onClick={onBack}>← {backLabel||('Retour à '+section.title)}</button><div className="placeholder-note">Cette fiche n’est pas disponible. Aucun contenu non vérifié n’est substitué.</div></div>
 
   const isFavorite=(progress.favorites||[]).includes(pageKey)
   const isCaseDone=(progress.completedCases||[]).includes(pageKey)
@@ -77,14 +115,19 @@ export default function DetailPage({section,entry,onBack,profile,profileLabel,us
     set.has(pageKey)?set.delete(pageKey):set.add(pageKey)
     return {...prev,favorites:[...set]}
   })
+
   const toggleCase=()=>updateProgress(prev=>{
     const set=new Set(prev.completedCases||[])
     set.has(pageKey)?set.delete(pageKey):set.add(pageKey)
-    return {...prev,completedCases:[...set]}
+    return {
+      ...prev,
+      completedCases:[...set],
+      lastActivity:{...activity,action:set.has(pageKey)?'Cas réalisé':'Cas consulté',updatedAt:new Date().toISOString()}
+    }
   })
 
   return <div className="detail-page">
-    <button className="back" onClick={onBack}>← Retour à {section.title}</button>
+    <button className="back" onClick={onBack}>← {backLabel||('Retour à '+section.title)}</button>
     <header className="detail-hero" style={{'--tile':section.color}}>
       <div className="detail-icon" aria-hidden>{entry.icon}</div>
       <div>
@@ -106,11 +149,11 @@ export default function DetailPage({section,entry,onBack,profile,profileLabel,us
       {item.example&&<div className="example-box"><strong>Exemple</strong><span>{item.example}</span></div>}
     </article>)}</div></section>}
 
-    {page.recap?.length>0&&<section className="content-block recap-block"><h3>Synthèse du chapitre</h3><div className="recap-grid">{page.recap.map((item,i)=><div className="recap-item" key={item}><span>✓</span><p>{item}</p></div>)}</div></section>}
+    {page.recap?.length>0&&<section className="content-block recap-block"><h3>Synthèse du chapitre</h3><div className="recap-grid">{page.recap.map(item=><div className="recap-item" key={item}><span>✓</span><p>{item}</p></div>)}</div></section>}
 
     {page.examTips?.length>0&&<section className="content-block exam-block"><h3>À savoir faire au concours</h3><div className="exam-list">{page.examTips.map((tip,i)=><div className="exam-item" key={tip}><span>{String(i+1).padStart(2,'0')}</span><p>{tip}</p></div>)}</div></section>}
-    {page.quiz?.length>0&&<section className="content-block"><h3>S’entraîner</h3><QuizBlock items={page.quiz} pageKey={pageKey} progress={progress} onProgress={updateProgress}/></section>}
-    {page.flashcards?.length>0&&<section className="content-block"><h3>Flashcards</h3><FlashcardBlock items={page.flashcards} pageKey={pageKey} progress={progress} onProgress={updateProgress}/></section>}
+    {page.quiz?.length>0&&<section className="content-block"><h3>S’entraîner</h3><QuizBlock items={page.quiz} pageKey={pageKey} progress={progress} onProgress={updateProgress} activity={activity}/></section>}
+    {page.flashcards?.length>0&&<section className="content-block"><h3>Flashcards</h3><FlashcardBlock items={page.flashcards} pageKey={pageKey} progress={progress} onProgress={updateProgress} activity={activity}/></section>}
     {page.progressType&&<section className="content-block"><h3>Données enregistrées</h3><ProgressView type={page.progressType} progress={progress} profileLabel={profileLabel} syncState={syncState}/></section>}
 
     {page.sources?.length>0&&<section className="content-block sources-block">
