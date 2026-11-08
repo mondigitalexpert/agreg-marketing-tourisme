@@ -699,3 +699,11 @@ button.model-clickable{border:inherit;background:inherit;padding:inherit;margin:
 .layer-row.model-clickable{width:100%;text-align:left}
 .case-levers>button.model-clickable{background:#fff;border:1px solid #dce4e8;border-radius:12px;padding:11px 12px;font-size:.8rem;font-weight:780;color:#425560;display:grid;grid-template-columns:24px 1fr;gap:7px;align-items:center;text-align:left}
 .case-levers>button.model-clickable small{grid-column:2}
+
+.analysis-level-box{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 12px}
+.analysis-level-box>div{border-radius:11px;padding:10px 11px;display:grid;gap:4px}
+.analysis-level-box>div:first-child{background:#fff8e8;border:1px solid #ead7aa}
+.analysis-level-box>div:last-child{background:#eef6f2;border:1px solid #d7e7dd}
+.analysis-level-box strong{font-size:.75rem;color:#43545d}
+.analysis-level-box span{font-size:.71rem;line-height:1.42;color:#66747d}
+@media(max-width:600px){.analysis-level-box{grid-template-columns:1fr}}
