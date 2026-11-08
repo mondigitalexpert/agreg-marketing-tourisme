@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './styles.css'
 import { contentPages } from './content'
 import DetailPage from './DetailPage'
+import { PROFILES, loadActiveProfile, saveActiveProfile } from './progressStore'
 
 const sections = [
   { id:'concours', group:'dashboard', title:'Le concours', icon:'🎓', color:'#1F3A5F', desc:'Programme, épreuves, méthode et attentes du jury.', size:'small', meta:'8 repères clés' },
@@ -102,6 +103,13 @@ function Tile({section, variant='action', onOpen}) {
 function App(){
   const [active, setActive] = useState(null)
   const [activeSub, setActiveSub] = useState(null)
+  const [activeProfile, setActiveProfile] = useState(loadActiveProfile)
+  const activeProfileLabel = PROFILES.find(p=>p.id===activeProfile)?.label || 'Rachid'
+
+  const changeProfile=(profile)=>{
+    setActiveProfile(profile)
+    saveActiveProfile(profile)
+  }
   const section = sections.find(s => s.id === active)
   const selectedEntry = active && activeSub ? subpages[active].find(e => e.title === activeSub) : null
 
@@ -116,9 +124,23 @@ function App(){
         <h1>Marketing & Tourisme</h1>
         <p>Un espace de consultation et d’entraînement pour apprendre, mémoriser, s’exercer et travailler sur des cas réels sourcés.</p>
       </div>
-      <div className="status-card">
-        <span className="status-dot"></span>
-        <div><strong>Base de préparation complète</strong><small>108 fiches • progression locale</small></div>
+      <div className="hero-tools">
+        <div className="profile-switcher">
+          <span className="profile-switcher-label">Profil de suivi</span>
+          <div className="profile-options">
+            {PROFILES.map(profile=><button
+              key={profile.id}
+              className={`profile-option ${activeProfile===profile.id?'active':''}`}
+              onClick={()=>changeProfile(profile.id)}
+              aria-pressed={activeProfile===profile.id}
+            >{profile.label}</button>)}
+          </div>
+          <small>Progression séparée pour chaque profil</small>
+        </div>
+        <div className="status-card">
+          <span className="status-dot"></span>
+          <div><strong>Base de préparation complète</strong><small>108 fiches • profil actif : {activeProfileLabel}</small></div>
+        </div>
       </div>
     </header>
 
@@ -132,7 +154,7 @@ function App(){
           <p>Des accès rapides pour piloter la préparation et retrouver les ressources.</p>
         </div>
         <div className="dashboard-grid">
-          {dashboard.map(s => <Tile key={s.id} section={s} variant="dashboard" onOpen={(id)=>{setActive(id);setActiveSub(null)}} />)}
+          {dashboard.map(s => <Tile key={s.id} section={s.id==='progression'?{...s,meta:'Profil : '+activeProfileLabel}:s} variant="dashboard" onOpen={(id)=>{setActive(id);setActiveSub(null)}} />)}
         </div>
       </section>
 
@@ -162,9 +184,12 @@ function App(){
         </div>
       </section>
     </> : activeSub && selectedEntry ? <DetailPage
+      key={activeProfile+'|'+active+'|'+activeSub}
       section={section}
       entry={selectedEntry}
       onBack={()=>setActiveSub(null)}
+      profile={activeProfile}
+      profileLabel={activeProfileLabel}
     /> : <>
       <button className="back" onClick={()=>{setActive(null);setActiveSub(null)}}>← Retour à l’accueil</button>
       <section className="section-head" style={{'--tile':section.color}}>
