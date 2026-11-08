@@ -18,6 +18,10 @@ export function CorrectionsBlock({items=[]}){
       <div><strong>3. Appliquer</strong><span>Le cadre au cas, sans réciter le cours.</span></div>
       <div><strong>4. Justifier</strong><span>Les recommandations par les données, mécanismes et KPI.</span></div>
     </div>
+    <div className="analysis-level-box">
+      <div><strong>Réponse descriptive</strong><span>« Le taux d’occupation est de 62,3 %. » → le fait est correctement repris, mais il n’est pas encore analysé.</span></div>
+      <div><strong>Réponse analytique</strong><span>« Le taux d’occupation de 62,3 % doit être rapproché du prix, du segment et des coûts : seul, il ne permet pas de conclure à la rentabilité. » → fait + mécanisme + conséquence.</span></div>
+    </div>
     <div className="correction-list">
       {items.map((item,index)=><details className="correction-item" key={item.title+index}>
         <summary>
