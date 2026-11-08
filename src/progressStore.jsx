@@ -139,7 +139,10 @@ export function ProgressView({type,progress,profileLabel,syncState='local'}){
     <div><strong>{cases.length}</strong><span>cas réalisés</span></div>
   </div>
 
-  if(type==='overview') return <>{stats}<p className="progress-note">Profil <strong>{profileLabel}</strong> • {syncLabel}.</p></>
+  if(type==='overview') return <>{stats}
+    {progress.lastActivity&&<div className="progress-last-activity"><span>Dernière activité</span><strong>{progress.lastActivity.entryTitle}</strong><small>{progress.lastActivity.sectionTitle}{progress.lastActivity.action?' • '+progress.lastActivity.action:''}</small></div>}
+    <p className="progress-note">Profil <strong>{profileLabel}</strong> • {syncLabel}.</p>
+  </>
   if(type==='results'||type==='quizHistory') return <div className="progress-list">
     {quizEntries.length?quizEntries.map(([key,r])=><div className="progress-row" key={key}><strong>{listTitle(key)}</strong><span>{r.correct}/{r.answered} bonnes réponses • {r.total} questions</span></div>):<p>Aucun QCM commencé pour {profileLabel}.</p>}
   </div>
