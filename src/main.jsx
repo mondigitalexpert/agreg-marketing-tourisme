@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
 import { contentPages } from './content'
 import DetailPage from './DetailPage'
 import { PROFILES, loadActiveProfile, saveActiveProfile } from './progressStore'
+import { isSupabaseConfigured } from './supabaseClient'
+import { fetchProfile, getSession, onAuthChange, signIn, signOut } from './remoteProgress'
 
 const sections = [
   { id:'concours', group:'dashboard', title:'Le concours', icon:'🎓', color:'#1F3A5F', desc:'Programme, épreuves, méthode et attentes du jury.', size:'small', meta:'8 repères clés' },
@@ -100,15 +102,125 @@ function Tile({section, variant='action', onOpen}) {
 }
 
 
+function AuthPanel({activeProfile,activeProfileLabel,onProfileChange,session,cloudProfile,onLogin,onLogout,busy,error}) {
+  const [email,setEmail]=useState('')
+  const [password,setPassword]=useState('')
+
+  if(!isSupabaseConfigured){
+    return <div className="profile-switcher">
+      <span className="profile-switcher-label">Profil de suivi</span>
+      <div className="profile-options">
+        {PROFILES.map(profile=><button
+          key={profile.id}
+          className={`profile-option ${activeProfile===profile.id?'active':''}`}
+          onClick={()=>onProfileChange(profile.id)}
+          aria-pressed={activeProfile===profile.id}
+        >{profile.label}</button>)}
+      </div>
+      <small>Mode local — la synchronisation cloud sera activée après configuration Supabase.</small>
+    </div>
+  }
+
+  if(session){
+    return <div className="profile-switcher cloud-account">
+      <span className="profile-switcher-label">Compte connecté</span>
+      <strong className="cloud-account-name">{cloudProfile?.display_name || activeProfileLabel}</strong>
+      <small>Progression synchronisée entre ordinateur et mobile.</small>
+      <button className="logout-button" onClick={onLogout} disabled={busy}>Se déconnecter</button>
+    </div>
+  }
+
+  return <div className="profile-switcher auth-panel">
+    <span className="profile-switcher-label">Profil de suivi</span>
+    <div className="profile-options">
+      {PROFILES.map(profile=><button
+        key={profile.id}
+        className={`profile-option ${activeProfile===profile.id?'active':''}`}
+        onClick={()=>onProfileChange(profile.id)}
+        aria-pressed={activeProfile===profile.id}
+      >{profile.label}</button>)}
+    </div>
+    <input className="auth-input" type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder={"E-mail de "+activeProfileLabel} autoComplete="email" />
+    <input className="auth-input" type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="Mot de passe" autoComplete="current-password" />
+    <button className="login-button" disabled={busy||!email||!password} onClick={()=>onLogin(email,password)}>
+      {busy?'Connexion…':'Se connecter'}
+    </button>
+    {error&&<small className="auth-error">{error}</small>}
+  </div>
+}
+
 function App(){
   const [active, setActive] = useState(null)
   const [activeSub, setActiveSub] = useState(null)
   const [activeProfile, setActiveProfile] = useState(loadActiveProfile)
+  const [session,setSession] = useState(null)
+  const [cloudProfile,setCloudProfile] = useState(null)
+  const [authBusy,setAuthBusy] = useState(false)
+  const [authError,setAuthError] = useState('')
   const activeProfileLabel = PROFILES.find(p=>p.id===activeProfile)?.label || 'Rachid'
 
   const changeProfile=(profile)=>{
+    if(session) return
     setActiveProfile(profile)
     saveActiveProfile(profile)
+    setAuthError('')
+  }
+
+  const applySession=async(nextSession)=>{
+    setSession(nextSession)
+    if(!nextSession){
+      setCloudProfile(null)
+      return
+    }
+    try{
+      const profile=await fetchProfile(nextSession.user.id)
+      setCloudProfile(profile)
+      const match=PROFILES.find(p=>p.label===profile?.display_name)
+      if(match){
+        setActiveProfile(match.id)
+        saveActiveProfile(match.id)
+      }
+    }catch{
+      setAuthError('Le profil associé à ce compte est introuvable.')
+    }
+  }
+
+  useEffect(()=>{
+    if(!isSupabaseConfigured) return
+    let mounted=true
+    getSession().then(s=>{if(mounted) applySession(s)}).catch(()=>{})
+    const subscription=onAuthChange(s=>{if(mounted) applySession(s)})
+    return ()=>{
+      mounted=false
+      subscription?.unsubscribe?.()
+    }
+  },[])
+
+  const handleLogin=async(email,password)=>{
+    setAuthBusy(true)
+    setAuthError('')
+    try{
+      const {session:nextSession}=await signIn(email,password)
+      await applySession(nextSession)
+    }catch(err){
+      setAuthError(err?.message || 'Connexion impossible.')
+    }finally{
+      setAuthBusy(false)
+    }
+  }
+
+  const handleLogout=async()=>{
+    setAuthBusy(true)
+    setAuthError('')
+    try{
+      await signOut()
+      setSession(null)
+      setCloudProfile(null)
+    }catch(err){
+      setAuthError(err?.message || 'Déconnexion impossible.')
+    }finally{
+      setAuthBusy(false)
+    }
   }
   const section = sections.find(s => s.id === active)
   const selectedEntry = active && activeSub ? subpages[active].find(e => e.title === activeSub) : null
@@ -125,21 +237,20 @@ function App(){
         <p>Un espace de consultation et d’entraînement pour apprendre, mémoriser, s’exercer et travailler sur des cas réels sourcés.</p>
       </div>
       <div className="hero-tools">
-        <div className="profile-switcher">
-          <span className="profile-switcher-label">Profil de suivi</span>
-          <div className="profile-options">
-            {PROFILES.map(profile=><button
-              key={profile.id}
-              className={`profile-option ${activeProfile===profile.id?'active':''}`}
-              onClick={()=>changeProfile(profile.id)}
-              aria-pressed={activeProfile===profile.id}
-            >{profile.label}</button>)}
-          </div>
-          <small>Progression séparée pour chaque profil</small>
-        </div>
+        <AuthPanel
+          activeProfile={activeProfile}
+          activeProfileLabel={activeProfileLabel}
+          onProfileChange={changeProfile}
+          session={session}
+          cloudProfile={cloudProfile}
+          onLogin={handleLogin}
+          onLogout={handleLogout}
+          busy={authBusy}
+          error={authError}
+        />
         <div className="status-card">
           <span className="status-dot"></span>
-          <div><strong>Base de préparation complète</strong><small>108 fiches • profil actif : {activeProfileLabel}</small></div>
+          <div><strong>Base de préparation complète</strong><small>108 fiches • {session?'synchronisé : ':'profil actif : '}{activeProfileLabel}</small></div>
         </div>
       </div>
     </header>
@@ -190,6 +301,7 @@ function App(){
       onBack={()=>setActiveSub(null)}
       profile={activeProfile}
       profileLabel={activeProfileLabel}
+      userId={session?.user?.id || null}
     /> : <>
       <button className="back" onClick={()=>{setActive(null);setActiveSub(null)}}>← Retour à l’accueil</button>
       <section className="section-head" style={{'--tile':section.color}}>
@@ -216,7 +328,7 @@ function App(){
 
     <footer>
       <span>Préparation Agrégation • Option C Marketing</span>
-      <span>Sources identifiées • Cas datés • Progression locale</span>
+      <span>Sources identifiées • Cas datés • {session?'Progression synchronisée':'Progression locale'}</span>
     </footer>
   </div>
 }
