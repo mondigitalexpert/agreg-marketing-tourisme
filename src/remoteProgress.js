@@ -13,9 +13,33 @@ export function onAuthChange(callback) {
   return data.subscription
 }
 
-export async function signIn(email, password) {
+export async function requestEmailOtp(email) {
   if (!isSupabaseConfigured) throw new Error('Supabase non configuré')
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+  const { data, error } = await supabase.auth.signInWithOtp({
+    email: email.trim().toLowerCase(),
+    options: { shouldCreateUser: true },
+  })
+  if (error) throw error
+  return data
+}
+
+export async function verifyEmailOtp(email, token) {
+  if (!isSupabaseConfigured) throw new Error('Supabase non configuré')
+  const { data, error } = await supabase.auth.verifyOtp({
+    email: email.trim().toLowerCase(),
+    token: token.trim(),
+    type: 'email',
+  })
+  if (error) throw error
+  return data
+}
+
+export async function claimProfile(profile, code) {
+  if (!isSupabaseConfigured) throw new Error('Supabase non configuré')
+  const { data, error } = await supabase.rpc('claim_profile', {
+    p_display_name: profile,
+    p_code: code.trim(),
+  })
   if (error) throw error
   return data
 }
@@ -32,7 +56,7 @@ export async function fetchProfile(userId) {
     .from('profiles')
     .select('display_name')
     .eq('id', userId)
-    .single()
+    .maybeSingle()
   if (error) throw error
   return data
 }
