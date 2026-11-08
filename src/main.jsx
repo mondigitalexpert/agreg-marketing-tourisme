@@ -218,6 +218,52 @@ function ResumeCard({activity,onResume}){
   </section>
 }
 
+function TrainingDashboard({section,entries,onBack,onOpen}){
+  const steps=[
+    ['Mémoriser une notion','Rappel actif, définitions, auteurs et flashcards.'],
+    ['Expliquer avec ses mots','Justifier une réponse et reformuler un mécanisme.'],
+    ['Reconnaître dans un cas','Choisir le bon modèle et repérer les notions utiles.'],
+    ['Analyser données et documents','Calculer, qualifier une source et interpréter.'],
+    ['Construire un diagnostic','Transformer les faits en enjeux hiérarchisés.'],
+    ['Problématiser et structurer','Formuler une tension puis construire un plan.'],
+    ['Recommander et mesurer','Proposer des actions justifiées avec KPI et risques.'],
+    ['Traiter sous contrainte','Gérer le temps, les annexes et une production complète.']
+  ]
+  const grouped=entries.reduce((acc,entry)=>{
+    const meta=contentPages['entrainement|'+entry.title]?.trainingMeta
+    const step=meta?.step||8
+    ;(acc[step]??=[]).push({...entry,meta})
+    return acc
+  },{})
+
+  return <div className="training-dashboard-page">
+    <button className="back" onClick={onBack}>← Retour à l’accueil</button>
+    <section className="section-head" style={{'--tile':section.color}}>
+      <span className="icon big">{section.icon}</span>
+      <div><h2>{section.title}</h2><p>Une progression du rappel de connaissances jusqu’au concours blanc, avec temps conseillé, niveau et compétences travaillées.</p></div>
+    </section>
+    <div className="training-path">
+      {steps.map(([title,desc],index)=>{
+        const step=index+1
+        const items=grouped[step]||[]
+        return <section className="training-step" key={title}>
+          <div className="training-step-head">
+            <span>{String(step).padStart(2,'0')}</span>
+            <div><h3>{title}</h3><p>{desc}</p></div>
+          </div>
+          <div className="training-step-grid">
+            {items.map(entry=><button className="training-step-card" key={entry.title} onClick={()=>onOpen(entry.title)}>
+              <span className="training-step-icon">{entry.icon}</span>
+              <span className="training-step-copy"><strong>{entry.title}</strong><small>{entry.meta?.time} • {entry.meta?.difficulty}</small><em>{entry.meta?.objective}</em></span>
+              <span className="sub-arrow">→</span>
+            </button>)}
+          </div>
+        </section>
+      })}
+    </div>
+  </div>
+}
+
 function ProgressDashboard({section,entries,progress,syncState,profileLabel,onBack,onOpen}){
   return <div className="progress-dashboard-page">
     <button className="back" onClick={onBack}>← Retour à l’accueil</button>
@@ -527,6 +573,11 @@ function App(){
       progress={progress}
       syncState={syncState}
       profileLabel={activeProfileLabel}
+      onBack={()=>{setActive(null);setActiveSub(null)}}
+      onOpen={setActiveSub}
+    /> : active==='entrainement' && !activeSub ? <TrainingDashboard
+      section={section}
+      entries={subpages.entrainement}
       onBack={()=>{setActive(null);setActiveSub(null)}}
       onOpen={setActiveSub}
     /> : activeSub && selectedEntry ? <DetailPage
