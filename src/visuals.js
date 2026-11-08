@@ -161,6 +161,9 @@ export const caseVisuals = {
 
 export const courseDeepVisuals = {
   'cours|Marché & environnement': [
+    {after:2,kind:'fiveforces',title:'Cinq forces — où se situe le pouvoir ?',items:[
+      'Rivalité entre concurrents','Nouveaux entrants','Produits ou services de substitution','Pouvoir des clients','Pouvoir des fournisseurs'
+    ],caption:'Le modèle de Porter explique la pression sur la rentabilité structurelle d’un secteur ; il ne remplace ni l’analyse de la demande ni celle des ressources internes.'},
     {after:4,kind:'matrix6',title:'PESTEL — six familles à relier au marketing',items:[
       ['P','Politique'],['E','Économique'],['S','Socioculturel'],['T','Technologique'],['E','Environnemental'],['L','Légal']
     ],caption:'Un facteur PESTEL n’est utile que s’il modifie la demande, les coûts, les canaux ou les règles du jeu.'},
