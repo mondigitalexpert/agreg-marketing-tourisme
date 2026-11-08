@@ -1,3 +1,4 @@
+import { trainingMeta } from './pedagogyMeta'
 import { trainingCorrections } from './corrections'
 const OFFICIAL={type:'Officiel',name:'Programme 2027 — Agrégation externe économie-gestion',url:'https://www.devenirenseignant.gouv.fr/media/20325/download',checked:'08/11/2026'}
 const JURY={type:'Officiel',name:'Rapport du jury externe économie-gestion 2025',url:'https://www.devenirenseignant.gouv.fr/media/18028/download',checked:'08/11/2026'}
@@ -303,3 +304,5 @@ export const trainingPages = {
 Object.entries(trainingCorrections).forEach(([key,corrections])=>{
   if(trainingPages[key]) trainingPages[key].corrections=corrections
 })
+
+Object.entries(trainingMeta).forEach(([key,meta])=>{ if(trainingPages[key]) trainingPages[key].trainingMeta=meta })
