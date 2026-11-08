@@ -77,7 +77,9 @@ function FlashcardBlock({items,pageKey,progress,onProgress,activity}){
 }
 
 function PageToc({page}){
-  const chapters=(page.sections||[]).map((item,index)=>({label:String(item.heading).replace(/^\d+\.\s*/,''),id:'chapter-'+(index+1)}))
+  const deep=(page.deepSections||[]).map((item,index)=>({label:String(item.heading).replace(/^\d+\.\s*/,''),id:'deep-chapter-'+(index+1)}))
+  const regular=(page.sections||[]).map((item,index)=>({label:String(item.heading).replace(/^\d+\.\s*/,''),id:'chapter-'+(index+1)}))
+  const chapters=[...deep,...regular]
   if(chapters.length<4) return null
   const go=(id)=>document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'})
   return <nav className="page-toc" aria-label="Sommaire de la fiche">
@@ -283,6 +285,10 @@ export default function DetailPage({
     {page.objectives?.length>0&&<section className="content-block course-objectives"><h3>Objectifs du cours</h3><div className="objective-grid">{page.objectives.map((objective,i)=><div className="objective-card" key={objective}><span>{String(i+1).padStart(2,'0')}</span><p>{objective}</p></div>)}</div></section>}
 
     {page.keyPoints?.length>0&&<section className="content-block"><h3>Repères essentiels</h3><div className="key-grid">{page.keyPoints.map((point,i)=><div className="key-card" key={point}><span>{String(i+1).padStart(2,'0')}</span><p>{point}</p></div>)}</div></section>}
+
+    {page.deepSections?.length>0&&<section className="content-block"><h3>Comprendre le secteur</h3><div className="reading-stack">{page.deepSections.map((item,index)=><article className="reading-card course-chapter" id={'deep-chapter-'+(index+1)} key={item.heading}>
+      <h4>{item.heading}</h4><p>{item.text}</p>
+    </article>)}</div></section>}
 
     {page.sections?.length>0&&<section className="content-block"><h3>{section.id==='cours'?'Le cours':'Approfondir'}</h3><div className="reading-stack">{page.sections.map((item,index)=><React.Fragment key={item.heading}>
       {/^(Exercice)/i.test(String(item.heading))&&page.trainingMeta&&<ExerciseMetaBlock meta={page.trainingMeta}/>}
