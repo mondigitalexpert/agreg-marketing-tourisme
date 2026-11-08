@@ -1,4 +1,4 @@
-import { tourismPedagogy, tourismExerciseMeta } from './pedagogyMeta'
+import { tourismPedagogy, tourismExerciseMeta, tourismDeepSections } from './pedagogyMeta'
 import { tourismCorrections } from './corrections'
 const p=(label,title,intro,keyPoints,sections,sources)=>({label,title,intro,keyPoints,sections,sources})
 const INSEE_HOTEL={type:'Officiel',name:'Insee — Parc et fréquentation des hôtels, données 2025',url:'https://www.insee.fr/fr/statistiques/2015412',checked:'08/11/2026'}
@@ -358,3 +358,5 @@ Object.entries(tourismCorrections).forEach(([key,corrections])=>{
 Object.entries(tourismPedagogy).forEach(([key,meta])=>{ if(tourismPages[key]) Object.assign(tourismPages[key],meta) })
 
 Object.entries(tourismExerciseMeta).forEach(([key,meta])=>{ if(tourismPages[key]) tourismPages[key].trainingMeta=meta })
+
+Object.entries(tourismDeepSections).forEach(([key,sections])=>{ if(tourismPages[key]) tourismPages[key].deepSections=sections })
