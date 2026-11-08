@@ -1,3 +1,4 @@
+import { watchCorrections } from './corrections'
 const checked='08/11/2026'
 const p=(title,intro,keyPoints,sections,sources)=>({label:'Veille',title,intro,keyPoints,sections,sources})
 
@@ -188,3 +189,8 @@ export const watchPages = {
     ]
   )
 }
+
+
+Object.entries(watchCorrections).forEach(([key,corrections])=>{
+  if(watchPages[key]) watchPages[key].corrections=corrections
+})
