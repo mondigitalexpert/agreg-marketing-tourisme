@@ -45,7 +45,7 @@ export const authorProfiles = {
     limits:'Le modèle explique surtout l’intention et certains déterminants du comportement. Il ne remplace pas l’analyse des émotions, habitudes, contraintes matérielles ou dimensions culturelles.',
     exam:'Très utile quand le sujet demande pourquoi une attitude favorable ne se transforme pas en comportement. Toujours distinguer intention et action effective.',
     links:[
-      {label:'Profil — UMass Amherst',url:'https://www.umass.edu/natural-sciences/about/directory/icek-aizen',type:'Institutionnel'},
+      {label:'Profil — UMass Amherst',url:'https://people.umass.edu/aizen/',type:'Institutionnel'},
       {label:'The Theory of Planned Behavior (1991)',url:'https://www.sciencedirect.com/science/article/pii/074959789190020T',type:'Article fondateur'}
     ]
   },
@@ -217,6 +217,24 @@ export const authorProfiles = {
       {label:'Digital marketing: A framework, review and research agenda',url:'https://doi.org/10.1016/j.ijresmar.2016.11.006',type:'Article'}
     ]
   }
+}
+
+
+const authorCopyExamples={
+  porter:'« La dépendance de l’hôtel à l’OTA accroît le pouvoir de négociation de l’intermédiaire au sens de Porter : l’enjeu n’est donc pas de supprimer ce canal, mais de réduire cette dépendance en développant un direct rentable. »',
+  ajzen:'« Une attitude favorable au train ne suffit pas à prédire le choix : selon Ajzen, le contrôle comportemental perçu — ici la durée et la disponibilité — peut empêcher le passage de l’intention au comportement. »',
+  aaker:'« Le portefeuille doit être évalué au-delà de la notoriété : Aaker invite à examiner qualité perçue, associations et fidélité pour comprendre la valeur réellement créée par la marque. »',
+  keller:'« Le repositionnement doit modifier les associations de marque en mémoire : dans la logique de Keller, elles doivent devenir plus fortes, favorables et distinctives pour la cible. »',
+  'eiglier-langeard':'« La défaillance observée au check-in peut être analysée par la servuction : elle résulte de l’interaction entre personnel, support physique, client et organisation interne. »',
+  'vargo-lusch':'« La valeur n’est pas simplement livrée au visiteur : la Service-Dominant Logic conduit à analyser comment celui-ci combine les ressources de la destination pour produire sa propre expérience. »',
+  'lemon-verhoef':'« L’abandon ne peut être compris en observant le seul site : Lemon et Verhoef invitent à replacer ce point de contact dans l’ensemble du parcours, avant et après l’achat. »',
+  sarasvathy:'« Dans un marché encore incertain, une logique effectuale est pertinente : l’entreprise peut partir de ses moyens et partenaires disponibles, tester à perte acceptable puis faire évoluer l’offre. »',
+  kimes:'« Une chambre non vendue étant périssable, Kimes justifie un pilotage conjoint de la demande, du prix et de l’inventaire plutôt qu’une recherche du seul taux d’occupation. »',
+  'webster-wind':'« La décision BtoB doit être lue comme un processus organisationnel : l’utilisateur, l’acheteur et le décideur n’évaluent pas nécessairement la même valeur. »',
+  'pine-gilmore':'« La différenciation ne repose plus uniquement sur le service rendu : Pine et Gilmore permettent d’analyser la mise en scène d’une expérience mémorable comme source de valeur. »',
+  'payne-frow':'« Le CRM ne doit pas être réduit à un logiciel : Payne et Frow le présentent comme un ensemble de processus reliant stratégie, création de valeur, canaux et information. »',
+  'arnould-thompson':'« La consommation touristique peut avoir une fonction identitaire : la CCT permet d’expliquer pourquoi certains choix servent à exprimer appartenance, statut ou style de vie. »',
+  'kannan-li':'« Le digital ne constitue pas un canal isolé : Kannan et Li montrent qu’il reconfigure acquisition, interaction, données et création de valeur sur plusieurs étapes du marketing. »'
 }
 
 export const essentialAuthorKeys = [
@@ -395,3 +413,5 @@ export const authorsPages = {
 Object.entries(authorsCorrections).forEach(([key,corrections])=>{
   if(authorsPages[key]) authorsPages[key].corrections=corrections
 })
+
+Object.entries(authorCopyExamples).forEach(([key,example])=>{ if(authorProfiles[key]) authorProfiles[key].example=example })
