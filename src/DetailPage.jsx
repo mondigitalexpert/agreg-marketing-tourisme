@@ -3,6 +3,7 @@ import { contentPages } from './content'
 import { ProgressView } from './progressStore'
 import LearningVisual, { DeepLearningVisual } from './LearningVisual'
 import { getDeepVisualsForPage } from './visuals'
+import { authorProfiles } from './content/authors'
 
 function QuizBlock({items,pageKey,progress,onProgress,activity}){
   const stored=progress.quiz?.[pageKey]?.answers||{}
@@ -74,6 +75,87 @@ function FlashcardBlock({items,pageKey,progress,onProgress,activity}){
   })}</div>
 }
 
+function AuthorDirectory({keys}){
+  const [selected,setSelected]=useState(null)
+  const selectedProfile=selected?authorProfiles[selected]:null
+
+  return <section className="content-block author-directory">
+    <div className="section-label-row author-directory-heading">
+      <div>
+        <span className="section-kicker">FICHES AUTEURS</span>
+        <h3>Auteurs et modèles à mobiliser</h3>
+      </div>
+      <p>Clique sur un auteur pour ouvrir sa fiche synthétique et ses ressources externes.</p>
+    </div>
+
+    <div className="author-card-grid">
+      {keys.map(key=>{
+        const author=authorProfiles[key]
+        if(!author) return null
+        return <button
+          className={'author-card '+(selected===key?'active':'')}
+          key={key}
+          onClick={()=>setSelected(selected===key?null:key)}
+          aria-expanded={selected===key}
+        >
+          <span className="author-card-icon" aria-hidden>{author.icon}</span>
+          <span className="author-card-copy">
+            <strong>{author.name}</strong>
+            <small>{author.years}</small>
+            <span>{author.oneLine}</span>
+          </span>
+          <span className="author-card-arrow" aria-hidden>{selected===key?'↑':'→'}</span>
+        </button>
+      })}
+    </div>
+
+    {selectedProfile&&<article className="author-profile-panel">
+      <div className="author-profile-head">
+        <div className="author-profile-icon" aria-hidden>{selectedProfile.icon}</div>
+        <div>
+          <span className="section-kicker">FICHE AUTEUR</span>
+          <h3>{selectedProfile.name}</h3>
+          <p>{selectedProfile.oneLine}</p>
+        </div>
+        <button className="author-close" onClick={()=>setSelected(null)} aria-label="Fermer la fiche">×</button>
+      </div>
+
+      <div className="author-profile-grid">
+        <section>
+          <h4>Concepts à retenir</h4>
+          <div className="author-chip-list">{selectedProfile.concepts.map(item=><span key={item}>{item}</span>)}</div>
+        </section>
+        <section>
+          <h4>Quand le mobiliser</h4>
+          <div className="author-use-list">{selectedProfile.useCases.map(item=><div key={item}>→ {item}</div>)}</div>
+        </section>
+      </div>
+
+      <div className="author-note-grid">
+        <div className="author-note exam">
+          <span>CONCOURS</span>
+          <p>{selectedProfile.exam}</p>
+        </div>
+        <div className="author-note limits">
+          <span>LIMITES</span>
+          <p>{selectedProfile.limits}</p>
+        </div>
+      </div>
+
+      <div className="author-links">
+        <h4>Pour aller plus loin</h4>
+        <div className="author-link-grid">
+          {selectedProfile.links.map(link=><a key={link.url} href={link.url} target="_blank" rel="noreferrer">
+            <span>{link.type}</span>
+            <strong>{link.label}</strong>
+            <i aria-hidden>↗</i>
+          </a>)}
+        </div>
+      </div>
+    </article>}
+  </section>
+}
+
 export default function DetailPage({
   section,
   entry,
@@ -141,6 +223,8 @@ export default function DetailPage({
     </header>
 
     <LearningVisual pageKey={pageKey} sectionId={section.id} page={page}/>
+
+    {page.authorKeys?.length>0&&<AuthorDirectory keys={page.authorKeys}/>} 
 
     {page.objectives?.length>0&&<section className="content-block course-objectives"><h3>Objectifs du cours</h3><div className="objective-grid">{page.objectives.map((objective,i)=><div className="objective-card" key={objective}><span>{String(i+1).padStart(2,'0')}</span><p>{objective}</p></div>)}</div></section>}
 
