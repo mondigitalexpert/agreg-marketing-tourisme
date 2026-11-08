@@ -1,5 +1,6 @@
+import { providedMediaResources } from '../mediaResources'
 const checked='08/11/2026'
-const p=(title,intro,keyPoints,sections,sources=[])=>({label:'Bibliothèque',title,intro,keyPoints,sections,sources})
+const p=(title,intro,keyPoints,sections,sources=[],extra={})=>({label:'Bibliothèque',title,intro,keyPoints,sections,sources,...extra})
 
 export const libraryPages = {
   'bibliotheque|Ressources fournies': p(
@@ -18,6 +19,23 @@ export const libraryPages = {
       {heading:'Règle de provenance',text:'Une ressource fournie peut servir de point de départ, de sujet ou de cas historique. Une affirmation théorique ou actuelle destinée à être publiée est recoupée avec une source académique, officielle ou primaire lorsque cela est nécessaire.'},
       {heading:'Droit de diffusion',text:'Le support méthodologique INSPE indique des restrictions de reproduction. Il n’est pas republié dans l’application ; seules des idées générales de méthode sont synthétisées.'}
     ]
+  ),
+
+  'bibliotheque|Médias & ressources fournies': p(
+    'Médias & ressources fournies',
+    'Un espace unique pour retrouver les documents transmis pour la préparation et une sélection de vidéos externes utiles. Les documents fournis restent distingués des contenus externes ajoutés par recherche.',
+    [
+      'Les ressources fournies sont conservées avec leur statut : officiel, préparation, méthodologie ou cas historique.',
+      'Les documents anciens sont signalés comme historiques lorsqu’ils ne décrivent plus la situation actuelle.',
+      'Les vidéos servent à l’ancrage et à la compréhension ; elles ne remplacent pas les références académiques ou officielles.',
+      'Le support méthodologique INSPE n’est pas reproduit dans l’application en raison de ses restrictions de diffusion.'
+    ],
+    [
+      {heading:'Comment utiliser cet espace',text:'Pour un cours : lire d’abord la fiche, puis utiliser une vidéo pour reformuler le mécanisme. Pour un cas : consulter les ressources seulement après une première tentative afin de ne pas court-circuiter l’entraînement.'},
+      {heading:'Statut des vidéos',text:'Les vidéos ont été sélectionnées pour leur pertinence, leur source et, quand cela a du sens, leur audience. Leur popularité ne constitue pas une validation scientifique.'}
+    ],
+    [],
+    {providedResources:providedMediaResources}
   ),
 
   'bibliotheque|Programme officiel': p(
