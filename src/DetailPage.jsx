@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { contentPages } from './content'
 import { ProgressView } from './progressStore'
-import LearningVisual from './LearningVisual'
+import LearningVisual, { DeepLearningVisual } from './LearningVisual'
+import { getDeepVisualsForPage } from './visuals'
 
 function QuizBlock({items,pageKey,progress,onProgress,activity}){
   const stored=progress.quiz?.[pageKey]?.answers||{}
@@ -85,6 +86,7 @@ export default function DetailPage({
 }){
   const pageKey=section.id+'|'+entry.title
   const page=contentPages[pageKey]
+  const deepVisuals=getDeepVisualsForPage(pageKey)
   const activity={
     pageKey,
     sectionId:section.id,
@@ -144,13 +146,16 @@ export default function DetailPage({
 
     {page.keyPoints?.length>0&&<section className="content-block"><h3>Repères essentiels</h3><div className="key-grid">{page.keyPoints.map((point,i)=><div className="key-card" key={point}><span>{String(i+1).padStart(2,'0')}</span><p>{point}</p></div>)}</div></section>}
 
-    {page.sections?.length>0&&<section className="content-block"><h3>Le cours</h3><div className="reading-stack">{page.sections.map(item=><article className="reading-card course-chapter" key={item.heading}>
-      <h4>{item.heading}</h4>
-      {item.text&&<p>{item.text}</p>}
-      {item.bullets?.length>0&&<ul className="course-bullets">{item.bullets.map(bullet=><li key={bullet}>{bullet}</li>)}</ul>}
-      {item.formula&&<div className="formula-box">{item.formula}</div>}
-      {item.example&&<div className="example-box"><strong>Exemple</strong><span>{item.example}</span></div>}
-    </article>)}</div></section>}
+    {page.sections?.length>0&&<section className="content-block"><h3>{section.id==='cours'?'Le cours':'Approfondir'}</h3><div className="reading-stack">{page.sections.map((item,index)=><React.Fragment key={item.heading}>
+      <article className="reading-card course-chapter">
+        <h4>{item.heading}</h4>
+        {item.text&&<p>{item.text}</p>}
+        {item.bullets?.length>0&&<ul className="course-bullets">{item.bullets.map(bullet=><li key={bullet}>{bullet}</li>)}</ul>}
+        {item.formula&&<div className="formula-box">{item.formula}</div>}
+        {item.example&&<div className="example-box"><strong>Exemple</strong><span>{item.example}</span></div>}
+      </article>
+      {deepVisuals.filter(v=>v.after===index).map((visual,i)=><DeepLearningVisual key={visual.title+i} visual={visual}/>)}
+    </React.Fragment>)}</div></section>}
 
     {page.recap?.length>0&&<section className="content-block recap-block"><h3>Synthèse du chapitre</h3><div className="recap-grid">{page.recap.map(item=><div className="recap-item" key={item}><span>✓</span><p>{item}</p></div>)}</div></section>}
 
