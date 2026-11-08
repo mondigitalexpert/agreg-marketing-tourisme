@@ -11,7 +11,7 @@ export const PROFILES = [
   {id:'sansan',label:'Sansan'}
 ]
 
-export const emptyProgress=()=>({viewed:{},favorites:[],quiz:{},difficultCards:[],completedCases:[]})
+export const emptyProgress=()=>({viewed:{},favorites:[],quiz:{},difficultCards:[],completedCases:[],lastActivity:null})
 
 export function profileStorageKey(profile){
   return STORAGE_PREFIX+':'+profile
