@@ -26,7 +26,7 @@ export const casePages = {
     [
       {type:'Entreprise',name:'Accor — Résultats financiers',url:'https://group.accor.com/fr/finance/financial-results',checked},
       {type:'Entreprise',name:'Accor — Half-Year 2026 Results',url:'https://group.accor.com/en/news-stories/accor-half-year-2026-results',checked},
-      {type:'Entreprise',name:'Accor at a glance — juillet 2026',url:'https://assets.group.accor.com/yrj0orc8tx24/5fb92nCdGwFBM4lYRHTevc/940cd987ec64f05a7d81a6f310a7b489/ACCOR_AT_A_GLANCE_JULY_2026.pdf',checked},
+      {type:'Entreprise',name:'Accor at a glance — juillet 2026',url:'https://assets.group.accor.com/yrj0orc8tx24/1gfnIc7BnVhT7xnnVrKMYj/cde89098605135e4610f1e2b48c855b2/Accor_Overview_JULY_2026.pdf',checked},
       {type:'Officiel',name:'Insee — Parc et fréquentation des hôtels 2025',url:'https://www.insee.fr/fr/statistiques/2015412',checked}
     ]
   ),
@@ -265,7 +265,7 @@ export const casePages = {
     ],
     [
       {type:'Entreprise',name:'Air France-KLM — présentation du groupe et stratégie de flotte',url:'https://www.airfranceklm.com/fr',checked},
-      {type:'Entreprise',name:'Air France-KLM — Sustainability',url:'https://www.airfranceklm.com/en/sustainability',checked}
+      {type:'Entreprise',name:'Air France-KLM — Sustainability',url:'https://www.airfranceklm.com/en/our-commitments/environment',checked}
     ]
   )
 }
