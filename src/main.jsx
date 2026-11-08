@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
 import { contentPages } from './content'
+import DetailPage from './DetailPage'
 
 const sections = [
   { id:'concours', group:'dashboard', title:'Le concours', icon:'🎓', color:'#1F3A5F', desc:'Programme, épreuves, méthode et attentes du jury.', size:'small', meta:'8 repères clés' },
-  { id:'progression', group:'dashboard', title:'Ma progression', icon:'🎯', color:'#417C78', desc:'Résultats, points faibles, historique et révisions recommandées.', size:'medium', meta:'Suivi personnel' },
+  { id:'progression', group:'dashboard', title:'Ma progression', icon:'🎯', color:'#417C78', desc:'Résultats, points faibles, historique et révisions recommandées.', size:'medium', meta:'Suivi local' },
   { id:'veille', group:'dashboard', title:'Actualité & Veille', icon:'📰', color:'#4C7EA8', desc:'Actualités marketing, tourisme, digital, IA et réglementation.', size:'small', meta:'Cas et chiffres récents' },
   { id:'bibliotheque', group:'dashboard', title:'Bibliothèque', icon:'📖', color:'#59636E', desc:'Ressources, sujets, rapports, articles et favoris.', size:'small', meta:'Sources & documents' },
 
@@ -98,107 +99,6 @@ function Tile({section, variant='action', onOpen}) {
 }
 
 
-function QuizBlock({items}) {
-  const [answers, setAnswers] = useState({})
-
-  return <div className="quiz-list">
-    {items.map((item,index) => {
-      const selected = answers[index]
-      const hasAnswered = selected !== undefined
-      return <article className="quiz-card" key={item.q}>
-        <div className="quiz-question"><span>{String(index+1).padStart(2,'0')}</span>{item.q}</div>
-        <div className="quiz-choices">
-          {item.choices.map((choice,choiceIndex) => {
-            const correct = hasAnswered && choiceIndex === item.answer
-            const wrong = hasAnswered && choiceIndex === selected && selected !== item.answer
-            return <button
-              key={choice}
-              className={`quiz-choice ${correct ? 'correct' : ''} ${wrong ? 'wrong' : ''}`}
-              onClick={() => setAnswers(prev => ({...prev,[index]:choiceIndex}))}
-              disabled={hasAnswered}
-            >
-              <span className="choice-letter">{String.fromCharCode(65+choiceIndex)}</span>
-              <span>{choice}</span>
-            </button>
-          })}
-        </div>
-        {hasAnswered && <div className={`quiz-feedback ${selected === item.answer ? 'ok' : 'ko'}`}>
-          <strong>{selected === item.answer ? 'Bonne réponse.' : 'À revoir.'}</strong> {item.explanation}
-        </div>}
-      </article>
-    })}
-  </div>
-}
-
-function DetailPage({section, entry, onBack}) {
-  const page = contentPages[`${section.id}|${entry.title}`]
-
-  if (!page) return <div className="detail-page">
-    <button className="back" onClick={onBack}>← Retour à {section.title}</button>
-    <section className="section-head" style={{'--tile':section.color}}>
-      <span className="icon big">{entry.icon}</span>
-      <div><h2>{entry.title}</h2><p>Cette fiche sera alimentée dans une prochaine étape.</p></div>
-    </section>
-    <div className="placeholder-note">Aucun contenu n’est publié ici tant qu’il n’a pas été préparé et vérifié.</div>
-  </div>
-
-  return <div className="detail-page">
-    <button className="back" onClick={onBack}>← Retour à {section.title}</button>
-
-    <header className="detail-hero" style={{'--tile':section.color}}>
-      <div className="detail-icon" aria-hidden>{entry.icon}</div>
-      <div>
-        <span className="detail-label">{page.label}</span>
-        <h2>{page.title}</h2>
-        <p>{page.intro}</p>
-      </div>
-    </header>
-
-    {page.keyPoints && <section className="content-block">
-      <h3>À retenir</h3>
-      <div className="key-grid">
-        {page.keyPoints.map((point,i)=><div className="key-card" key={point}>
-          <span>{String(i+1).padStart(2,'0')}</span><p>{point}</p>
-        </div>)}
-      </div>
-    </section>}
-
-    {page.sections && <section className="content-block">
-      <h3>Approfondir</h3>
-      <div className="reading-stack">
-        {page.sections.map(s=><article className="reading-card" key={s.heading}>
-          <h4>{s.heading}</h4>
-          <p>{s.text}</p>
-        </article>)}
-      </div>
-    </section>}
-
-    {page.quiz && <section className="content-block">
-      <h3>S’entraîner</h3>
-      <QuizBlock items={page.quiz} />
-    </section>}
-
-    {page.sources && <section className="content-block sources-block">
-      <div className="sources-heading">
-        <div><span className="detail-label">TRAÇABILITÉ</span><h3>Sources</h3></div>
-        <span className="verified-chip">Contenu sourcé</span>
-      </div>
-      <div className="source-list">
-        {page.sources.map((source,i)=><div className="source-card" key={source.name+i}>
-          <span className="source-type">{source.type}</span>
-          <div>
-            {source.url
-              ? <a href={source.url} target="_blank" rel="noreferrer">{source.name} ↗</a>
-              : <strong>{source.name}</strong>}
-            {source.checked && <small>Vérifié le {source.checked}</small>}
-            {source.note && <small>{source.note}</small>}
-          </div>
-        </div>)}
-      </div>
-    </section>}
-  </div>
-}
-
 function App(){
   const [active, setActive] = useState(null)
   const [activeSub, setActiveSub] = useState(null)
@@ -218,7 +118,7 @@ function App(){
       </div>
       <div className="status-card">
         <span className="status-dot"></span>
-        <div><strong>Application en construction</strong><small>Structure et navigation actives</small></div>
+        <div><strong>Base de préparation complète</strong><small>108 fiches • progression locale</small></div>
       </div>
     </header>
 
@@ -286,12 +186,12 @@ function App(){
           <span className="sub-arrow" aria-hidden>→</span>
         </button>)}
       </main>
-      <div className="placeholder-note">Les fiches publiées ouvrent un contenu sourcé. Les autres restent volontairement vides tant qu’elles ne sont pas vérifiées.</div>
+      <div className="placeholder-note">Toutes les rubriques disposent d’un contenu. Les cas réels indiquent leurs sources et leur date de vérification.</div>
     </>}
 
     <footer>
       <span>Préparation Agrégation • Option C Marketing</span>
-      <span>Contenus sourcés • Cas datés • Progression à venir</span>
+      <span>Sources identifiées • Cas datés • Progression locale</span>
     </footer>
   </div>
 }
