@@ -116,3 +116,23 @@ export const casePedagogy={
   'cas|Transformation digitale':{time:'30–45 min',difficulty:'★★☆',skills:['Adoption','ROI','Conduite du changement'],facts:['France Tourisme Tech documente plus de 80 mises en relation et plus de 55 expérimentations/partenariats d’open innovation selon ses bilans.'],interpretations:['Le nombre de pilotes ne mesure pas à lui seul la transformation.'],hypotheses:['Quel taux d’industrialisation et quels gains opérationnels ?']},
   'cas|Développement durable':{time:'30–45 min',difficulty:'★★★',skills:['Preuve','Greenwashing','KPI environnementaux'],facts:['Air France-KLM publie des engagements de renouvellement de flotte.'],interpretations:['Un engagement de moyen ne prouve pas une baisse absolue d’impact.'],hypotheses:['Comment évoluent émissions absolues et intensité par passager-km ?']}
 }
+
+
+export const tourismExerciseMeta={
+  'tourisme|Fondamentaux':{objective:'Apprendre à comparer des indicateurs sans mélanger leurs champs.',time:'10 min',difficulty:'★★☆',skills:['Lecture statistique','Esprit critique'],step:4},
+  'tourisme|Hôtellerie':{objective:'Construire un mix de distribution rentable et relationnel.',time:'15–20 min',difficulty:'★★☆',skills:['Distribution','KPI','CRM'],step:7},
+  'tourisme|Restauration':{objective:'Améliorer la marge sans réduire le problème à une hausse générale des prix.',time:'15 min',difficulty:'★★☆',skills:['Marge','Capacité','Préconisation'],step:7},
+  'tourisme|Destinations & territoires':{objective:'Désaisonnaliser une destination par segmentation, offre et coordination.',time:'20 min',difficulty:'★★☆',skills:['Territoire','Segmentation','Plan d’action'],step:7},
+  'tourisme|Agences / TO / plateformes':{objective:'Comparer des canaux par valeur créée, coût et contrôle.',time:'15 min',difficulty:'★★☆',skills:['Distribution','Plateforme','Arbitrage'],step:5},
+  'tourisme|Expérience touristique':{objective:'Cartographier un parcours et identifier des moments de vérité mesurables.',time:'15 min',difficulty:'★★☆',skills:['Parcours client','KPI'],step:5},
+  'tourisme|Distribution & OTA':{objective:'Construire un tableau de bord qui dépasse le seul volume de réservations.',time:'15 min',difficulty:'★★☆',skills:['KPI','Rentabilité canal'],step:4},
+  'tourisme|E-réputation':{objective:'Passer d’une baisse de note à un diagnostic opérationnel.',time:'15 min',difficulty:'★★☆',skills:['Avis','Diagnostic','Données'],step:5},
+  'tourisme|Revenue management':{objective:'Interpréter le même RevPAR derrière deux modèles prix/occupation différents.',time:'15 min',difficulty:'★★★',skills:['Calcul','Interprétation','Capacité'],step:4},
+  'tourisme|Fidélisation & CRM':{objective:'Créer de la fidélité sans dépendre d’une remise.',time:'10–15 min',difficulty:'★★☆',skills:['CRM','Fidélité','Comportement'],step:7},
+  'tourisme|Tourisme durable':{objective:'Évaluer une promesse environnementale par des preuves et risques de greenwashing.',time:'15–20 min',difficulty:'★★★',skills:['Preuve','Durabilité','Esprit critique'],step:5},
+  'tourisme|IA & nouvelles technologies':{objective:'Transformer une technologie en cas d’usage évalué.',time:'15–20 min',difficulty:'★★☆',skills:['Cas d’usage','Données','KPI','Risques'],step:7},
+  'tourisme|Influence & réseaux sociaux':{objective:'Choisir une stratégie d’influence selon la cible et les KPI.',time:'15 min',difficulty:'★★☆',skills:['Influence','Ciblage','Mesure'],step:7},
+  'tourisme|Luxe & tourisme':{objective:'Justifier une montée en gamme par des preuves de valeur.',time:'15 min',difficulty:'★★☆',skills:['Positionnement','Service','Preuve'],step:7},
+  'tourisme|Événementiel':{objective:'Évaluer un événement par performance commerciale et expérience.',time:'15 min',difficulty:'★★☆',skills:['Événementiel','KPI','Expérience'],step:4},
+  'tourisme|Crises & tourisme':{objective:'Prioriser les premières décisions marketing sans spéculer.',time:'15–20 min',difficulty:'★★★',skills:['Crise','Confiance','Priorisation'],step:7}
+}
