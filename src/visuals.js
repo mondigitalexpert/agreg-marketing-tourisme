@@ -165,27 +165,70 @@ export function getVisualForPage(pageKey,sectionId,page){
 
   const points=(page?.keyPoints||[]).slice(0,4)
   const chapters=(page?.sections||[]).slice(0,4).map(s=>String(s.heading||'').replace(/^\d+\.\s*/,''))
+  const flashcards=(page?.flashcards||[]).slice(0,4).map(card=>card.front)
+  const quizTopics=(page?.quiz||[]).slice(0,4).map(q=>q.q.length>58?q.q.slice(0,55)+'…':q.q)
+  const available=points.length?points:chapters.length?chapters:flashcards.length?flashcards:quizTopics
 
   if(sectionId==='auteurs'){
-    return {kind:'concept',title:'Carte de mémorisation',nodes:(points.length?points:chapters).slice(0,4),caption:'Relier le concept à son auteur, son mécanisme et son usage dans une copie.'}
+    return {
+      kind:'concept',
+      title:'Carte de mémorisation',
+      nodes:(available.length?available:['Auteur','Concept','Mécanisme','Usage dans la copie']).slice(0,4),
+      caption:'Relier la référence à son concept, son mécanisme et son usage est plus efficace que mémoriser un nom isolé.'
+    }
   }
   if(sectionId==='tourisme'){
-    return {kind:'flow',title:'Lecture marketing du sujet',nodes:(chapters.length?chapters:['Contexte','Client','Offre','Performance']).slice(0,5),caption:'Toujours relier le secteur touristique aux concepts marketing mobilisés.'}
+    return {
+      kind:'flow',
+      title:'Lecture marketing du sujet',
+      nodes:(available.length?available:['Contexte','Client','Offre','Expérience','Performance']).slice(0,5),
+      caption:'Le secteur touristique sert de terrain d’application : toujours revenir au mécanisme marketing.'
+    }
   }
   if(sectionId==='entrainement'){
-    return {kind:'steps',title:'Méthode de travail',nodes:(points.length?points:chapters).slice(0,5),caption:'La progression visuelle aide à automatiser la méthode avant le travail chronométré.'}
+    return {
+      kind:'steps',
+      title:page?.quiz?.length?'Boucle d’entraînement':'Méthode de travail',
+      nodes:(available.length?available:['Consigne','Réponse','Correction','Compréhension','Nouvel essai']).slice(0,5),
+      caption:'L’ancrage vient de la récupération active, de la correction expliquée et de la répétition.'
+    }
   }
   if(sectionId==='veille'){
-    return {kind:'flow',title:'Transformer une actualité en exemple',nodes:['Fait daté','Source','Notion','Mécanisme','Limite'],caption:'Une actualité n’est utile au concours que si elle illustre précisément un concept.'}
+    return {
+      kind:'flow',
+      title:'Transformer une actualité en exemple',
+      nodes:['Fait daté','Source','Notion','Mécanisme','Limite'],
+      caption:'Une actualité n’est utile au concours que si elle illustre précisément un concept.'
+    }
   }
   if(sectionId==='bibliotheque'){
-    return {kind:'source',title:'Hiérarchie des sources',nodes:['Officiel','Académique','Professionnel','Ressource de préparation'],caption:'La nature de la source détermine la force de ce qu’elle permet d’affirmer.'}
+    return {
+      kind:'source',
+      title:'Hiérarchie des sources',
+      nodes:['Officiel','Académique','Professionnel','Ressource de préparation'],
+      caption:'La nature de la source détermine la force de ce qu’elle permet d’affirmer.'
+    }
   }
   if(sectionId==='concours'){
-    return {kind:'steps',title:'Repère concours',nodes:(points.length?points:chapters).slice(0,5),caption:'Situer la fiche dans la logique générale de préparation et d’épreuve.'}
+    return {
+      kind:'steps',
+      title:'Repère concours',
+      nodes:(available.length?available:['Programme','Méthode','Entraînement','Évaluation','Ajustement']).slice(0,5),
+      caption:'Situer chaque ressource dans la logique générale de préparation et d’épreuve.'
+    }
   }
-  if(points.length||chapters.length){
-    return {kind:'concept',title:'Repère visuel',nodes:(points.length?points:chapters).slice(0,4),caption:'Synthèse graphique des idées principales de la fiche.'}
+  if(sectionId==='progression'){
+    return {
+      kind:'flow',
+      title:'Boucle de progression',
+      nodes:['Activité','Résultats','Erreurs','Priorités','Nouvel entraînement'],
+      caption:'Le suivi sert à décider quoi revoir et quoi pratiquer ensuite.'
+    }
   }
-  return null
+  return {
+    kind:'concept',
+    title:'Repère visuel',
+    nodes:(available.length?available:['Idée centrale','Mécanisme','Application','À retenir']).slice(0,4),
+    caption:'Synthèse graphique des idées principales de la fiche.'
+  }
 }
