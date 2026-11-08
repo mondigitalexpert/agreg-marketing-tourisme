@@ -3,15 +3,17 @@ import { createRoot } from 'react-dom/client'
 import './styles.css'
 
 const sections = [
-  { id:'concours', title:'Le concours', icon:'🎓', color:'#1F3A5F', desc:'Programme, épreuves, méthode et attentes du jury.' },
-  { id:'cours', title:'Cours Marketing', icon:'📚', color:'#2F6B6D', desc:'Les notions du programme, structurées pour réviser efficacement.' },
-  { id:'tourisme', title:'Marketing & Tourisme', icon:'🏨', color:'#C96F4A', desc:'Applications au tourisme, à l’hôtellerie et aux services.' },
-  { id:'auteurs', title:'Auteurs & Modèles', icon:'🧠', color:'#6F5B8C', desc:'Concepts, modèles, références et flashcards.' },
-  { id:'entrainement', title:'S’entraîner', icon:'✍️', color:'#3F7D5A', desc:'QCM, mini-cas, exercices et concours blancs.' },
-  { id:'cas', title:'Cas réels', icon:'🧳', color:'#B67A32', desc:'Situations réelles, sourcées, datées et corrigées.' },
-  { id:'veille', title:'Actualité & Veille', icon:'📰', color:'#4C7EA8', desc:'Actualités marketing, tourisme, digital, IA et réglementation.' },
-  { id:'bibliotheque', title:'Bibliothèque', icon:'📖', color:'#59636E', desc:'Ressources, sujets, rapports, articles et favoris.' },
-  { id:'progression', title:'Ma progression', icon:'🎯', color:'#417C78', desc:'Résultats, points faibles, historique et révisions recommandées.' },
+  { id:'concours', group:'dashboard', title:'Le concours', icon:'🎓', color:'#1F3A5F', desc:'Programme, épreuves, méthode et attentes du jury.', size:'small' },
+  { id:'progression', group:'dashboard', title:'Ma progression', icon:'🎯', color:'#417C78', desc:'Résultats, points faibles, historique et révisions recommandées.', size:'medium' },
+  { id:'veille', group:'dashboard', title:'Actualité & Veille', icon:'📰', color:'#4C7EA8', desc:'Actualités marketing, tourisme, digital, IA et réglementation.', size:'small' },
+  { id:'bibliotheque', group:'dashboard', title:'Bibliothèque', icon:'📖', color:'#59636E', desc:'Ressources, sujets, rapports, articles et favoris.', size:'small' },
+
+  { id:'cours', group:'learn', title:'Cours Marketing', icon:'📚', color:'#2F6B6D', desc:'Les notions du programme, structurées pour réviser efficacement.', size:'hero' },
+  { id:'tourisme', group:'learn', title:'Marketing & Tourisme', icon:'🏨', color:'#C96F4A', desc:'Applications au tourisme, à l’hôtellerie et aux services.', size:'tall' },
+  { id:'auteurs', group:'learn', title:'Auteurs & Modèles', icon:'🧠', color:'#6F5B8C', desc:'Concepts, modèles, références et flashcards.', size:'wide' },
+
+  { id:'entrainement', group:'practice', title:'S’entraîner', icon:'✍️', color:'#3F7D5A', desc:'QCM, mini-cas, exercices, entraînements chronométrés et concours blancs.', size:'hero' },
+  { id:'cas', group:'practice', title:'Cas réels', icon:'🧳', color:'#B67A32', desc:'Situations réelles, sourcées, datées et corrigées.', size:'wide' },
 ]
 
 const subpages = {
@@ -26,9 +28,33 @@ const subpages = {
   progression:['Vue d’ensemble','Mes résultats','Points faibles','Notions maîtrisées','À revoir','Historique QCM','Erreurs fréquentes','Cas réalisés','Flashcards difficiles','Favoris']
 }
 
+function Tile({section, variant='action', onOpen}) {
+  return (
+    <button
+      className={`tile ${variant} ${section.size}`}
+      style={{'--tile':section.color}}
+      onClick={() => onOpen(section.id)}
+    >
+      <div className="tile-top">
+        <span className="icon">{section.icon}</span>
+        <span className="tile-arrow" aria-hidden>↗</span>
+      </div>
+      <div className="tile-copy">
+        <span className="tile-title">{section.title}</span>
+        <span className="tile-desc">{section.desc}</span>
+      </div>
+      <span className="tile-link">Ouvrir <span aria-hidden>→</span></span>
+    </button>
+  )
+}
+
 function App(){
   const [active, setActive] = useState(null)
   const section = sections.find(s => s.id === active)
+
+  const dashboard = sections.filter(s => s.group === 'dashboard')
+  const learn = sections.filter(s => s.group === 'learn')
+  const practice = sections.filter(s => s.group === 'practice')
 
   return <div className="app-shell">
     <header className="hero">
@@ -39,23 +65,49 @@ function App(){
       </div>
       <div className="status-card">
         <span className="status-dot"></span>
-        <div><strong>Version initiale</strong><small>Structure de l’application</small></div>
+        <div><strong>Application en construction</strong><small>Structure et navigation actives</small></div>
       </div>
     </header>
 
     {!active ? <>
-      <section className="intro">
-        <h2>Que veux-tu travailler ?</h2>
-        <p>Choisis une rubrique. Chaque espace regroupera cours, fiches, sources et exercices adaptés.</p>
+      <section className="dashboard-zone">
+        <div className="section-label-row">
+          <div>
+            <span className="section-kicker">TABLEAU DE BORD</span>
+            <h2>Suivre, retrouver, s’orienter</h2>
+          </div>
+          <p>Les accès de pilotage et de consultation restent volontairement plus compacts.</p>
+        </div>
+        <div className="dashboard-grid">
+          {dashboard.map(s => <Tile key={s.id} section={s} variant="dashboard" onOpen={setActive} />)}
+        </div>
       </section>
-      <main className="tile-grid">
-        {sections.map(s => <button key={s.id} className="tile" style={{'--tile':s.color}} onClick={()=>setActive(s.id)}>
-          <span className="icon">{s.icon}</span>
-          <span className="tile-title">{s.title}</span>
-          <span className="tile-desc">{s.desc}</span>
-          <span className="tile-link">Ouvrir <span aria-hidden>→</span></span>
-        </button>)}
-      </main>
+
+      <section className="workspace-section learn-zone">
+        <div className="section-label-row">
+          <div>
+            <span className="section-kicker">APPRENDRE</span>
+            <h2>Comprendre et mémoriser</h2>
+          </div>
+          <p>Cours, concepts, auteurs et applications sectorielles.</p>
+        </div>
+        <div className="mosaic-grid learn-grid">
+          {learn.map(s => <Tile key={s.id} section={s} onOpen={setActive} />)}
+        </div>
+      </section>
+
+      <section className="workspace-section practice-zone">
+        <div className="section-label-row">
+          <div>
+            <span className="section-kicker">S’ENTRAÎNER</span>
+            <h2>Mobiliser les connaissances</h2>
+          </div>
+          <p>QCM, cas, analyses et entraînements proches des attendus du concours.</p>
+        </div>
+        <div className="mosaic-grid practice-grid">
+          {practice.map(s => <Tile key={s.id} section={s} onOpen={setActive} />)}
+        </div>
+      </section>
     </> : <>
       <button className="back" onClick={()=>setActive(null)}>← Retour à l’accueil</button>
       <section className="section-head" style={{'--tile':section.color}}>
