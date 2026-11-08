@@ -663,3 +663,7 @@ button.model-clickable{appearance:none}
 @media(max-width:480px){
   .exercise-meta-grid,.correction-framework{grid-template-columns:1fr}
 }
+
+.author-copy-example{margin-top:12px;background:#fff;border:1px solid #ddd4e5;border-left:4px solid #6f5b8c;border-radius:13px;padding:13px 14px}
+.author-copy-example>span{display:block;font-size:.63rem;font-weight:900;letter-spacing:.08em;color:#6f5b8c;margin-bottom:6px}
+.author-copy-example p{margin:0;font-size:.82rem;line-height:1.55;color:#4e5c66;font-style:italic}
