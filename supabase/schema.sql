@@ -25,6 +25,9 @@ create table if not exists public.profile_invites (
   created_at timestamptz not null default now()
 );
 
+create index if not exists profile_invites_claimed_by_idx
+  on public.profile_invites (claimed_by);
+
 alter table public.profiles enable row level security;
 alter table public.progress enable row level security;
 alter table public.profile_invites enable row level security;
@@ -61,7 +64,20 @@ to authenticated
 using ((select auth.uid()) = user_id)
 with check ((select auth.uid()) = user_id);
 
-create or replace function public.claim_profile(p_display_name text, p_code text)
+drop policy if exists "No direct client access" on public.profile_invites;
+create policy "No direct client access"
+on public.profile_invites
+for all
+to anon, authenticated
+using (false)
+with check (false);
+
+create schema if not exists private;
+revoke all on schema private from public;
+revoke all on schema private from anon;
+grant usage on schema private to authenticated;
+
+create or replace function private.claim_profile_impl(p_display_name text, p_code text)
 returns text
 language plpgsql
 security definer
@@ -73,13 +89,8 @@ declare
   v_invite record;
   v_existing text;
 begin
-  if v_uid is null then
-    raise exception 'Authentification requise';
-  end if;
-
-  if p_display_name not in ('Rachid','Sansan') then
-    raise exception 'Profil invalide';
-  end if;
+  if v_uid is null then raise exception 'Authentification requise'; end if;
+  if p_display_name not in ('Rachid','Sansan') then raise exception 'Profil invalide'; end if;
 
   v_hash := encode(extensions.digest(p_code, 'sha256'), 'hex');
 
@@ -93,15 +104,12 @@ begin
     raise exception 'Code invitation invalide';
   end if;
 
-  select display_name
-  into v_existing
+  select display_name into v_existing
   from public.profiles
   where id = v_uid;
 
   if found then
-    if v_existing = p_display_name then
-      return v_existing;
-    end if;
+    if v_existing = p_display_name then return v_existing; end if;
     raise exception 'Ce compte est déjà associé à un autre profil';
   end if;
 
@@ -135,8 +143,23 @@ begin
 end;
 $$;
 
+revoke all on function private.claim_profile_impl(text, text) from public;
+revoke all on function private.claim_profile_impl(text, text) from anon;
+grant execute on function private.claim_profile_impl(text, text) to authenticated;
+
+create or replace function public.claim_profile(p_display_name text, p_code text)
+returns text
+language sql
+security invoker
+set search_path = ''
+as $$
+  select private.claim_profile_impl(p_display_name, p_code);
+$$;
+
 revoke all on function public.claim_profile(text, text) from public;
+revoke all on function public.claim_profile(text, text) from anon;
 grant execute on function public.claim_profile(text, text) to authenticated;
 
--- Production only:
--- Insérer les deux invitations sous forme de hash SHA-256, jamais les codes en clair.
+-- Production only :
+-- les deux invitations sont insérées sous forme de hash SHA-256.
+-- Les codes en clair sont remis séparément aux deux utilisateurs.
