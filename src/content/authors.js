@@ -1,3 +1,4 @@
+import { authorsCorrections } from './corrections'
 const p=(label,title,intro,keyPoints,sections,sources,extra={})=>({label,title,intro,keyPoints,sections,sources,...extra})
 
 const sources = {
@@ -389,3 +390,8 @@ export const authorsPages = {
     ]}
   )
 }
+
+
+Object.entries(authorsCorrections).forEach(([key,corrections])=>{
+  if(authorsPages[key]) authorsPages[key].corrections=corrections
+})
