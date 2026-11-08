@@ -108,6 +108,17 @@ function AuthPanel({activeProfile,activeProfileLabel,onProfileChange,session,clo
   const [inviteCode,setInviteCode]=useState('')
   const [otpSent,setOtpSent]=useState(false)
   const [localMessage,setLocalMessage]=useState('')
+  const [expanded,setExpanded]=useState(()=>{
+    try{return localStorage.getItem('agreg-ui-auth-expanded-v1')==='1'}catch{return false}
+  })
+
+  const toggleExpanded=()=>{
+    setExpanded(prev=>{
+      const next=!prev
+      try{localStorage.setItem('agreg-ui-auth-expanded-v1',next?'1':'0')}catch{}
+      return next
+    })
+  }
 
   const requestCode=async()=>{
     setLocalMessage('')
@@ -133,28 +144,31 @@ function AuthPanel({activeProfile,activeProfileLabel,onProfileChange,session,clo
     }
   }
 
+  let title='Connexion au suivi'
+  let summary='Se connecter pour synchroniser la progression'
+  let body=null
+
   if(!isSupabaseConfigured){
-    return <div className="profile-switcher">
-      <span className="profile-switcher-label">Profil de suivi</span>
+    title='Profil de suivi'
+    summary=activeProfileLabel+' • appareil local'
+    body=<div className="profile-switcher compact-auth-body">
       <div className="profile-options">
         {PROFILES.map(profile=><button key={profile.id} className={`profile-option ${activeProfile===profile.id?'active':''}`} onClick={()=>onProfileChange(profile.id)}>{profile.label}</button>)}
       </div>
       <small>Mode local.</small>
     </div>
-  }
-
-  if(session && cloudProfile){
-    return <div className="profile-switcher cloud-account">
-      <span className="profile-switcher-label">Compte connecté</span>
+  }else if(session && cloudProfile){
+    title='Compte connecté'
+    summary=cloudProfile.display_name+' • synchronisé'
+    body=<div className="profile-switcher cloud-account compact-auth-body">
       <strong className="cloud-account-name">{cloudProfile.display_name}</strong>
       <small>Progression synchronisée entre ordinateur et mobile.</small>
       <button className="logout-button" onClick={onLogout} disabled={busy}>Se déconnecter</button>
     </div>
-  }
-
-  if(session && !cloudProfile){
-    return <div className="profile-switcher auth-panel">
-      <span className="profile-switcher-label">Première connexion</span>
+  }else if(session && !cloudProfile){
+    title='Première connexion'
+    summary='Associer le compte à '+activeProfileLabel
+    body=<div className="profile-switcher auth-panel compact-auth-body">
       <small>Choisis ton profil puis saisis le code d’invitation qui t’a été remis.</small>
       <div className="profile-options">
         {PROFILES.map(profile=><button
@@ -169,31 +183,45 @@ function AuthPanel({activeProfile,activeProfileLabel,onProfileChange,session,clo
       {(error||localMessage)&&<small className={error?'auth-error':'auth-message'}>{error||localMessage}</small>}
       <button className="logout-button" onClick={onLogout} disabled={busy}>Utiliser une autre adresse e-mail</button>
     </div>
+  }else{
+    body=<div className="profile-switcher auth-panel compact-auth-body">
+      <div className="profile-options">
+        {PROFILES.map(profile=><button
+          key={profile.id}
+          className={`profile-option ${activeProfile===profile.id?'active':''}`}
+          onClick={()=>onProfileChange(profile.id)}
+          aria-pressed={activeProfile===profile.id}
+        >{profile.label}</button>)}
+      </div>
+
+      {!otpSent ? <>
+        <input className="auth-input" type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder={"E-mail de "+activeProfileLabel} autoComplete="email" />
+        <button className="login-button" disabled={busy||!email} onClick={requestCode}>{busy?'Envoi…':'Recevoir un code par e-mail'}</button>
+      </> : <>
+        <div className="otp-email">{email}</div>
+        <input className="auth-input otp-input" inputMode="numeric" value={otp} onChange={e=>setOtp(e.target.value.replace(/\D/g,'').slice(0,8))} placeholder="Code reçu par e-mail (si présent)" autoComplete="one-time-code" />
+        <button className="login-button" disabled={busy||otp.length<6} onClick={verifyCode}>{busy?'Vérification…':'Valider le code'}</button>
+        <button className="text-button" onClick={()=>{setOtpSent(false);setOtp('');setLocalMessage('')}} disabled={busy}>Changer d’adresse e-mail</button>
+      </>}
+
+      {(error||localMessage)&&<small className={error?'auth-error':'auth-message'}>{error||localMessage}</small>}
+      <small>À la première connexion seulement, un code d’invitation sera demandé après authentification de l’e-mail.</small>
+    </div>
   }
 
-  return <div className="profile-switcher auth-panel">
-    <span className="profile-switcher-label">Connexion au suivi</span>
-    <div className="profile-options">
-      {PROFILES.map(profile=><button
-        key={profile.id}
-        className={`profile-option ${activeProfile===profile.id?'active':''}`}
-        onClick={()=>onProfileChange(profile.id)}
-        aria-pressed={activeProfile===profile.id}
-      >{profile.label}</button>)}
-    </div>
-
-    {!otpSent ? <>
-      <input className="auth-input" type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder={"E-mail de "+activeProfileLabel} autoComplete="email" />
-      <button className="login-button" disabled={busy||!email} onClick={requestCode}>{busy?'Envoi…':'Recevoir un code par e-mail'}</button>
-    </> : <>
-      <div className="otp-email">{email}</div>
-      <input className="auth-input otp-input" inputMode="numeric" value={otp} onChange={e=>setOtp(e.target.value.replace(/\D/g,'').slice(0,8))} placeholder="Code reçu par e-mail (si présent)" autoComplete="one-time-code" />
-      <button className="login-button" disabled={busy||otp.length<6} onClick={verifyCode}>{busy?'Vérification…':'Valider le code'}</button>
-      <button className="text-button" onClick={()=>{setOtpSent(false);setOtp('');setLocalMessage('')}} disabled={busy}>Changer d’adresse e-mail</button>
-    </>}
-
-    {(error||localMessage)&&<small className={error?'auth-error':'auth-message'}>{error||localMessage}</small>}
-    <small>À la première connexion seulement, un code d’invitation sera demandé après authentification de l’e-mail.</small>
+  return <div className={'auth-collapse '+(expanded?'expanded':'collapsed')}>
+    <button
+      type="button"
+      className="auth-collapse-toggle"
+      onClick={toggleExpanded}
+      aria-expanded={expanded}
+      aria-controls="auth-collapse-content"
+    >
+      <span className="collapse-icon" aria-hidden>👤</span>
+      <span className="collapse-copy"><strong>{title}</strong><small>{summary}</small></span>
+      <span className="collapse-chevron" aria-hidden>{expanded?'▴':'▾'}</span>
+    </button>
+    {expanded&&<div id="auth-collapse-content" className="auth-collapse-content">{body}</div>}
   </div>
 }
 
@@ -333,6 +361,9 @@ function App(){
   const [cloudProfile,setCloudProfile] = useState(null)
   const [authBusy,setAuthBusy] = useState(false)
   const [authError,setAuthError] = useState('')
+  const [dashboardExpanded,setDashboardExpanded] = useState(()=>{
+    try{return localStorage.getItem('agreg-ui-dashboard-expanded-v1')==='1'}catch{return false}
+  })
   const activeProfileLabel = PROFILES.find(p=>p.id===activeProfile)?.label || 'Rachid'
   const progressUserId = cloudProfile ? (session?.user?.id || null) : null
   const [progress,updateProgress,syncState] = useProgress(activeProfile,progressUserId)
@@ -472,6 +503,14 @@ function App(){
   const score=totalAnswered?Math.round(totalCorrect/totalAnswered*100):0
   const progressMeta=totalAnswered?score+'% QCM':'Profil : '+activeProfileLabel
 
+  const toggleDashboard=()=>{
+    setDashboardExpanded(prev=>{
+      const next=!prev
+      try{localStorage.setItem('agreg-ui-dashboard-expanded-v1',next?'1':'0')}catch{}
+      return next
+    })
+  }
+
   const goHome=()=>{
     setActive(null)
     setActiveSub(null)
@@ -527,17 +566,30 @@ function App(){
     />
 
     {!active ? <>
-      <section className="dashboard-zone">
-        <div className="section-label-row">
-          <div>
-            <span className="section-kicker">TABLEAU DE BORD</span>
-            <h2>Suivre, retrouver, s’orienter</h2>
+      <section className={'dashboard-zone collapsible-dashboard '+(dashboardExpanded?'expanded':'collapsed')}>
+        <button
+          type="button"
+          className="dashboard-collapse-toggle"
+          onClick={toggleDashboard}
+          aria-expanded={dashboardExpanded}
+          aria-controls="dashboard-collapse-content"
+        >
+          <span className="collapse-icon dashboard-collapse-icon" aria-hidden>📊</span>
+          <span className="collapse-copy">
+            <strong>Tableau de bord</strong>
+            <small>Suivre, retrouver, s’orienter</small>
+          </span>
+          <span className="dashboard-collapse-summary">Concours • Progression • Veille • Bibliothèque</span>
+          <span className="collapse-chevron" aria-hidden>{dashboardExpanded?'▴':'▾'}</span>
+        </button>
+        {dashboardExpanded&&<div id="dashboard-collapse-content" className="dashboard-collapse-content">
+          <div className="section-label-row dashboard-expanded-heading">
+            <p>Des accès rapides pour piloter la préparation et retrouver les ressources.</p>
           </div>
-          <p>Des accès rapides pour piloter la préparation et retrouver les ressources.</p>
-        </div>
-        <div className="dashboard-grid">
-          {dashboard.map(s => <Tile key={s.id} section={s.id==='progression'?{...s,meta:progressMeta}:s} variant="dashboard" onOpen={(id)=>{setActive(id);setActiveSub(null)}} />)}
-        </div>
+          <div className="dashboard-grid">
+            {dashboard.map(s => <Tile key={s.id} section={s.id==='progression'?{...s,meta:progressMeta}:s} variant="dashboard" onOpen={(id)=>{setActive(id);setActiveSub(null)}} />)}
+          </div>
+        </div>}
       </section>
 
       {resumeActivity&&<ResumeCard activity={resumeActivity} onResume={resumeLastActivity}/>}
