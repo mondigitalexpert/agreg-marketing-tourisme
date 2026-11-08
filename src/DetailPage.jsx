@@ -58,10 +58,10 @@ function FlashcardBlock({items,pageKey,progress,onProgress}){
   })}</div>
 }
 
-export default function DetailPage({section,entry,onBack}){
+export default function DetailPage({section,entry,onBack,profile,profileLabel}){
   const pageKey=section.id+'|'+entry.title
   const page=contentPages[pageKey]
-  const [progress,updateProgress]=useProgress()
+  const [progress,updateProgress]=useProgress(profile)
 
   useEffect(()=>{
     updateProgress(prev=>({...prev,viewed:{...prev.viewed,[pageKey]:new Date().toISOString()}}))
@@ -88,7 +88,7 @@ export default function DetailPage({section,entry,onBack}){
     <header className="detail-hero" style={{'--tile':section.color}}>
       <div className="detail-icon" aria-hidden>{entry.icon}</div>
       <div>
-        <div className="detail-meta-row"><span className="detail-label">{page.label}</span><button className={'favorite-button '+(isFavorite?'active':'')} onClick={toggleFavorite}>{isFavorite?'★ Favori':'☆ Ajouter aux favoris'}</button></div>
+        <div className="detail-meta-row"><div className="detail-label-group"><span className="detail-label">{page.label}</span><span className="profile-chip">Profil : {profileLabel}</span></div><button className={'favorite-button '+(isFavorite?'active':'')} onClick={toggleFavorite}>{isFavorite?'★ Favori':'☆ Ajouter aux favoris'}</button></div>
         <h2>{page.title}</h2><p>{page.intro}</p>
         {section.id==='cas'&&<button className={'case-done '+(isCaseDone?'active':'')} onClick={toggleCase}>{isCaseDone?'✓ Cas réalisé':'Marquer le cas comme réalisé'}</button>}
       </div>
@@ -98,7 +98,7 @@ export default function DetailPage({section,entry,onBack}){
     {page.sections?.length>0&&<section className="content-block"><h3>Approfondir</h3><div className="reading-stack">{page.sections.map(s=><article className="reading-card" key={s.heading}><h4>{s.heading}</h4><p>{s.text}</p></article>)}</div></section>}
     {page.quiz?.length>0&&<section className="content-block"><h3>S’entraîner</h3><QuizBlock items={page.quiz} pageKey={pageKey} progress={progress} onProgress={updateProgress}/></section>}
     {page.flashcards?.length>0&&<section className="content-block"><h3>Flashcards</h3><FlashcardBlock items={page.flashcards} pageKey={pageKey} progress={progress} onProgress={updateProgress}/></section>}
-    {page.progressType&&<section className="content-block"><h3>Données enregistrées</h3><ProgressView type={page.progressType} progress={progress}/></section>}
+    {page.progressType&&<section className="content-block"><h3>Données enregistrées</h3><ProgressView type={page.progressType} progress={progress} profileLabel={profileLabel}/></section>}
 
     {page.sources?.length>0&&<section className="content-block sources-block">
       <div className="sources-heading"><div><span className="detail-label">TRAÇABILITÉ</span><h3>Sources</h3></div><span className="verified-chip">Sources identifiées</span></div>
