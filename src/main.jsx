@@ -3,17 +3,17 @@ import { createRoot } from 'react-dom/client'
 import './styles.css'
 
 const sections = [
-  { id:'concours', group:'dashboard', title:'Le concours', icon:'🎓', color:'#1F3A5F', desc:'Programme, épreuves, méthode et attentes du jury.', size:'small' },
-  { id:'progression', group:'dashboard', title:'Ma progression', icon:'🎯', color:'#417C78', desc:'Résultats, points faibles, historique et révisions recommandées.', size:'medium' },
-  { id:'veille', group:'dashboard', title:'Actualité & Veille', icon:'📰', color:'#4C7EA8', desc:'Actualités marketing, tourisme, digital, IA et réglementation.', size:'small' },
-  { id:'bibliotheque', group:'dashboard', title:'Bibliothèque', icon:'📖', color:'#59636E', desc:'Ressources, sujets, rapports, articles et favoris.', size:'small' },
+  { id:'concours', group:'dashboard', title:'Le concours', icon:'🎓', color:'#1F3A5F', desc:'Programme, épreuves, méthode et attentes du jury.', size:'small', meta:'8 repères clés' },
+  { id:'progression', group:'dashboard', title:'Ma progression', icon:'🎯', color:'#417C78', desc:'Résultats, points faibles, historique et révisions recommandées.', size:'medium', meta:'Suivi personnel' },
+  { id:'veille', group:'dashboard', title:'Actualité & Veille', icon:'📰', color:'#4C7EA8', desc:'Actualités marketing, tourisme, digital, IA et réglementation.', size:'small', meta:'Cas et chiffres récents' },
+  { id:'bibliotheque', group:'dashboard', title:'Bibliothèque', icon:'📖', color:'#59636E', desc:'Ressources, sujets, rapports, articles et favoris.', size:'small', meta:'Sources & documents' },
 
-  { id:'cours', group:'learn', title:'Cours Marketing', icon:'📚', color:'#2F6B6D', desc:'Les notions du programme, structurées pour réviser efficacement.', size:'feature' },
-  { id:'tourisme', group:'learn', title:'Marketing & Tourisme', icon:'🏨', color:'#C96F4A', desc:'Applications au tourisme, à l’hôtellerie et aux services.', size:'tall' },
-  { id:'auteurs', group:'learn', title:'Auteurs & Modèles', icon:'🧠', color:'#6F5B8C', desc:'Concepts, modèles, références et flashcards.', size:'wide' },
+  { id:'cours', group:'learn', title:'Cours Marketing', icon:'📚', color:'#2F6B6D', desc:'Le socle du programme, organisé pour passer rapidement de la notion à son utilisation au concours.', size:'feature', badge:'16 thèmes', tags:['Marché & environnement','Comportement','Segmentation / ciblage','Mix marketing','Digital & services'] },
+  { id:'tourisme', group:'learn', title:'Marketing & Tourisme', icon:'🏨', color:'#C96F4A', desc:'Le tourisme comme terrain d’application privilégié des notions de marketing.', size:'tall', badge:'16 angles', tags:['Hôtellerie','Destinations','OTA & distribution','Expérience client','Tourisme durable','IA & influence'] },
+  { id:'auteurs', group:'learn', title:'Auteurs & Modèles', icon:'🧠', color:'#6F5B8C', desc:'Les références à connaître, mais surtout à mobiliser au bon moment dans une copie ou un cas.', size:'wide', badge:'Mémo', tags:['Auteurs clés','Modèles','Définitions','Flashcards'] },
 
-  { id:'entrainement', group:'practice', title:'S’entraîner', icon:'✍️', color:'#3F7D5A', desc:'QCM, mini-cas, exercices, entraînements chronométrés et concours blancs.', size:'feature' },
-  { id:'cas', group:'practice', title:'Cas réels', icon:'🧳', color:'#B67A32', desc:'Situations réelles, sourcées, datées et corrigées.', size:'wide' },
+  { id:'entrainement', group:'practice', title:'S’entraîner', icon:'✍️', color:'#3F7D5A', desc:'Des formats courts jusqu’au concours blanc pour transformer les connaissances en réflexes.', size:'feature', badge:'18 formats', tags:['QCM','Mini-cas','Analyse de documents','Problématique & plan','Concours blanc'] },
+  { id:'cas', group:'practice', title:'Cas réels', icon:'🧳', color:'#B67A32', desc:'Des situations d’entreprises et d’acteurs du tourisme, datées, sourcées et reliées aux notions du programme.', size:'wide', badge:'Sourcés', tags:['Hôtellerie','Plateformes','Transport','Crises','Transformation digitale'] },
 ]
 
 const subpages = {
@@ -37,13 +37,23 @@ function Tile({section, variant='action', onOpen}) {
     >
       <div className="tile-top">
         <span className="icon">{section.icon}</span>
-        <span className="tile-arrow" aria-hidden>↗</span>
+        {variant === 'dashboard'
+          ? <span className="dashboard-meta">{section.meta}</span>
+          : <span className="content-badge">{section.badge}</span>}
       </div>
+
       <div className="tile-copy">
         <span className="tile-title">{section.title}</span>
         <span className="tile-desc">{section.desc}</span>
       </div>
-      <span className="tile-link">Ouvrir <span aria-hidden>→</span></span>
+
+      {variant !== 'dashboard' && section.tags && (
+        <div className="tag-list">
+          {section.tags.map(tag => <span className="tag" key={tag}>{tag}</span>)}
+        </div>
+      )}
+
+      <span className="tile-link">Explorer <span aria-hidden>→</span></span>
     </button>
   )
 }
@@ -76,7 +86,7 @@ function App(){
             <span className="section-kicker">TABLEAU DE BORD</span>
             <h2>Suivre, retrouver, s’orienter</h2>
           </div>
-          <p>Les accès de pilotage et de consultation restent volontairement plus compacts.</p>
+          <p>Des accès rapides pour piloter la préparation et retrouver les ressources.</p>
         </div>
         <div className="dashboard-grid">
           {dashboard.map(s => <Tile key={s.id} section={s} variant="dashboard" onOpen={setActive} />)}
@@ -102,7 +112,7 @@ function App(){
             <span className="section-kicker">S’ENTRAÎNER</span>
             <h2>Mobiliser les connaissances</h2>
           </div>
-          <p>QCM, cas, analyses et entraînements proches des attendus du concours.</p>
+          <p>Des exercices progressifs jusqu’aux situations proches du concours.</p>
         </div>
         <div className="mosaic-grid practice-grid">
           {practice.map(s => <Tile key={s.id} section={s} onOpen={setActive} />)}
