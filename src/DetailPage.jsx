@@ -79,6 +79,22 @@ function AuthorDirectory({keys}){
   const [selected,setSelected]=useState(null)
   const selectedProfile=selected?authorProfiles[selected]:null
 
+  useEffect(()=>{
+    if(!selectedProfile) return
+    const previousOverflow=document.body.style.overflow
+    document.body.style.overflow='hidden'
+
+    const onKeyDown=(event)=>{
+      if(event.key==='Escape') setSelected(null)
+    }
+    window.addEventListener('keydown',onKeyDown)
+
+    return ()=>{
+      document.body.style.overflow=previousOverflow
+      window.removeEventListener('keydown',onKeyDown)
+    }
+  },[selectedProfile])
+
   return <section className="content-block author-directory">
     <div className="section-label-row author-directory-heading">
       <div>
@@ -95,8 +111,8 @@ function AuthorDirectory({keys}){
         return <button
           className={'author-card '+(selected===key?'active':'')}
           key={key}
-          onClick={()=>setSelected(selected===key?null:key)}
-          aria-expanded={selected===key}
+          onClick={()=>setSelected(key)}
+          aria-haspopup="dialog"
         >
           <span className="author-card-icon" aria-hidden>{author.icon}</span>
           <span className="author-card-copy">
@@ -104,55 +120,70 @@ function AuthorDirectory({keys}){
             <small>{author.years}</small>
             <span>{author.oneLine}</span>
           </span>
-          <span className="author-card-arrow" aria-hidden>{selected===key?'↑':'→'}</span>
+          <span className="author-card-arrow" aria-hidden>→</span>
         </button>
       })}
     </div>
 
-    {selectedProfile&&<article className="author-profile-panel">
-      <div className="author-profile-head">
-        <div className="author-profile-icon" aria-hidden>{selectedProfile.icon}</div>
-        <div>
-          <span className="section-kicker">FICHE AUTEUR</span>
-          <h3>{selectedProfile.name}</h3>
-          <p>{selectedProfile.oneLine}</p>
+    {selectedProfile&&<div
+      className="author-modal-backdrop"
+      onMouseDown={(event)=>{if(event.target===event.currentTarget)setSelected(null)}}
+      role="presentation"
+    >
+      <article
+        className="author-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="author-modal-title"
+      >
+        <div className="author-modal-toolbar">
+          <span className="author-modal-kicker">FICHE AUTEUR</span>
+          <button className="author-modal-close" onClick={()=>setSelected(null)} aria-label="Fermer la fiche auteur">×</button>
         </div>
-        <button className="author-close" onClick={()=>setSelected(null)} aria-label="Fermer la fiche">×</button>
-      </div>
 
-      <div className="author-profile-grid">
-        <section>
-          <h4>Concepts à retenir</h4>
-          <div className="author-chip-list">{selectedProfile.concepts.map(item=><span key={item}>{item}</span>)}</div>
-        </section>
-        <section>
-          <h4>Quand le mobiliser</h4>
-          <div className="author-use-list">{selectedProfile.useCases.map(item=><div key={item}>→ {item}</div>)}</div>
-        </section>
-      </div>
+        <div className="author-profile-head">
+          <div className="author-profile-icon" aria-hidden>{selectedProfile.icon}</div>
+          <div>
+            <span className="section-kicker">{selectedProfile.years}</span>
+            <h3 id="author-modal-title">{selectedProfile.name}</h3>
+            <p>{selectedProfile.oneLine}</p>
+          </div>
+        </div>
 
-      <div className="author-note-grid">
-        <div className="author-note exam">
-          <span>CONCOURS</span>
-          <p>{selectedProfile.exam}</p>
+        <div className="author-profile-grid">
+          <section>
+            <h4>Concepts à retenir</h4>
+            <div className="author-chip-list">{selectedProfile.concepts.map(item=><span key={item}>{item}</span>)}</div>
+          </section>
+          <section>
+            <h4>Quand le mobiliser</h4>
+            <div className="author-use-list">{selectedProfile.useCases.map(item=><div key={item}>→ {item}</div>)}</div>
+          </section>
         </div>
-        <div className="author-note limits">
-          <span>LIMITES</span>
-          <p>{selectedProfile.limits}</p>
-        </div>
-      </div>
 
-      <div className="author-links">
-        <h4>Pour aller plus loin</h4>
-        <div className="author-link-grid">
-          {selectedProfile.links.map(link=><a key={link.url} href={link.url} target="_blank" rel="noreferrer">
-            <span>{link.type}</span>
-            <strong>{link.label}</strong>
-            <i aria-hidden>↗</i>
-          </a>)}
+        <div className="author-note-grid">
+          <div className="author-note exam">
+            <span>CONCOURS</span>
+            <p>{selectedProfile.exam}</p>
+          </div>
+          <div className="author-note limits">
+            <span>LIMITES</span>
+            <p>{selectedProfile.limits}</p>
+          </div>
         </div>
-      </div>
-    </article>}
+
+        <div className="author-links">
+          <h4>Pour aller plus loin</h4>
+          <div className="author-link-grid">
+            {selectedProfile.links.map(link=><a key={link.url} href={link.url} target="_blank" rel="noreferrer">
+              <span>{link.type}</span>
+              <strong>{link.label}</strong>
+              <i aria-hidden>↗</i>
+            </a>)}
+          </div>
+        </div>
+      </article>
+    </div>}
   </section>
 }
 
