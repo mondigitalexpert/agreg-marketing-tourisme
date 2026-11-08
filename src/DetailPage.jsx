@@ -293,7 +293,7 @@ export default function DetailPage({
         {item.formula&&<div className="formula-box">{item.formula}</div>}
         {item.example&&<div className="example-box"><strong>Exemple</strong><span>{item.example}</span></div>}
       </article>
-      {deepVisuals.filter(v=>v.after===index).map((visual,i)=><DeepLearningVisual key={visual.title+i} visual={visual} pageKey={pageKey}/>)}
+      {deepVisuals.filter(v=>v.after===index).map((visual,i)=><DeepLearningVisual key={visual.title+i} visual={visual} pageKey={pageKey} page={page}/>)}
     </React.Fragment>)}</div></section>}
 
     {page.recap?.length>0&&<section className="content-block recap-block"><h3>Synthèse du chapitre</h3><div className="recap-grid">{page.recap.map(item=><div className="recap-item" key={item}><span>✓</span><p>{item}</p></div>)}</div></section>}
