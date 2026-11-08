@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './styles.css'
 import { contentPages } from './content'
 import DetailPage from './DetailPage'
-import { PROFILES, loadActiveProfile, saveActiveProfile } from './progressStore'
+import { PROFILES, ProgressView, loadActiveProfile, saveActiveProfile, useProgress } from './progressStore'
 import { isSupabaseConfigured } from './supabaseClient'
 import { claimProfile, fetchProfile, getSession, onAuthChange, requestEmailOtp, signOut, verifyEmailOtp } from './remoteProgress'
 
@@ -66,7 +66,7 @@ const subpages = {
     item('📣','Ressources marketing'), item('🗒️','Mes fiches'), item('⭐','Mes favoris')
   ],
   progression:[
-    item('🧭','Vue d’ensemble'), item('📈','Mes résultats'), item('⚠️','Points faibles'), item('✅','Notions maîtrisées'), item('🔁','À revoir'),
+    item('📈','Mes résultats'), item('⚠️','Points faibles'), item('✅','Notions maîtrisées'), item('🔁','À revoir'),
     item('🕘','Historique QCM'), item('🧩','Erreurs fréquentes'), item('🧳','Cas réalisés'), item('🃏','Flashcards difficiles'), item('⭐','Favoris')
   ]
 }
@@ -197,6 +197,67 @@ function AuthPanel({activeProfile,activeProfileLabel,onProfileChange,session,clo
   </div>
 }
 
+function formatActivityDate(value){
+  if(!value) return ''
+  const date=new Date(value)
+  if(Number.isNaN(date.getTime())) return ''
+  return new Intl.DateTimeFormat('fr-FR',{dateStyle:'medium',timeStyle:'short'}).format(date)
+}
+
+function ResumeCard({activity,onResume}){
+  if(!activity) return null
+  return <section className="resume-card">
+    <div className="resume-icon" aria-hidden>{activity.entryIcon||'↩️'}</div>
+    <div className="resume-copy">
+      <span className="section-kicker">REPRENDRE</span>
+      <h2>{activity.entryTitle}</h2>
+      <p>{activity.sectionTitle}{activity.action?' • '+activity.action:''}</p>
+      {activity.updatedAt&&<small>Dernière activité : {formatActivityDate(activity.updatedAt)}</small>}
+    </div>
+    <button className="resume-button" onClick={onResume}>Reprendre <span aria-hidden>→</span></button>
+  </section>
+}
+
+function ProgressDashboard({section,entries,progress,syncState,profileLabel,onBack,onOpen}){
+  return <div className="progress-dashboard-page">
+    <button className="back" onClick={onBack}>← Retour à l’accueil</button>
+    <section className="section-head" style={{'--tile':section.color}}>
+      <span className="icon big">{section.icon}</span>
+      <div><h2>{section.title}</h2><p>Vue d’ensemble immédiate du profil {profileLabel}, puis accès au détail des résultats et priorités de révision.</p></div>
+    </section>
+
+    <section className="content-block progress-overview-direct">
+      <div className="progress-overview-heading">
+        <div><span className="section-kicker">VUE D’ENSEMBLE</span><h3>Où en est {profileLabel} ?</h3></div>
+        <span className={'sync-chip '+syncState}>{syncState==='cloud'?'☁ Synchronisé':syncState==='loading'?'↻ Synchronisation':syncState==='error'?'⚠ Copie locale':'Appareil local'}</span>
+      </div>
+      <ProgressView type="overview" progress={progress} profileLabel={profileLabel} syncState={syncState}/>
+    </section>
+
+    <section className="content-block">
+      <div className="section-label-row progress-detail-heading">
+        <div><span className="section-kicker">DÉTAIL</span><h2>Analyser la progression</h2></div>
+        <p>Résultats, erreurs, notions maîtrisées et éléments à revoir.</p>
+      </div>
+      <main className="subgrid">
+        {entries.map((entry,i)=><button
+          className="subtile"
+          key={entry.title}
+          style={{'--tile':section.color}}
+          onClick={()=>onOpen(entry.title)}
+        >
+          <span className="sub-icon" aria-hidden>{entry.icon}</span>
+          <span className="subtile-copy">
+            <span className="sub-number">{String(i+1).padStart(2,'0')}</span>
+            <span className="sub-title">{entry.title}</span>
+          </span>
+          <span className="sub-arrow" aria-hidden>→</span>
+        </button>)}
+      </main>
+    </section>
+  </div>
+}
+
 function App(){
   const [active, setActive] = useState(null)
   const [activeSub, setActiveSub] = useState(null)
@@ -206,6 +267,8 @@ function App(){
   const [authBusy,setAuthBusy] = useState(false)
   const [authError,setAuthError] = useState('')
   const activeProfileLabel = PROFILES.find(p=>p.id===activeProfile)?.label || 'Rachid'
+  const progressUserId = cloudProfile ? (session?.user?.id || null) : null
+  const [progress,updateProgress,syncState] = useProgress(activeProfile,progressUserId)
 
   const changeProfile=(profile)=>{
     if(session) return
@@ -323,6 +386,25 @@ function App(){
   const learn = sections.filter(s => s.group === 'learn')
   const practice = sections.filter(s => s.group === 'practice')
 
+  const lastActivity=progress.lastActivity
+  const canResume=Boolean(
+    lastActivity &&
+    sections.some(s=>s.id===lastActivity.sectionId) &&
+    subpages[lastActivity.sectionId]?.some(e=>e.title===lastActivity.entryTitle)
+  )
+  const resumeActivity=canResume?lastActivity:null
+
+  const resumeLastActivity=()=>{
+    if(!resumeActivity) return
+    setActive(resumeActivity.sectionId)
+    setActiveSub(resumeActivity.entryTitle)
+  }
+
+  const totalAnswered=Object.values(progress.quiz||{}).reduce((sum,r)=>sum+(r.answered||0),0)
+  const totalCorrect=Object.values(progress.quiz||{}).reduce((sum,r)=>sum+(r.correct||0),0)
+  const score=totalAnswered?Math.round(totalCorrect/totalAnswered*100):0
+  const progressMeta=totalAnswered?score+'% QCM':'Profil : '+activeProfileLabel
+
   return <div className="app-shell">
     <header className="hero">
       <div>
@@ -361,9 +443,11 @@ function App(){
           <p>Des accès rapides pour piloter la préparation et retrouver les ressources.</p>
         </div>
         <div className="dashboard-grid">
-          {dashboard.map(s => <Tile key={s.id} section={s.id==='progression'?{...s,meta:'Profil : '+activeProfileLabel}:s} variant="dashboard" onOpen={(id)=>{setActive(id);setActiveSub(null)}} />)}
+          {dashboard.map(s => <Tile key={s.id} section={s.id==='progression'?{...s,meta:progressMeta}:s} variant="dashboard" onOpen={(id)=>{setActive(id);setActiveSub(null)}} />)}
         </div>
       </section>
+
+      {resumeActivity&&<ResumeCard activity={resumeActivity} onResume={resumeLastActivity}/>}
 
       <section className="workspace-section learn-zone">
         <div className="section-label-row">
@@ -390,14 +474,23 @@ function App(){
           {practice.map(s => <Tile key={s.id} section={s} onOpen={(id)=>{setActive(id);setActiveSub(null)}} />)}
         </div>
       </section>
-    </> : activeSub && selectedEntry ? <DetailPage
+    </> : active==='progression' && !activeSub ? <ProgressDashboard
+      section={section}
+      entries={subpages.progression}
+      progress={progress}
+      syncState={syncState}
+      profileLabel={activeProfileLabel}
+      onBack={()=>{setActive(null);setActiveSub(null)}}
+      onOpen={setActiveSub}
+    /> : activeSub && selectedEntry ? <DetailPage
       key={activeProfile+'|'+active+'|'+activeSub}
       section={section}
       entry={selectedEntry}
       onBack={()=>setActiveSub(null)}
-      profile={activeProfile}
       profileLabel={activeProfileLabel}
-      userId={session?.user?.id || null}
+      progress={progress}
+      updateProgress={updateProgress}
+      syncState={syncState}
     /> : <>
       <button className="back" onClick={()=>{setActive(null);setActiveSub(null)}}>← Retour à l’accueil</button>
       <section className="section-head" style={{'--tile':section.color}}>
