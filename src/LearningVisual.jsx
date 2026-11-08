@@ -2,62 +2,87 @@ import React, { useEffect, useState } from 'react'
 import { getVisualForPage } from './visuals'
 import { findInteractiveDetail } from './content/modelDetails'
 
-function Flow({visual}){
+function Flow({visual,getDetail,onInspect}){
   return <div className={'visual-flow '+(visual.kind==='cycle'?'cycle':'')}>
     {visual.nodes.map((node,i)=><React.Fragment key={node+i}>
-      <div className="visual-node"><span>{String(i+1).padStart(2,'0')}</span><strong>{node}</strong></div>
+      <Inspectable className="visual-node" label={node} detail={getDetail(node)} onInspect={onInspect}>
+        <span>{String(i+1).padStart(2,'0')}</span><strong>{node}</strong><span className="model-more">Explorer →</span>
+      </Inspectable>
       {i<visual.nodes.length-1&&<div className="visual-arrow" aria-hidden>→</div>}
     </React.Fragment>)}
   </div>
 }
 
-function Triangle({visual}){
+function Triangle({visual,getDetail,onInspect}){
   return <div className="visual-triangle">
-    <div className="triangle-node top">{visual.nodes[0]}</div>
-    <div className="triangle-node left">{visual.nodes[1]}</div>
-    <div className="triangle-node right">{visual.nodes[2]}</div>
-    <div className="triangle-center">{visual.center}</div>
+    {visual.nodes.map((node,i)=><Inspectable
+      key={node}
+      className={'triangle-node '+(i===0?'top':i===1?'left':'right')}
+      label={node} detail={getDetail(node)} onInspect={onInspect}
+    >{node}<span className="model-more">Explorer →</span></Inspectable>)}
+    <Inspectable className="triangle-center" label={visual.center} detail={getDetail(visual.center)} onInspect={onInspect}>
+      {visual.center}<span className="model-more">Explorer →</span>
+    </Inspectable>
   </div>
 }
 
-function Split({visual}){
+function Split({visual,getDetail,onInspect}){
+  const side=(items)=><div className="split-side">
+    {items.map((x,i)=><Inspectable key={x} label={x} detail={getDetail(x)} onInspect={onInspect} className={i===0?'split-primary':''}>
+      {i===0?<strong>{x}</strong>:<span>{x}</span>}{<span className="model-more">Explorer →</span>}
+    </Inspectable>)}
+  </div>
   return <div className="visual-split">
-    <div className="split-side"><strong>{visual.left[0]}</strong>{visual.left.slice(1).map(x=><span key={x}>{x}</span>)}</div>
-    <div className="split-center">{visual.center}</div>
-    <div className="split-side"><strong>{visual.right[0]}</strong>{visual.right.slice(1).map(x=><span key={x}>{x}</span>)}</div>
+    {side(visual.left)}
+    <Inspectable className="split-center" label={visual.center} detail={getDetail(visual.center)} onInspect={onInspect}>{visual.center}</Inspectable>
+    {side(visual.right)}
   </div>
 }
 
-function Funnel({visual}){
+function Funnel({visual,getDetail,onInspect}){
   return <div className="visual-funnel">
-    {visual.nodes.map((node,i)=><div className="funnel-step" key={node} style={{'--level':i}}><span>{node}</span></div>)}
+    {visual.nodes.map((node,i)=><Inspectable className="funnel-step" label={node} detail={getDetail(node)} onInspect={onInspect} key={node}>
+      <span>{node}</span><small>Explorer →</small>
+    </Inspectable>)}
   </div>
 }
 
-function Layers({visual}){
+function Layers({visual,getDetail,onInspect}){
   return <div className="visual-layers">
-    {visual.nodes.map((node,i)=><div className="layer-row" key={node}><span>{i+1}</span><strong>{node}</strong></div>)}
+    {visual.nodes.map((node,i)=><Inspectable className="layer-row" label={node} detail={getDetail(node)} onInspect={onInspect} key={node}>
+      <span>{i+1}</span><strong>{node}</strong><small>Explorer →</small>
+    </Inspectable>)}
   </div>
 }
 
-function Concept({visual}){
+function Concept({visual,getDetail,onInspect}){
   return <div className="visual-concept">
     <div className="concept-center">À retenir</div>
-    <div className="concept-nodes">{visual.nodes.map((node,i)=><div className="concept-node" key={node+i}>{node}</div>)}</div>
+    <div className="concept-nodes">{visual.nodes.map((node,i)=><Inspectable className="concept-node" label={node} detail={getDetail(node)} onInspect={onInspect} key={node+i}>
+      {node}<span className="model-more">Explorer →</span>
+    </Inspectable>)}</div>
   </div>
 }
 
-function SourcePyramid({visual}){
+function SourcePyramid({visual,getDetail,onInspect}){
   return <div className="source-pyramid">
-    {visual.nodes.map((node,i)=><div className={'source-level level-'+i} key={node}>{node}</div>)}
+    {visual.nodes.map((node,i)=><Inspectable className={'source-level level-'+i} label={node} detail={getDetail(node)} onInspect={onInspect} key={node}>
+      {node}<span className="model-more">Explorer →</span>
+    </Inspectable>)}
   </div>
 }
 
-function CaseVisual({visual}){
+function CaseVisual({visual,getDetail,onInspect}){
   return <div className="case-visual">
-    <div className="case-metrics">{visual.metrics.map(([value,label])=><div className="case-metric" key={value+label}><strong>{value}</strong><span>{label}</span></div>)}</div>
-    <div className="case-tension"><span>ENJEU CENTRAL</span><strong>{visual.tension}</strong></div>
-    <div className="case-levers">{visual.levers.map((lever,i)=><div key={lever}><span>{String(i+1).padStart(2,'0')}</span>{lever}</div>)}</div>
+    <div className="case-metrics">{visual.metrics.map(([value,label])=><Inspectable className="case-metric" label={label} detail={getDetail(label)} onInspect={onInspect} key={value+label}>
+      <strong>{value}</strong><span>{label}</span><small>Contexte →</small>
+    </Inspectable>)}</div>
+    <Inspectable className="case-tension" label="Enjeu central" detail={getDetail("Enjeu central")} onInspect={onInspect}>
+      <span>ENJEU CENTRAL</span><strong>{visual.tension}</strong><small>Explorer →</small>
+    </Inspectable>
+    <div className="case-levers">{visual.levers.map((lever,i)=><Inspectable label={lever} detail={getDetail(lever)} onInspect={onInspect} key={lever}>
+      <span>{String(i+1).padStart(2,'0')}</span>{lever}<small>Explorer →</small>
+    </Inspectable>)}</div>
   </div>
 }
 
@@ -186,6 +211,35 @@ function DeepBody({visual,getDetail,onInspect}){
   return null
 }
 
+function buildFallbackDetail(page,visual,label){
+  const sections=page?.sections||[]
+  const normalized=String(label||'').toLowerCase()
+  const tokens=normalized.split(/[^a-zà-ÿ0-9]+/i).filter(x=>x.length>3)
+  let section=sections.find(item=>{
+    const hay=(String(item.heading||'')+' '+String(item.text||'')+' '+(item.bullets||[]).join(' ')).toLowerCase()
+    return tokens.some(token=>hay.includes(token))
+  })
+  if(!section&&Number.isInteger(visual?.after)) section=sections[visual.after]
+  if(!section) section=sections[0]
+  const clues=(section?.bullets?.length?section.bullets:page?.keyPoints||[]).slice(0,5)
+  const interpretation=visual?.caption||section?.example||section?.formula||'Relier cet élément au problème décisionnel, puis vérifier si les données du cas confirment ou nuancent le mécanisme.'
+  return {
+    definition:section?.text||page?.intro||('« '+label+' » est un élément du cadre présenté sur cette fiche.'),
+    questions:[
+      'Que signifie concrètement « '+label+' » dans le cas étudié ?',
+      'Quels faits permettent de l’étayer ou de le contester ?',
+      'Quelle conséquence cela produit-il sur la décision marketing ?'
+    ],
+    data:clues.length?clues:['Données du cas','Indicateurs de performance','Comportements observés','Comparaisons pertinentes'],
+    interpretation,
+    marketing:section?.example||'Appliquer cet élément à une organisation en reliant un fait observé à un mécanisme marketing, puis à une décision.',
+    tourism:'Dans un cas touristique, vérifier l’effet sur le client, l’expérience, la capacité, la distribution ou le territoire selon le sujet.',
+    decision:'Formuler une conséquence explicite : maintenir, corriger, tester, segmenter, investir ou réduire une dépendance.',
+    errors:['Réciter le modèle sans l’appliquer au cas','Conclure sans donnée','Confondre fait, interprétation et hypothèse'],
+    source:page?.sources?.find(source=>source.url)?.url||null
+  }
+}
+
 function ModelDetailModal({title,label,detail,onClose}){
   useEffect(()=>{
     if(!detail) return
@@ -224,15 +278,15 @@ function ModelDetailModal({title,label,detail,onClose}){
   </div>
 }
 
-export function DeepLearningVisual({visual,pageKey}){
+export function DeepLearningVisual({visual,pageKey,page}){
   const [selected,setSelected]=useState(null)
   if(!visual) return null
-  const getDetail=(label)=>findInteractiveDetail(pageKey,visual.title,label)
+  const getDetail=(label)=>findInteractiveDetail(pageKey,visual.title,label)||buildFallbackDetail(page,visual,label)
   const selectedDetail=selected?getDetail(selected):null
   return <aside className="deep-learning-visual">
     <div className="deep-visual-head">
       <div><span className="section-kicker">SCHÉMA D’ANCRAGE</span><h4>{visual.title}</h4></div>
-      {Object.keys(interactiveModelDetailsSafe(pageKey,visual.title)).length>0&&<span className="interactive-hint">Cliquer pour explorer</span>}
+      <span className="interactive-hint">Cliquer pour explorer</span>
     </div>
     <DeepBody visual={visual} getDetail={getDetail} onInspect={setSelected}/>
     {visual.caption&&<p className="deep-visual-caption">{visual.caption}</p>}
@@ -240,27 +294,29 @@ export function DeepLearningVisual({visual,pageKey}){
   </aside>
 }
 
-function interactiveModelDetailsSafe(pageKey,title){
-  const labels=['Politique','Économique','Socioculturel','Technologique','Environnemental','Légal','Forces','Faiblesses','Opportunités','Menaces','Attitude','Norme subjective','Contrôle perçu','Intention','Comportement','Sociodémographique','Géographique','Comportemental','Bénéfices recherchés','Psychographique','Notoriété','Qualité perçue','Associations','Préférence','Fidélité','Magasin','Site','App','Réseaux sociaux','Centre de contact','Plateforme','Client','Personnel en contact','Support physique','Organisation interne','Systèmes','Back-office','Utilisateur','Prescripteur','Acheteur','Décideur','Influenceur','Gatekeeper','Objectif fixé','Prévoir','Choisir les moyens','Moyens disponibles','Agir','Construire les possibles','Explorer','Mesurer','Expliquer un effet','Contextualiser','Formuler H0','Choisir le test','Calculer','Comparer au seuil','Conclure avec prudence','Finalité','Base légale','Minimisation','Information','Durée','Droits']
-  return Object.fromEntries(labels.filter(label=>findInteractiveDetail(pageKey,title,label)).map(label=>[label,true]))
-}
-
 export default function LearningVisual({pageKey,sectionId,page}){
   const visual=getVisualForPage(pageKey,sectionId,page)
+  const [selected,setSelected]=useState(null)
   if(!visual) return null
+  const getDetail=(label)=>findInteractiveDetail(pageKey,visual.title,label)||buildFallbackDetail(page,visual,label)
+  const detail=selected?getDetail(selected):null
 
-  let body=<Flow visual={visual}/>
-  if(visual.kind==='triangle') body=<Triangle visual={visual}/>
-  if(visual.kind==='split') body=<Split visual={visual}/>
-  if(visual.kind==='funnel') body=<Funnel visual={visual}/>
-  if(visual.kind==='layers') body=<Layers visual={visual}/>
-  if(visual.kind==='concept') body=<Concept visual={visual}/>
-  if(visual.kind==='source') body=<SourcePyramid visual={visual}/>
-  if(visual.kind==='case') body=<CaseVisual visual={visual}/>
+  let body=<Flow visual={visual} getDetail={getDetail} onInspect={setSelected}/>
+  if(visual.kind==='triangle') body=<Triangle visual={visual} getDetail={getDetail} onInspect={setSelected}/>
+  if(visual.kind==='split') body=<Split visual={visual} getDetail={getDetail} onInspect={setSelected}/>
+  if(visual.kind==='funnel') body=<Funnel visual={visual} getDetail={getDetail} onInspect={setSelected}/>
+  if(visual.kind==='layers') body=<Layers visual={visual} getDetail={getDetail} onInspect={setSelected}/>
+  if(visual.kind==='concept') body=<Concept visual={visual} getDetail={getDetail} onInspect={setSelected}/>
+  if(visual.kind==='source') body=<SourcePyramid visual={visual} getDetail={getDetail} onInspect={setSelected}/>
+  if(visual.kind==='case') body=<CaseVisual visual={visual} getDetail={getDetail} onInspect={setSelected}/>
 
   return <section className="learning-visual">
-    <div className="learning-visual-head"><span className="section-kicker">ANCRAGE VISUEL</span><h3>{visual.title}</h3></div>
+    <div className="learning-visual-head">
+      <div><span className="section-kicker">ANCRAGE VISUEL</span><h3>{visual.title}</h3></div>
+      <span className="interactive-hint">Cliquer pour explorer</span>
+    </div>
     {body}
     {visual.caption&&<p className="visual-caption">{visual.caption}</p>}
+    <ModelDetailModal title={visual.title} label={selected} detail={detail} onClose={()=>setSelected(null)}/>
   </section>
 }
