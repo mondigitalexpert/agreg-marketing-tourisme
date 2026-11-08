@@ -136,3 +136,51 @@ export const tourismExerciseMeta={
   'tourisme|Événementiel':{objective:'Évaluer un événement par performance commerciale et expérience.',time:'15 min',difficulty:'★★☆',skills:['Événementiel','KPI','Expérience'],step:4},
   'tourisme|Crises & tourisme':{objective:'Prioriser les premières décisions marketing sans spéculer.',time:'15–20 min',difficulty:'★★★',skills:['Crise','Confiance','Priorisation'],step:7}
 }
+
+
+export const contestPedagogy={
+  'concours|Épreuves 2027':{
+    recap:['Trois écrits d’admissibilité et trois oraux d’admission.','L’option C Marketing structure l’étude de cas écrite et le cas pratique oral.','Droit, économie et management restent indispensables.'],
+    examTips:['Construire un calendrier qui ne surinvestit pas le seul marketing.','S’entraîner en conditions de durée réelle.','Vérifier les règles officielles à chaque session.']
+  },
+  'concours|Programme officiel':{
+    recap:['Le programme est une checklist de compétences, pas une liste de définitions.','L’option C combine stratégie, mix, études, outils quantitatifs et droit appliqué.','Le tourisme reste un terrain d’application parmi d’autres.'],
+    examTips:['Pour chaque ligne du programme : savoir définir, expliquer, appliquer et illustrer.','Repérer les thèmes encore sans entraînement.','Conserver le programme officiel comme référence de périmètre.']
+  },
+  'concours|Option C Marketing':{
+    recap:['L’épreuve exige théorie, calcul, données, diagnostic et recommandations.','Le sujet 2026 confirme la variété des tâches.','La mobilisation des concepts doit dépasser la paraphrase des annexes.'],
+    examTips:['Préparer les notions avec un exemple hors tourisme et un exemple tourisme.','Travailler régulièrement les calculs.','Justifier le choix des modèles utilisés.']
+  },
+  'concours|Attentes du jury':{
+    recap:['Le jury valorise précision, actualisation académique et interprétation des calculs.','Une recommandation doit être contextualisée et justifiée.','La récitation d’auteurs ne suffit pas.'],
+    examTips:['Après chaque cas, utiliser une grille : définition, modèle, données, calculs, diagnostic, recommandations, sources.','Comparer une réponse descriptive à une réponse analytique.','Identifier les sous-questions non traitées.']
+  },
+  'concours|Méthodologie':{
+    recap:['Planifier, mémoriser, veiller et s’entraîner de manière répétée.','Construire des dossiers de notions avec théorie, exemples et actualité.','Alterner entraînements courts et simulations longues.'],
+    examTips:['Ne pas transposer mécaniquement une méthodologie d’agrégation interne.','Utiliser les conseils généraux du support fourni, pas ses règles d’épreuve.','Réviser avec récupération active plutôt qu’en relecture passive.']
+  },
+  'concours|Sujets officiels':{
+    recap:['Les sujets officiels calibrent le niveau réel de l’épreuve.','Le sujet 2026 Coopérative U mobilise stratégie, calcul, local, digital et parcours.','La correction doit commencer après une vraie tentative.'],
+    examTips:['Travailler d’abord sans corrigé.','Chronométrer lecture, calcul, plan et rédaction.','Comparer ensuite la qualité du raisonnement, pas seulement les réponses finales.']
+  },
+  'concours|Rapports de jury':{
+    recap:['Les rapports constituent un cahier des charges indirect du concours.','Le dernier rapport externe disponible au 08/11/2026 reste 2025.','Les remarques doivent être transformées en critères d’autoévaluation.'],
+    examTips:['Extraire les erreurs récurrentes et en faire une checklist.','Mettre à jour la fiche dès publication d’un nouveau rapport.','Distinguer conseils spécifiques à l’option C et remarques transversales.']
+  },
+  'concours|Pièges à éviter':{
+    recap:['Le principal risque est de réciter au lieu d’analyser.','Une donnée sans source ni périmètre affaiblit la copie.','Une recommandation générique n’est pas une réponse au cas.'],
+    examTips:['Avant de rendre : supprimer les passages applicables à n’importe quelle entreprise.','Vérifier que chaque calcul est interprété.','Signaler l’incertitude au lieu de l’inventer.']
+  }
+}
+
+export const watchPedagogy={
+  'veille|Marketing':{recap:['Une veille utile relie un fait daté à un concept.','La nouveauté n’est pas une preuve d’importance.'],examTips:['Conserver source, date, périmètre et limite.','Formuler une phrase d’utilisation possible dans une copie.']},
+  'veille|Tourisme':{recap:['Croiser conjoncture, entreprises et acteurs publics.','Séparer tendances sectorielles et communication d’entreprise.'],examTips:['Mettre à jour les chiffres avant usage.','Éviter de généraliser une entreprise au secteur.']},
+  'veille|Consommation':{recap:['Une tendance médiatique doit être confrontée à une donnée.','Attitude déclarée et comportement effectif peuvent diverger.'],examTips:['Chercher une source officielle qui confirme ou nuance.','Relier la tendance à un mécanisme marketing.']},
+  'veille|Digital & IA':{recap:['Partir de l’usage et de la valeur, pas du buzz technologique.','Évaluer qualité des données, erreurs et adoption.'],examTips:['Donner un KPI de valeur.','Distinguer démonstration, pilote et industrialisation.']},
+  'veille|Environnement':{recap:['Distinguer engagement, action et performance.','Un indicateur environnemental a toujours un périmètre.'],examTips:['Éviter les allégations absolues.','Comparer évolution et niveau absolu si possible.']},
+  'veille|Réglementation':{recap:['Une procédure en cours n’est pas une condamnation.','Le droit peut modifier directement le mix marketing.'],examTips:['Citer l’autorité et la date.','Distinguer règle, recommandation et enquête.']},
+  'veille|Entreprises à suivre':{recap:['Suivre quelques entreprises en profondeur produit de meilleurs exemples.','Un même acteur peut illustrer plusieurs notions.'],examTips:['Conserver un historique daté.','Noter ce qui est déclaré par l’entreprise et ce qui est vérifié indépendamment.']},
+  'veille|Chiffres clés':{recap:['Un chiffre n’est utile qu’avec unité, période, périmètre et source.','Les chiffres d’entreprise ne sont pas des statistiques sectorielles.'],examTips:['Écrire la date dans la fiche.','Interpréter le chiffre avant de le mémoriser.']},
+  'veille|Relier une actualité à une notion':{recap:['Fait → source → notion → mécanisme → limite.','L’exemple doit éclairer un raisonnement, pas remplacer la théorie.'],examTips:['Préparer une phrase de mobilisation en copie.','Conserver au moins une limite ou donnée manquante.']}
+}
