@@ -166,3 +166,4 @@ export const contestPages = {
       {type:'Ressource fournie',name:'Cours INSPE Agreg Methodo Partie 2.pdf',note:'Utilisé uniquement comme appui méthodologique.'}
     ]
   }
+}
