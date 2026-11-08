@@ -4,6 +4,7 @@ import { ProgressView } from './progressStore'
 import LearningVisual, { DeepLearningVisual } from './LearningVisual'
 import { getDeepVisualsForPage } from './visuals'
 import { authorProfiles } from './content/authors'
+import { CorrectionsBlock, MediaResourcesBlock } from './StudySupport'
 
 function QuizBlock({items,pageKey,progress,onProgress,activity}){
   const stored=progress.quiz?.[pageKey]?.answers||{}
@@ -275,6 +276,10 @@ export default function DetailPage({
     {page.recap?.length>0&&<section className="content-block recap-block"><h3>Synthèse du chapitre</h3><div className="recap-grid">{page.recap.map(item=><div className="recap-item" key={item}><span>✓</span><p>{item}</p></div>)}</div></section>}
 
     {page.examTips?.length>0&&<section className="content-block exam-block"><h3>À savoir faire au concours</h3><div className="exam-list">{page.examTips.map((tip,i)=><div className="exam-item" key={tip}><span>{String(i+1).padStart(2,'0')}</span><p>{tip}</p></div>)}</div></section>}
+
+    <CorrectionsBlock items={page.corrections||[]}/>
+    <MediaResourcesBlock pageKey={pageKey} page={page}/>
+
     {page.quiz?.length>0&&<section className="content-block"><h3>S’entraîner</h3><QuizBlock items={page.quiz} pageKey={pageKey} progress={progress} onProgress={updateProgress} activity={activity}/></section>}
     {page.flashcards?.length>0&&<section className="content-block"><h3>Flashcards</h3><FlashcardBlock items={page.flashcards} pageKey={pageKey} progress={progress} onProgress={updateProgress} activity={activity}/></section>}
     {page.progressType&&<section className="content-block"><h3>Données enregistrées</h3><ProgressView type={page.progressType} progress={progress} profileLabel={profileLabel} syncState={syncState}/></section>}
