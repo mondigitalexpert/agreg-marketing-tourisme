@@ -12,6 +12,12 @@ export function CorrectionsBlock({items=[]}){
       <p>Il peut exister plusieurs bonnes réponses. Les propositions ci-dessous montrent un raisonnement possible et les éléments attendus.</p>
     </div>
 
+    <div className="correction-framework">
+      <div><strong>1. Repérer</strong><span>Les faits, données et mots-clés de la consigne.</span></div>
+      <div><strong>2. Choisir</strong><span>Les notions ou modèles qui expliquent réellement le problème.</span></div>
+      <div><strong>3. Appliquer</strong><span>Le cadre au cas, sans réciter le cours.</span></div>
+      <div><strong>4. Justifier</strong><span>Les recommandations par les données, mécanismes et KPI.</span></div>
+    </div>
     <div className="correction-list">
       {items.map((item,index)=><details className="correction-item" key={item.title+index}>
         <summary>
@@ -22,6 +28,10 @@ export function CorrectionsBlock({items=[]}){
         <div className="correction-body">
           {item.text&&<p>{item.text}</p>}
           {item.bullets?.length>0&&<ul>{item.bullets.map(bullet=><li key={bullet}>{bullet}</li>)}</ul>}
+          <div className="correction-selfcheck">
+            <strong>Autoévaluation</strong>
+            <span>Ai-je expliqué le mécanisme ? Ai-je appliqué la notion au cas ? Ai-je distingué faits et hypothèses ? Mes recommandations sont-elles mesurables ?</span>
+          </div>
         </div>
       </details>)}
     </div>
@@ -70,5 +80,44 @@ export function MediaResourcesBlock({pageKey,page}){
         </article>)}
       </div>
     </div>}
+  </section>
+}
+
+
+export function ExerciseMetaBlock({meta}){
+  if(!meta) return null
+  return <section className="exercise-meta-block" aria-label="Cadre de l'exercice">
+    <div className="exercise-meta-main">
+      <span className="section-kicker">AVANT DE COMMENCER</span>
+      <h3>{meta.objective}</h3>
+    </div>
+    <div className="exercise-meta-grid">
+      <div><span>Temps conseillé</span><strong>{meta.time}</strong></div>
+      <div><span>Difficulté</span><strong>{meta.difficulty}</strong></div>
+      {meta.step&&<div><span>Étape de progression</span><strong>{meta.step}/8</strong></div>}
+      <div className="exercise-skills"><span>Compétences</span><p>{(meta.skills||[]).join(' • ')}</p></div>
+    </div>
+  </section>
+}
+
+export function CaseEvidenceBlock({meta}){
+  if(!meta) return null
+  const groups=[
+    ['Faits établis',meta.facts,'fact'],
+    ['Interprétations possibles',meta.interpretations,'interpretation'],
+    ['Hypothèses à vérifier',meta.hypotheses,'hypothesis']
+  ]
+  return <section className="case-evidence-block">
+    <div className="case-evidence-head">
+      <div><span className="section-kicker">RAISONNER SUR LES PREUVES</span><h3>Faits, interprétations et hypothèses</h3></div>
+      <div className="case-meta-inline"><span>{meta.time}</span><span>{meta.difficulty}</span></div>
+    </div>
+    <div className="case-evidence-grid">
+      {groups.map(([title,items,type])=><article className={'case-evidence-card '+type} key={title}>
+        <h4>{title}</h4>
+        <ul>{(items||[]).map(item=><li key={item}>{item}</li>)}</ul>
+      </article>)}
+    </div>
+    <div className="case-skills">Compétences travaillées : {(meta.skills||[]).join(' • ')}</div>
   </section>
 }
