@@ -43,7 +43,7 @@ export const tourismPages = {
     [
       INSEE_HOTEL,
       {type:'Entreprise',name:'Accor — Résultats financiers 2026',url:'https://group.accor.com/fr/finance/financial-results',checked:'08/11/2026'},
-      {type:'Entreprise',name:'Accor at a glance — juillet 2026',url:'https://assets.group.accor.com/yrj0orc8tx24/5fb92nCdGwFBM4lYRHTevc/940cd987ec64f05a7d81a6f310a7b489/ACCOR_AT_A_GLANCE_JULY_2026.pdf',checked:'08/11/2026'},
+      {type:'Entreprise',name:'Accor at a glance — juillet 2026',url:'https://assets.group.accor.com/yrj0orc8tx24/1gfnIc7BnVhT7xnnVrKMYj/cde89098605135e4610f1e2b48c855b2/Accor_Overview_JULY_2026.pdf',checked:'08/11/2026'},
       {type:'Ressource fournie',name:'Accor et digital.docx',note:'Article de 2015 — cas historique.'},
       {type:'Ressource fournie',name:'OKKO Hôtel.docx',note:'Article de 2015 — cas historique.'}
     ]
@@ -215,7 +215,7 @@ export const tourismPages = {
     [
       {type:'Académique',name:'Payne & Frow — A Strategic Framework for CRM',url:'https://doi.org/10.1509/jmkg.2005.69.4.167'},
       {type:'Académique',name:'Oliver — Whence Consumer Loyalty?',url:'https://doi.org/10.1177/00222429990634s105'},
-      {type:'Entreprise',name:'Accor at a glance — juin 2026',url:'https://assets.group.accor.com/yrj0orc8tx24/5fb92nCdGwFBM4lYRHTevc/940cd987ec64f05a7d81a6f310a7b489/ACCOR_AT_A_GLANCE_JULY_2026.pdf',checked:'08/11/2026'}
+      {type:'Entreprise',name:'Accor at a glance — juin 2026',url:'https://assets.group.accor.com/yrj0orc8tx24/1gfnIc7BnVhT7xnnVrKMYj/cde89098605135e4610f1e2b48c855b2/Accor_Overview_JULY_2026.pdf',checked:'08/11/2026'}
     ]
   ),
 
@@ -300,7 +300,7 @@ export const tourismPages = {
     ],
     [
       {type:'Entreprise',name:'Accor — Résultats semestriels 2026',url:'https://group.accor.com/en/news-stories/accor-half-year-2026-results',checked:'08/11/2026'},
-      {type:'Entreprise',name:'Accor at a glance — juillet 2026',url:'https://assets.group.accor.com/yrj0orc8tx24/5fb92nCdGwFBM4lYRHTevc/940cd987ec64f05a7d81a6f310a7b489/ACCOR_AT_A_GLANCE_JULY_2026.pdf',checked:'08/11/2026'}
+      {type:'Entreprise',name:'Accor at a glance — juillet 2026',url:'https://assets.group.accor.com/yrj0orc8tx24/1gfnIc7BnVhT7xnnVrKMYj/cde89098605135e4610f1e2b48c855b2/Accor_Overview_JULY_2026.pdf',checked:'08/11/2026'}
     ]
   ),
 
