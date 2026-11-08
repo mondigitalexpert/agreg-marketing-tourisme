@@ -14,6 +14,63 @@ const d=(definition,questions,data,interpretation,marketing,tourism,decision,err
 
 export const interactiveModelDetails={
   'cours|Marché & environnement':{
+    'Cinq forces — où se situe le pouvoir ?':{
+      'Rivalité entre concurrents':d(
+        'Intensité avec laquelle les acteurs en place se disputent clients, volumes, prix, innovation ou visibilité.',
+        ['Combien d’acteurs significatifs ?','Le marché croît-il assez pour éviter une guerre de parts ?','Les offres sont-elles différenciées ?','Les coûts fixes poussent-ils à remplir la capacité ?'],
+        ['Parts de marché','Croissance du secteur','Écarts de prix','Capacité','Promotions','Taux de sortie/entrée','Différenciation perçue'],
+        'La rivalité augmente notamment quand la croissance ralentit, que les acteurs sont nombreux ou proches, que la différenciation est faible ou que les coûts fixes sont élevés.',
+        'Sur un marché de téléphonie mature, une forte comparabilité et des coûts de changement faibles peuvent accentuer la rivalité tarifaire.',
+        'Dans l’hôtellerie urbaine, une capacité importante sur des dates creuses peut intensifier la concurrence par le prix et les OTA.',
+        'Renforcer la différenciation, choisir des segments moins exposés, réduire les coûts de comparaison ou améliorer l’efficience.',
+        ['Assimiler concurrence et rivalité sans analyser ses déterminants','Conclure “forte concurrence” à partir du seul nombre d’acteurs','Confondre intensité concurrentielle et attractivité de la demande'],
+        PORTER
+      ),
+      'Nouveaux entrants':d(
+        'Pression créée par la possibilité que de nouveaux acteurs entrent sur le marché et captent clients ou marges.',
+        ['Quelles barrières à l’entrée ?','Faut-il beaucoup de capital, de réputation, de données ou de réseau ?','La réglementation protège-t-elle ou freine-t-elle l’entrée ?'],
+        ['Investissements initiaux','Coûts d’acquisition','Accès aux canaux','Réglementation','Brevets','Effets de réseau','Économies d’échelle'],
+        'La menace est forte lorsque l’entrée est relativement facile et que les acteurs installés disposent de peu d’avantages défendables.',
+        'Une marque digitale peut entrer rapidement sur une niche si la production est externalisée, mais l’acquisition client peut constituer une barrière réelle.',
+        'Une nouvelle plateforme de réservation peut être techniquement facile à créer, mais difficile à imposer face aux effets de réseau et budgets marketing des acteurs dominants.',
+        'Construire des actifs difficiles à copier : marque, relation, données propriétaires, réseau, coûts de changement ou excellence opérationnelle.',
+        ['Confondre possibilité technique d’entrer et viabilité économique','Oublier les barrières de distribution et de réputation'],
+        PORTER
+      ),
+      'Produits ou services de substitution':d(
+        'Solutions différentes capables de satisfaire le même besoin ou de remplir une fonction proche pour le client.',
+        ['Quel besoin fondamental est satisfait ?','Quelles alternatives le client considère-t-il réellement ?','Le rapport valeur/prix du substitut s’améliore-t-il ?'],
+        ['Études de choix','Élasticité croisée','Recherche web','Motifs de non-achat','Arbitrages budgétaires'],
+        'La menace augmente lorsque le client peut changer facilement de solution et que le substitut améliore son rapport bénéfices/coût.',
+        'La visioconférence peut substituer certains déplacements professionnels sans être un “concurrent” direct d’une compagnie aérienne.',
+        'Pour une destination, un parc de loisirs, un city-break ou un séjour chez des proches peuvent se substituer dans l’arbitrage d’un week-end.',
+        'Redéfinir le marché par le besoin, renforcer les bénéfices non substituables ou adapter la proposition de valeur.',
+        ['Limiter les substituts aux concurrents de même catégorie','Définir le marché trop étroitement'],
+        PORTER
+      ),
+      'Pouvoir des clients':d(
+        'Capacité des acheteurs à imposer prix, conditions, qualité ou transfert de valeur à leur avantage.',
+        ['Les clients sont-ils concentrés ?','Peuvent-ils comparer facilement ?','Quel est leur coût de changement ?','Leur achat représente-t-il une part importante du revenu du vendeur ?'],
+        ['Concentration client','Taux de churn','Comparabilité prix','Coût de changement','Part du CA par grands comptes','Sensibilité au prix'],
+        'Le pouvoir client est plus élevé quand les alternatives sont nombreuses, comparables et faciles d’accès, ou lorsque quelques acheteurs représentent une forte part des ventes.',
+        'Un grand distributeur peut négocier fortement avec une petite marque dont il représente une part majeure des débouchés.',
+        'Une entreprise négociant un important contrat hôtelier corporate dispose d’un pouvoir supérieur à celui d’un voyageur occasionnel isolé.',
+        'Différencier, diversifier la clientèle, créer des coûts de changement légitimes ou renforcer la valeur relationnelle.',
+        ['Confondre satisfaction client et pouvoir de négociation','Supposer que le consommateur final a toujours un pouvoir élevé'],
+        PORTER
+      ),
+      'Pouvoir des fournisseurs':d(
+        'Capacité des fournisseurs de ressources essentielles à imposer prix, conditions ou contraintes au secteur.',
+        ['Combien de fournisseurs alternatifs ?','La ressource est-elle différenciée ou rare ?','Quel coût pour changer ?','Le fournisseur peut-il intégrer l’aval ?'],
+        ['Concentration fournisseurs','Part des achats','Délais','Disponibilité','Dépendance technologique','Coûts de changement'],
+        'Le pouvoir est élevé lorsque la ressource est critique, rare, différenciée ou difficile à remplacer.',
+        'Une plateforme technologique propriétaire peut augmenter le coût ou les conditions d’accès d’entreprises dépendantes de son infrastructure.',
+        'Un hôtel très dépendant d’une plateforme de distribution ou d’un système propriétaire peut subir un pouvoir fournisseur au sens large selon le périmètre retenu.',
+        'Diversifier, sécuriser les contrats, standardiser certains composants ou développer des alternatives.',
+        ['Classer mécaniquement tout partenaire comme fournisseur','Oublier que le rôle dépend du périmètre du secteur étudié'],
+        PORTER
+      )
+    },
     'PESTEL — six familles à relier au marketing':{
       'Politique':d(
         'Décisions publiques, stabilité institutionnelle, politiques sectorielles et orientations susceptibles de modifier les conditions d’activité.',
