@@ -17,7 +17,7 @@ export async function requestEmailOtp(email) {
   if (!isSupabaseConfigured) throw new Error('Supabase non configuré')
   const { data, error } = await supabase.auth.signInWithOtp({
     email: email.trim().toLowerCase(),
-    options: { shouldCreateUser: true },
+    options: { shouldCreateUser: true, emailRedirectTo: window.location.origin },
   })
   if (error) throw error
   return data
