@@ -3,12 +3,6 @@ const p=(title,intro,type,keyPoints=[])=>({
 })
 
 export const progressPages = {
-  'progression|Vue d’ensemble': p(
-    'Vue d’ensemble de la préparation',
-    'Synthèse construite uniquement à partir de l’activité réellement enregistrée dans ce navigateur : fiches ouvertes, quiz répondus, favoris, flashcards à revoir et cas réalisés.',
-    'overview',
-    ['Aucune donnée n’est préremplie.','Le suivi reste local au navigateur tant qu’aucun compte n’est activé.','Effacer les données du navigateur efface cette progression.']
-  ),
   'progression|Mes résultats': p(
     'Mes résultats aux QCM',
     'Cette vue regroupe les scores réellement obtenus dans les quiz interactifs.',
