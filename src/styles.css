@@ -239,3 +239,26 @@ footer{display:flex;justify-content:space-between;gap:20px;margin-top:38px;paddi
   .objective-grid,.recap-grid{grid-template-columns:1fr}
   .course-chapter{padding:18px}
 }
+
+.resume-card{margin-top:16px;background:#fff;border:1px solid #dbe4e8;border-radius:20px;padding:17px 18px;display:grid;grid-template-columns:52px 1fr auto;gap:15px;align-items:center;box-shadow:0 8px 24px rgba(26,40,55,.05)}
+.resume-icon{width:50px;height:50px;border-radius:15px;display:grid;place-items:center;background:#eef4f5;border:1px solid #dce6e9;font-size:1.45rem}
+.resume-copy{min-width:0}
+.resume-copy h2{font-size:1.18rem;margin:3px 0 4px;color:#233746;letter-spacing:-.015em}
+.resume-copy p{margin:0;color:#667680;font-size:.84rem}
+.resume-copy small{display:block;margin-top:4px;color:#8a959d;font-size:.72rem}
+.resume-button{border:0;background:#1f3a5f;color:#fff;border-radius:12px;padding:10px 14px;font-weight:850;cursor:pointer;white-space:nowrap}
+.resume-button:hover{filter:brightness(1.06)}
+.progress-overview-direct{background:#f8fafb;border:1px solid #dfe6ea;border-radius:20px;padding:20px}
+.progress-overview-heading{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:13px}
+.progress-overview-heading h3{margin:4px 0 0;font-size:1.3rem;letter-spacing:-.02em}
+.progress-detail-heading{margin-bottom:13px}
+.progress-last-activity{margin-top:12px;background:#fff;border:1px solid #dfe5e9;border-radius:13px;padding:12px 14px;display:grid;gap:3px}
+.progress-last-activity>span{font-size:.68rem;font-weight:850;text-transform:uppercase;letter-spacing:.08em;color:#72818c}
+.progress-last-activity strong{font-size:.92rem;color:#2a3f4e}
+.progress-last-activity small{font-size:.76rem;color:#78858f}
+@media(max-width:680px){
+  .resume-card{grid-template-columns:46px 1fr}
+  .resume-icon{width:44px;height:44px}
+  .resume-button{grid-column:1/-1;width:100%}
+  .progress-overview-heading{flex-direction:column}
+}
