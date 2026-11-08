@@ -1,3 +1,4 @@
+import { casePedagogy } from './pedagogyMeta'
 import { caseCorrections } from './corrections'
 const p=(title,intro,facts,questions,sources)=>({
   label:'Cas réel sourcé',title,intro,keyPoints:facts,
@@ -275,3 +276,5 @@ export const casePages = {
 Object.entries(caseCorrections).forEach(([key,corrections])=>{
   if(casePages[key]) casePages[key].corrections=corrections
 })
+
+Object.entries(casePedagogy).forEach(([key,meta])=>{ if(casePages[key]) casePages[key].caseMeta=meta })
