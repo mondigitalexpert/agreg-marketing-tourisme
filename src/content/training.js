@@ -1,3 +1,4 @@
+import { trainingCorrections } from './corrections'
 const OFFICIAL={type:'Officiel',name:'Programme 2027 — Agrégation externe économie-gestion',url:'https://www.devenirenseignant.gouv.fr/media/20325/download',checked:'08/11/2026'}
 const JURY={type:'Officiel',name:'Rapport du jury externe économie-gestion 2025',url:'https://www.devenirenseignant.gouv.fr/media/18028/download',checked:'08/11/2026'}
 const p=(label,title,intro,keyPoints=[],sections=[],sources=[OFFICIAL,JURY],extra={})=>({label,title,intro,keyPoints,sections,sources,...extra})
@@ -297,3 +298,8 @@ export const trainingPages = {
     [{type:'Ressource fournie',name:'Sujet option C externe 2026.pdf'},JURY]
   )
 }
+
+
+Object.entries(trainingCorrections).forEach(([key,corrections])=>{
+  if(trainingPages[key]) trainingPages[key].corrections=corrections
+})
