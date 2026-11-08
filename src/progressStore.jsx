@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { contentPages } from './content'
+import { loadRemoteProgress, saveRemoteProgress } from './remoteProgress'
 
 export const LEGACY_STORAGE_KEY='agreg-marketing-tourisme-progress-v1'
 export const STORAGE_PREFIX='agreg-marketing-tourisme-progress-v2'
@@ -29,13 +30,12 @@ export function saveActiveProfile(profile){
   try{localStorage.setItem(ACTIVE_PROFILE_KEY,profile)}catch{}
 }
 
-export function loadProgress(profile='rachid'){
+export function loadLocalProgress(profile='rachid'){
   try{
     const key=profileStorageKey(profile)
     const raw=localStorage.getItem(key)
     if(raw) return {...emptyProgress(),...JSON.parse(raw)}
 
-    // Migration douce de l'ancien suivi unique vers Rachid uniquement.
     if(profile==='rachid'){
       const legacy=localStorage.getItem(LEGACY_STORAGE_KEY)
       if(legacy){
@@ -44,26 +44,70 @@ export function loadProgress(profile='rachid'){
         return migrated
       }
     }
-
     return emptyProgress()
   }catch{
     return emptyProgress()
   }
 }
 
-export function useProgress(profile='rachid'){
-  const [progress,setProgress]=useState(()=>loadProgress(profile))
+export function useProgress(profile='rachid',userId=null){
+  const [progress,setProgress]=useState(()=>loadLocalProgress(profile))
+  const [syncState,setSyncState]=useState(userId?'loading':'local')
+
+  useEffect(()=>{
+    let cancelled=false
+
+    async function hydrate(){
+      if(!userId){
+        setProgress(loadLocalProgress(profile))
+        setSyncState('local')
+        return
+      }
+
+      setSyncState('loading')
+      try{
+        const remote=await loadRemoteProgress(userId)
+        if(cancelled) return
+
+        if(remote){
+          const normalized={...emptyProgress(),...remote}
+          setProgress(normalized)
+          try{localStorage.setItem(profileStorageKey(profile),JSON.stringify(normalized))}catch{}
+        }else{
+          const local=loadLocalProgress(profile)
+          await saveRemoteProgress(userId,local)
+          if(cancelled) return
+          setProgress(local)
+        }
+        setSyncState('cloud')
+      }catch{
+        if(cancelled) return
+        setProgress(loadLocalProgress(profile))
+        setSyncState('error')
+      }
+    }
+
+    hydrate()
+    return ()=>{cancelled=true}
+  },[profile,userId])
+
   const updateProgress=(updater)=>{
     setProgress(prev=>{
       const next=typeof updater==='function'?updater(prev):updater
       try{localStorage.setItem(profileStorageKey(profile),JSON.stringify(next))}catch{}
+      if(userId){
+        saveRemoteProgress(userId,next)
+          .then(()=>setSyncState('cloud'))
+          .catch(()=>setSyncState('error'))
+      }
       return next
     })
   }
-  return [progress,updateProgress]
+
+  return [progress,updateProgress,syncState]
 }
 
-export function ProgressView({type,progress,profileLabel}){
+export function ProgressView({type,progress,profileLabel,syncState='local'}){
   const quizEntries=Object.entries(progress.quiz||{})
   const favorites=progress.favorites||[]
   const difficult=progress.difficultCards||[]
@@ -84,6 +128,8 @@ export function ProgressView({type,progress,profileLabel}){
   })
   const mastered=quizEntries.filter(([,r])=>r.total&&r.answered===r.total&&(r.correct/r.total)>=.8)
 
+  const syncLabel=syncState==='cloud'?'Synchronisé en ligne':syncState==='loading'?'Synchronisation…':syncState==='error'?'Synchronisation indisponible — copie locale conservée':'Enregistré sur cet appareil'
+
   const stats=<div className="progress-stats">
     <div><strong>{viewedCount}</strong><span>fiches consultées</span></div>
     <div><strong>{quizEntries.length}</strong><span>quiz commencés</span></div>
@@ -93,7 +139,7 @@ export function ProgressView({type,progress,profileLabel}){
     <div><strong>{cases.length}</strong><span>cas réalisés</span></div>
   </div>
 
-  if(type==='overview') return <>{stats}<p className="progress-note">Suivi du profil <strong>{profileLabel}</strong>, enregistré uniquement dans ce navigateur.</p></>
+  if(type==='overview') return <>{stats}<p className="progress-note">Profil <strong>{profileLabel}</strong> • {syncLabel}.</p></>
   if(type==='results'||type==='quizHistory') return <div className="progress-list">
     {quizEntries.length?quizEntries.map(([key,r])=><div className="progress-row" key={key}><strong>{listTitle(key)}</strong><span>{r.correct}/{r.answered} bonnes réponses • {r.total} questions</span></div>):<p>Aucun QCM commencé pour {profileLabel}.</p>}
   </div>
